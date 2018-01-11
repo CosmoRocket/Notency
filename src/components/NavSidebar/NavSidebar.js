@@ -1,4 +1,5 @@
 import React from 'react'
+import logo from './embassy_english.png'
 import './NavSidebar.css'
 
 const NavSidebar = () => {
@@ -7,22 +8,22 @@ const NavSidebar = () => {
       <ul class="nav flex-column">
         <li class="nav-item">
           <a class="nav-link" href="#">
-            <img src="./embassy_english.png" alt="Embassy English Logo" />
+            <img className="logo" src={logo} alt="Embassy English Logo" />
           </a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">
-            Create Broadcast
+            Home
           </a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">
-            Sent Broadcasts
+            Update Contacts
           </a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">
-            Mailing List
+            Logout
           </a>
         </li>
       </ul>
