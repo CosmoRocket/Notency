@@ -3,6 +3,7 @@ import logo from './logo.svg'
 import './App.css'
 import Home from './components/Home'
 import NavSidebar from './components/NavSidebar'
+import Input from './components/Input'
 
 class App extends Component {
   state = {
@@ -52,6 +53,12 @@ class App extends Component {
         <Home
           notifications={this.state.notifications}
           announcements={this.state.announcements}
+        />
+        <Input
+          type="text"
+          name="loginName"
+          placeholder="User"
+          iconName="spinner"
         />
       </div>
     )

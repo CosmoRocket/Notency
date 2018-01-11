@@ -1,4 +1,5 @@
 import React from 'react'
+import pic from './embassy_english.png'
 import './NavSidebar.css'
 
 const NavSidebar = () => {
@@ -7,7 +8,7 @@ const NavSidebar = () => {
       <ul class="nav flex-column">
         <li class="nav-item">
           <a class="nav-link" href="#">
-            <img src="./embassy_english.png" alt="Embassy English Logo" />
+            <img src={pic} alt="Embassy English Logo" />
           </a>
         </li>
         <li class="nav-item">
