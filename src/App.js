@@ -53,7 +53,7 @@ class App extends Component {
     return (
 
       <Router>
-        <div className="App d-flex">
+        <div className="App">
           <Switch>
 
             {/* Home */}
