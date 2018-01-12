@@ -58,13 +58,7 @@ class App extends Component {
 
             {/* Home */}
             <Route path='/home' exact render={() => (
-              <Fragment>
-                <NavSidebar />
-                <Home
-                  notifications={this.state.notifications}
-                  announcements={this.state.announcements}
-                />
-              </Fragment>
+              <h1>Homepage</h1>
             )} />
 
             {/* Login */}
