@@ -1,0 +1,13 @@
+.mobile-nav-list {
+  list-style: none;
+  color: #5969e2;
+  padding: 0;
+}
+
+.mobile-nav-item {
+  cursor: pointer;
+}
+
+.mobile-nav-item-text {
+  font-size: 13px;
+}
