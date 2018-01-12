@@ -3,8 +3,7 @@ import logo from './logo.svg'
 import './App.css'
 import Home from './components/Home'
 import NavSidebar from './components/NavSidebar'
-import Input from './components/Input'
-import LoginButton from './components/LoginButton'
+import LoginPage from './LoginPage';
 
 class App extends Component {
   state = {
@@ -55,19 +54,7 @@ class App extends Component {
           notifications={this.state.notifications}
           announcements={this.state.announcements}
         />
-        <Input
-          type="name"
-          name="username"
-          placeholder="User"
-          iconName="user"
-        />
-        <Input
-          type="password"
-          name="password"
-          placeholder="Password"
-          iconName="lock"
-        />
-        <LoginButton />
+        <LoginPage />
       </div>
     )
   }

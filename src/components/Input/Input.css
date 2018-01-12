@@ -1,5 +1,6 @@
 .inputContainer {
   position: relative;
+  margin: 10px;
 }
 
 input {
