@@ -1,9 +1,9 @@
-import React, { Component } from 'react'
-import logo from './logo.svg'
+import React, { Component, Fragment } from 'react'
+import { BrowserRouter as Router, Switch, Route, Redirect, Link } from 'react-router-dom'
 import './App.css'
 import Home from './components/Home'
 import NavSidebar from './components/NavSidebar'
-import LoginPage from './LoginPage';
+import LoginPage from './LoginPage'
 
 class App extends Component {
   state = {
@@ -48,14 +48,38 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App d-flex">
-        <NavSidebar />
-        <Home
-          notifications={this.state.notifications}
-          announcements={this.state.announcements}
-        />
-        <LoginPage />
-      </div>
+
+      <Router>
+        <div className="App d-flex">
+          <Switch>
+
+            {/* Home */}
+            <Route path='/home' exact render={() => (
+              <Fragment>
+                <NavSidebar />
+                <Home
+                  notifications={this.state.notifications}
+                  announcements={this.state.announcements}
+                />
+              </Fragment>
+            )} />
+
+            {/* Login */}
+            <Route path='/login' exact render={() => (
+              <LoginPage />
+            )} />
+
+            {/* Route not found */}
+            <Route render={({ location }) => (
+              <h2
+                className='text-center text-danger'
+              >
+                Page not found: {location.pathname}
+              </h2>
+            )} />
+          </Switch>
+        </div>
+      </Router>
     )
   }
 }

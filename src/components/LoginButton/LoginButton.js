@@ -7,7 +7,7 @@ const LoginButton = () => {
     <Button
       type="submit"
       text="Login"
-      className="button"
+      className="login-button"
     />
   )
 }

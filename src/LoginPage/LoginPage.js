@@ -3,17 +3,17 @@ import Input from '../components/Input'
 import LoginButton from '../components/LoginButton'
 import Checkbox from '../components/Checkbox'
 import './LoginPage.css'
-import './embassy_english.png'
+import logo from './embassy_english.png'
 
 function LoginPage({
   onSubmit,
   passwordLink
 }) {
   return (
-    <Fragment>
-      <img src="./embassy_english.png" alt="embassy english logo" />
-      <h2>Welcome Back!</h2>
-      <form onSubmit={onSubmit}>
+    <div className='text-center login-page'>
+      <img src={logo} className='logo' alt="embassy english logo" />
+      <h2 className='greeting'>Welcome Back!</h2>
+      <form onSubmit={onSubmit} className='login-form'>
         <Input
           type="name"
           name="username"
@@ -33,11 +33,11 @@ function LoginPage({
             value="rememberMe"
             text="Rember me"
           />
-          <a href={passwordLink} className='password-link'>Forgot your password?</a>
+          <p><a href={passwordLink} className='password-link'>Forgot your password?</a></p>
         </div>
       </form>
-      <p>An app for sending bulk SMS and email notifications</p>
-    </Fragment>
+      <p className='fine-print'>An app for sending bulk SMS and email notifications</p>
+    </div>
   )
 }
 
