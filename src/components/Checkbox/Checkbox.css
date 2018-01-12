@@ -1,7 +1,9 @@
-.check-label {
-  font-size: 14px;
+.checkbox {
+
 }
 
-.checkbox {
-  width: 20px;
+.label-text {
+  font-size: 14px;
+  display: inline-block;
+  vertical-align: middle;
 }

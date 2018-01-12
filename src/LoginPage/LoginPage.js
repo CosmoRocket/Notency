@@ -7,10 +7,10 @@ import logo from './embassy_english.png'
 
 function LoginPage({ onSubmit, passwordLink }) {
   return (
-    <div>
-      <img src={logo} alt="embassy english logo" />
-      <h2>Welcome Back!</h2>
-      <form onSubmit={onSubmit}>
+    <div className="text-center login-page">
+      <img src={logo} className="logo" alt="embassy english logo" />
+      <h2 className="greeting">Welcome Back!</h2>
+      <form onSubmit={onSubmit} className="login-form">
         <Input type="name" name="username" placeholder="User" iconName="user" />
         <Input
           type="password"
@@ -20,13 +20,17 @@ function LoginPage({ onSubmit, passwordLink }) {
         />
         <LoginButton />
         <div className="d-flex justify-content-between">
-          <Checkbox name="rememberMe" value="rememberMe" text="Remember me" />
-          <a href={passwordLink} className="password-link">
-            Forgot your password?
-          </a>
+          <Checkbox name="rememberMe" value="rememberMe" text="Rember me" />
+          <p>
+            <a href={passwordLink} className="password-link">
+              Forgot your password?
+            </a>
+          </p>
         </div>
       </form>
-      <p>An app for sending bulk SMS and email notifications</p>
+      <p className="fine-print">
+        An app for sending bulk SMS and email notifications
+      </p>
     </div>
   )
 }
