@@ -1,11 +1,18 @@
-import React from 'react'
+import React, { Fragment } from 'react'
+import './Checkbox.css'
 
-const Checkbox = () => {
+function Checkbox({ name, value, text }) {
   return (
     <div className="form-check">
-      <input type="checkbox" className="form-check-input" id="exampleCheck1" />
-      <label className="form-check-label" htmlFor="exampleCheck1">
-        Check me out
+      <input
+        className="form-check-input checkbox"
+        type="checkbox"
+        name={name}
+        value={value}
+        id={value}
+      />
+      <label className="form-check-label check-label" htmlFor={value}>
+        {text}
       </label>
     </div>
   )

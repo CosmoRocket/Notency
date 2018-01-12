@@ -4,6 +4,7 @@ import './App.css'
 import HomePage from './HomePage'
 import DesktopNav from './components/DesktopNav'
 import Input from './components/Input'
+import LoginPage from './LoginPage'
 
 class App extends Component {
   state = {
@@ -56,12 +57,7 @@ class App extends Component {
           notifications={this.state.notifications}
           announcements={this.state.announcements}
         />
-        <Input
-          type="text"
-          name="loginName"
-          placeholder="User"
-          iconName="spinner"
-        />
+        <LoginPage />
       </div>
     )
   }

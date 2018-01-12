@@ -6,6 +6,7 @@ export default function Input({
   type,
   name,
   placeholder,
+  inputStyle,
   iconName
 }) {
   return (
@@ -14,10 +15,9 @@ export default function Input({
         type={type}
         name={name}
         placeholder={placeholder}
+        className={`${iconName && 'pl-4'} ${inputStyle}`}
       />
-      {
-        iconName ? <Icon name={iconName} className='icon' /> : null
-      }
+      {iconName ? <Icon name={iconName} className="icon" /> : null}
     </div>
   )
 }

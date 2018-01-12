@@ -1,0 +1,10 @@
+form {
+  border: 1px solid black;
+  padding: 10px;
+  /* text-align: center; */
+  max-width: 400px;
+}
+
+.password-link {
+  font-size: 14px;
+}

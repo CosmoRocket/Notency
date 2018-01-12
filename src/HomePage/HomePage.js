@@ -66,6 +66,7 @@ class HomePage extends React.Component {
           messageBody="OK"
         />
         <MobileNav />
+
         <div className="d-flex justify-content-between">
           <Checkbox />
           <a>Forgot your password</a>
