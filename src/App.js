@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import logo from './logo.svg'
 import './App.css'
-import Home from './components/Home'
-import NavSidebar from './components/NavSidebar'
+import HomePage from './HomePage'
+import DesktopNav from './components/DesktopNav'
+import Input from './components/Input'
 
 class App extends Component {
   state = {
@@ -34,11 +35,13 @@ class App extends Component {
     announcements: [
       {
         title: 'Flood warning',
+        sentAt: Date.now(),
         body:
           'Please note that there has been an announcement about a flood coming.'
       },
       {
         title: 'Heat wave',
+        sentAt: Date.now(),
         body:
           'Please note that there has been an announcement about a heat wave.'
       }
@@ -48,10 +51,16 @@ class App extends Component {
   render() {
     return (
       <div className="App d-flex">
-        <NavSidebar />
-        <Home
+        <DesktopNav />
+        <HomePage
           notifications={this.state.notifications}
           announcements={this.state.announcements}
+        />
+        <Input
+          type="text"
+          name="loginName"
+          placeholder="User"
+          iconName="spinner"
         />
       </div>
     )
