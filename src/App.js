@@ -1,8 +1,9 @@
 import React, { Component, Fragment } from 'react'
 import { BrowserRouter as Router, Switch, Route, Redirect, Link } from 'react-router-dom'
 import './App.css'
-import Home from './components/Home'
-import NavSidebar from './components/NavSidebar'
+import HomePage from './HomePage'
+import DesktopNav from './components/DesktopNav'
+import Input from './components/Input'
 import LoginPage from './LoginPage'
 
 class App extends Component {
@@ -35,11 +36,13 @@ class App extends Component {
     announcements: [
       {
         title: 'Flood warning',
+        sentAt: Date.now(),
         body:
           'Please note that there has been an announcement about a flood coming.'
       },
       {
         title: 'Heat wave',
+        sentAt: Date.now(),
         body:
           'Please note that there has been an announcement about a heat wave.'
       }

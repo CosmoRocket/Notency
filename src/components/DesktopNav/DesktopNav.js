@@ -1,29 +1,29 @@
 import React from 'react'
 import pic from './embassy_english.png'
-import './NavSidebar.css'
+import './DesktopNav.css'
 
-const NavSidebar = () => {
+const DesktopNav = () => {
   return (
-    <nav className="NavSidebar">
+    <nav className="DesktopNav">
       <ul class="nav flex-column">
         <li class="nav-item">
           <a class="nav-link" href="#">
-            <img src={pic} alt="Embassy English Logo" />
+            <img className="logo" src={pic} alt="Embassy English Logo" />
           </a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">
-            Create Broadcast
+            Home
           </a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">
-            Sent Broadcasts
+            Update Contacts
           </a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">
-            Mailing List
+            Logout
           </a>
         </li>
       </ul>
@@ -31,4 +31,4 @@ const NavSidebar = () => {
   )
 }
 
-export default NavSidebar
+export default DesktopNav

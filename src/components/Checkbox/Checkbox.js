@@ -1,11 +1,7 @@
 import React from 'react'
 import './Checkbox.css'
 
-function Checkbox({
-  name,
-  value,
-  text
-}) {
+function Checkbox({ name, value, text }) {
   return (
     <div className="form-check">
       <input className="form-check-input checkbox" type="checkbox" name={name} value={value} id={value} />

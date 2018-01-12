@@ -1,5 +1,4 @@
 import React from 'react'
-import './Button.css'
 
 export default function Button({
   btnStyle = 'primary',
@@ -8,7 +7,10 @@ export default function Button({
   text
 }) {
   return (
-    <button className={`btn btn-${btnStyle} ${className}`} type={type}>
+    <button
+      className={`btn btn-${btnStyle} ${className}`}
+      type={type}
+    >
       {text}
     </button>
   )

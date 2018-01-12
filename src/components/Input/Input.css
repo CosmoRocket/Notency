@@ -14,13 +14,11 @@
 
 .inputContainer input:focus {
   outline: none;
-  border: 1px solid #5969E2;
+  border: 1px solid #5969e2;
 }
 
 .inputContainer .icon{
   position: absolute;
   top: 10px;
   left: 10px;
-
 }
-
