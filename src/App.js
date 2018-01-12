@@ -4,6 +4,7 @@ import './App.css'
 import Home from './components/Home'
 import NavSidebar from './components/NavSidebar'
 import Input from './components/Input'
+import LoginButton from './components/LoginButton'
 
 class App extends Component {
   state = {
@@ -55,11 +56,18 @@ class App extends Component {
           announcements={this.state.announcements}
         />
         <Input
-          type="text"
-          name="loginName"
+          type="name"
+          name="username"
           placeholder="User"
-          iconName="spinner"
+          iconName="user"
         />
+        <Input
+          type="password"
+          name="password"
+          placeholder="Password"
+          iconName="lock"
+        />
+        <LoginButton />
       </div>
     )
   }

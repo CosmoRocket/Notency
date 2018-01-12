@@ -1,4 +1,5 @@
 import React from 'react'
+import Button from '../Button'
 import './LoginButton.css'
 
 const LoginButton = () => {
@@ -6,6 +7,7 @@ const LoginButton = () => {
     <Button
       type="submit"
       text="Login"
+      className="button"
     />
   )
 }

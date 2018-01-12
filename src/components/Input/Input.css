@@ -3,9 +3,16 @@
 }
 
 input {
-  padding-top: 2px;
-  padding-left: 35px;
-  padding-bottom: 2px;
+  padding: 2px 10px;
+  width: 288px;
+  height: 40px;
+  border: 1px solid #4d4d4d;
+  border-radius: 2px;
+}
+
+input:focus {
+  outline: none;
+  border: 1px solid #5969E2;
 }
 
 .icon{
@@ -14,3 +21,4 @@ input {
   left: 10px;
 
 }
+
