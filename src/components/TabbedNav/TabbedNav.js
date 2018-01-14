@@ -12,7 +12,7 @@ export default function TabbedNav({ handleChangeActiveTab, activeTab, tabs }) {
   })
   return (
     <nav>
-      <ul class="nav nav-tabs d-none d-sm-flex">{navTabs}</ul>
+      <ul class="nav nav-tabs d-flex">{navTabs}</ul>
     </nav>
   )
 }
