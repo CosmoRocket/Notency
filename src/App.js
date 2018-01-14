@@ -1,10 +1,17 @@
 import React, { Component, Fragment } from 'react'
-import { BrowserRouter as Router, Switch, Route, Redirect, Link } from 'react-router-dom'
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+  Link
+} from 'react-router-dom'
 import './App.css'
 import HomePage from './HomePage'
 import DesktopNav from './components/DesktopNav'
 import Input from './components/Input'
 import LoginPage from './LoginPage'
+import MobileNav from './components/MobileNav'
 
 class App extends Component {
   state = {
@@ -50,30 +57,30 @@ class App extends Component {
   }
 
   render() {
+    const { notifications, announcements } = this.state
     return (
-
       <Router>
         <div className="App">
           <Switch>
-
-            {/* Home */}
-            <Route path='/home' exact render={() => (
-              <h1>Homepage</h1>
-            )} />
-
             {/* Login */}
-            <Route path='/login' exact render={() => (
-              <LoginPage />
-            )} />
-
-            {/* Route not found */}
-            <Route render={({ location }) => (
-              <h2
-                className='text-center text-danger'
-              >
-                Page not found: {location.pathname}
-              </h2>
-            )} />
+            <Route path="/login" exact render={() => <LoginPage />} />
+            <Route
+              path="/"
+              exact
+              render={() => (
+                <HomePage
+                  notifications={notifications}
+                  announcements={announcements}
+                />
+              )}
+            />
+            <Route
+              render={({ location }) => (
+                <h2 className="text-center text-danger">
+                  Page not found: {location.pathname}
+                </h2>
+              )}
+            />
           </Switch>
         </div>
       </Router>
