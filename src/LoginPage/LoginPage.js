@@ -5,13 +5,24 @@ import Checkbox from '../components/Checkbox'
 import './LoginPage.css'
 import logo from './embassy_english.png'
 
-function LoginPage({ onSubmit, passwordLink }) {
+function LoginPage({ onSignIn, passwordLink }) {
   return (
     <div className="text-center login-page">
       <img src={logo} className="logo" alt="embassy english logo" />
       <h3 className="greeting">Welcome Back!</h3>
-      <form onSubmit={onSubmit} className="login-form">
-        <Input type="name" name="username" placeholder="User" iconName="user" />
+      <form
+        className="login-form"
+        onSubmit={event => {
+          event.preventDefault()
+
+          const form = event.target
+          const elements = form.elements
+          const username = form.username.value
+          const password = form.password.value
+
+          onSignIn({ username, password })
+        }}>
+        <Input type="text" name="username" placeholder="User" iconName="user" />
         <Input
           type="password"
           name="password"

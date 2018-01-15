@@ -3,7 +3,7 @@ import pic from './embassy_english.png'
 import './DesktopNav.css'
 import { Link } from 'react-router-dom'
 
-const DesktopNav = () => {
+const DesktopNav = ({ onSignOut }) => {
   return (
     <nav className="DesktopNav d-none d-sm-block">
       <ul class="nav flex-column">
@@ -23,7 +23,7 @@ const DesktopNav = () => {
           </Link>
         </li>
         <li class="nav-item">
-          <Link class="nav-link" to="logout">
+          <Link class="nav-link" to="login" onClick={onSignOut}>
             Logout
           </Link>
         </li>

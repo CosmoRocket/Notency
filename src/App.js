@@ -7,16 +7,19 @@ import {
   Link
 } from 'react-router-dom'
 import './App.css'
-import HomePage from './HomePage'
-import NotificationShowPage from './NotificationShowPage'
-import DesktopNav from './components/DesktopNav'
-import Input from './components/Input'
+import { setToken } from './api/init'
+import { getDecodedToken } from './api/token'
+import { signIn, signOutNow } from './api/auth'
+import Container from './components/Container'
 import LoginPage from './LoginPage'
 import MobileNav from './components/MobileNav'
-import Container from './components/Container'
+import DesktopNav from './components/DesktopNav'
+import HomePage from './HomePage'
+import NotificationShowPage from './NotificationShowPage'
 
 class App extends Component {
   state = {
+    decodedToken: getDecodedToken(),
     totalRecipients: 700,
     notifications: [
       {
@@ -58,8 +61,24 @@ class App extends Component {
     ]
   }
 
+  onSignIn = ({ username, password }) => {
+    signIn({ username, password })
+      .then(decodedToken => {
+        this.setState({ decodedToken })
+      })
+      .catch((error) => {
+        this.setState({ error })
+      })
+  }
+
+  onSignOut = () => {
+    signOutNow()
+    this.setState({ decodedToken: null })
+  }
+
   render() {
-    const { notifications, announcements } = this.state
+    const { notifications, announcements, decodedToken } = this.state
+
     return (
       <Router>
         <Container>
@@ -68,11 +87,18 @@ class App extends Component {
             <Route
               path="/login"
               exact
-              render={() =>
-                <LoginPage
-
-                />}
+              render={() => (
+                <Fragment>
+                  <LoginPage
+                    onSignIn={this.onSignIn}
+                  />
+                  {/* To remove :p */}
+                  <h1 class='text-center'>{decodedToken && 'Yey! You are logged!' || 'Not logged'}</h1>
+                </Fragment>
+              )
+              }
             />
+
             <Route
               path="/"
               exact
@@ -80,6 +106,7 @@ class App extends Component {
                 <HomePage
                   notifications={notifications}
                   announcements={announcements}
+                  onSignOut={this.onSignOut}
                 />
               )}
             />

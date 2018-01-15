@@ -18,7 +18,7 @@ class HomePage extends React.Component {
   }
 
   render() {
-    const { notifications, announcements } = this.props
+    const { notifications, announcements, onSignOut } = this.props
     const { activeTab } = this.state
     const notificationsList = notifications.map(notification => {
       return <Notification {...notification} responses="10/60" />
@@ -30,7 +30,7 @@ class HomePage extends React.Component {
       <div>
         <MobileNav />
         <div className="d-flex">
-          <DesktopNav />
+          <DesktopNav onSignOut={onSignOut} />
           <ContentContainer>
             <TabbedNav
               activeTab={activeTab}
