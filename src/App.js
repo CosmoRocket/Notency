@@ -8,7 +8,6 @@ import {
 } from 'react-router-dom'
 import './App.css'
 import HomePage from './HomePage'
-import NotificationShowPage from './NotificationShowPage'
 import DesktopNav from './components/DesktopNav'
 import Input from './components/Input'
 import LoginPage from './LoginPage'
@@ -44,16 +43,16 @@ class App extends Component {
     ],
     announcements: [
       {
-        title: 'Graduation Day for Students of Class 1024',
+        title: 'Flood warning',
         sentAt: Date.now(),
         body:
-          'The graduation for course eA342 will be hold on Thursday the 2nd of March 2018 at 12am. Please be punctual.'
+          'Please note that there has been an announcement about a flood coming.'
       },
       {
-        title: 'Christmas Party',
+        title: 'Heat wave',
         sentAt: Date.now(),
         body:
-          'Please note there will be a Christmas Party in your respective classes on 11 December 2018. Wishing you all a Merry Christmas and Happy New Year'
+          'Please note that there has been an announcement about a heat wave.'
       }
     ]
   }
@@ -69,7 +68,9 @@ class App extends Component {
               path="/login"
               exact
               render={() =>
-                <LoginPage />}
+                <LoginPage
+
+                />}
             />
             <Route
               path="/"
@@ -80,10 +81,6 @@ class App extends Component {
                   announcements={announcements}
                 />
               )}
-            />
-            <Route
-              path="/notifications"
-              render={() => <NotificationShowPage />}
             />
             <Route
               render={({ location }) => (
