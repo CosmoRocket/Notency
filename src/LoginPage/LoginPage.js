@@ -9,7 +9,7 @@ function LoginPage({ onSubmit, passwordLink }) {
   return (
     <div className="text-center login-page">
       <img src={logo} className="logo" alt="embassy english logo" />
-      <h2 className="greeting">Welcome Back!</h2>
+      <h3 className="greeting">Welcome Back!</h3>
       <form onSubmit={onSubmit} className="login-form">
         <Input type="name" name="username" placeholder="User" iconName="user" />
         <Input
