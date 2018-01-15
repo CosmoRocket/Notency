@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import Input from '../components/Input'
 import LoginButton from '../components/LoginButton'
 import Checkbox from '../components/Checkbox'
