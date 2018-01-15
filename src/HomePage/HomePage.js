@@ -8,6 +8,7 @@ import MobileNav from '../components/MobileNav'
 import DesktopNav from '../components/DesktopNav'
 import Checkbox from '../components/Checkbox'
 import ContentContainer from '../components/ContentContainer'
+import { Link } from 'react-router-dom'
 
 class HomePage extends React.Component {
   state = {
@@ -41,6 +42,22 @@ class HomePage extends React.Component {
               ]}
               handleChangeActiveTab={this.handleChangeActiveTab}
             />
+            {this.state.activeTab === 0 ? (
+              <Link
+                to="/notifications/new"
+                className="btn btn-danger text-uppercase font-weight-bold my-2"
+              >
+                New Notification
+              </Link>
+            ) : (
+              <Link
+                to="/announcements/new"
+                className="btn btn-danger text-uppercase font-weight-bold my-2"
+              >
+                New Announcement
+              </Link>
+            )}
+
             {this.state.activeTab === 0 ? notificationsList : announcementsList}
             <Message
               recipientId="123891273"
