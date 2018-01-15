@@ -1,10 +1,9 @@
-import React, { Component, Fragment } from 'react'
+import React, { Component } from 'react'
 import {
   BrowserRouter as Router,
   Switch,
   Route,
   Redirect,
-  Link,
   withRouter
 } from 'react-router-dom'
 import './App.css'
@@ -12,9 +11,8 @@ import { setToken } from './api/init'
 import { getDecodedToken } from './api/token'
 import { signIn, signOutNow } from './api/auth'
 import Container from './components/Container'
+import ContentContainer from './components/ContentContainer'
 import LoginPage from './LoginPage'
-import MobileNav from './components/MobileNav'
-import DesktopNav from './components/DesktopNav'
 import HomePage from './HomePage'
 import NotificationShowPage from './NotificationShowPage'
 import AnnouncementShowPage from './AnnouncementShowPage'
@@ -23,7 +21,7 @@ import CreateAnnouncementPage from './CreateAnnouncementPage'
 
 class App extends Component {
   state = {
-    decodedToken: getDecodedToken(),
+    userData: getDecodedToken(),
     activeTab: 0,
     totalRecipients: 700,
     notifications: [
@@ -72,17 +70,17 @@ class App extends Component {
 
   onSignIn = ({ username, password }) => {
     signIn({ username, password })
-      .then(decodedToken => {
-        this.setState({ decodedToken })
+      .then(userData => {
+        this.setState({ userData })
       })
-      .catch((error) => {
+      .catch(error => {
         this.setState({ error })
       })
   }
 
   onSignOut = () => {
     signOutNow()
-    this.setState({ decodedToken: null })
+    this.setState({ userData: null })
   }
 
   handleChangeActiveTab = index => {
@@ -90,7 +88,10 @@ class App extends Component {
   }
 
   render() {
-    const { notifications, announcements, activeTab, decodedToken } = this.state
+    const { notifications, announcements, activeTab, userData } = this.state
+
+    const requireAuth = render => props =>
+      userData ? render(props) : <Redirect to="/login" />
 
     return (
       <Router>
@@ -100,59 +101,63 @@ class App extends Component {
             <Route
               path="/login"
               exact
-              render={() => (
-                <Fragment>
-                  <LoginPage
-                    onSignIn={this.onSignIn}
-                  />
-                  {/* To remove :p */}
-                  <h1 class='text-center'>{decodedToken && 'Yey! You are logged!' || 'Not logged'}</h1>
-                </Fragment>
-              )
+              render={() =>
+                userData ? (
+                  <Redirect to="/" />
+                ) : (
+                  <LoginPage onSignIn={this.onSignIn} />
+                )
               }
             />
-
-            <Route
-              path="/"
-              exact
-              render={() => (
-                <HomePage
-                  activeTab={activeTab}
-                  notifications={notifications}
-                  announcements={announcements}
-                  handleChangeActiveTab={this.handleChangeActiveTab}
-                  onSignOut={this.onSignOut}
-                />
-              )}
-            />
-            <Route
-              path="/notifications/new"
-              exact
-              render={() => <CreateNotificationPage />}
-            />
-            <Route
-              path="/announcements/new"
-              exact
-              render={() => <CreateAnnouncementPage />}
-            />
-            <Route
-              path="/notifications"
-              render={withRouter(props => (
-                <NotificationShowPage
-                  {...props}
-                  notifications={notifications}
-                />
-              ))}
-            />
-            <Route
-              path="/announcements"
-              render={withRouter(props => (
-                <AnnouncementShowPage
-                  {...props}
-                  announcements={announcements}
-                />
-              ))}
-            />
+            <Route path="/logout" render={() => <Redirect to="/login" />} />
+            <ContentContainer onSignOut={this.onSignOut}>
+              <Route
+                path="/"
+                exact
+                render={requireAuth(() => (
+                  <HomePage
+                    activeTab={activeTab}
+                    notifications={notifications}
+                    announcements={announcements}
+                    handleChangeActiveTab={this.handleChangeActiveTab}
+                  />
+                ))}
+              />
+              <Route
+                path="/new_notification"
+                exact
+                render={requireAuth(() => <CreateNotificationPage />)}
+              />
+              <Route
+                path="/new_announcement"
+                exact
+                render={requireAuth(() => <CreateAnnouncementPage />)}
+              />
+              <Route
+                path="/notifications/:id"
+                exact
+                render={requireAuth(
+                  withRouter(props => (
+                    <NotificationShowPage
+                      {...props}
+                      notifications={notifications}
+                    />
+                  ))
+                )}
+              />
+              <Route
+                path="/announcements/:id"
+                exact
+                render={requireAuth(
+                  withRouter(props => (
+                    <AnnouncementShowPage
+                      {...props}
+                      announcements={announcements}
+                    />
+                  ))
+                )}
+              />
+            </ContentContainer>
             <Route
               render={({ location }) => (
                 <h2 className="text-center text-danger">
