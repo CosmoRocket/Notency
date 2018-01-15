@@ -76,7 +76,14 @@ class App extends Component {
         <Container>
           <Switch>
             {/* Login */}
-            <Route path="/login" exact render={() => <LoginPage />} />
+            <Route
+              path="/login"
+              exact
+              render={() =>
+                <LoginPage
+
+                />}
+            />
             <Route
               path="/"
               exact
