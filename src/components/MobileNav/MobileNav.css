@@ -1,13 +1,15 @@
 .mobile-nav-list {
-  list-style: none;
-  color: #5969e2;
-  padding: 0;
+    list-style: none;
+    color: #5969e2;
+    padding: 0;
+    margin: 0;
 }
 
 .mobile-nav-item {
-  cursor: pointer;
+    cursor: pointer;
 }
 
 .mobile-nav-item-text {
-  font-size: 13px;
+    font-size: 13px;
+    margin: 0;
 }

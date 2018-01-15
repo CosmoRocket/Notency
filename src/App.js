@@ -12,6 +12,7 @@ import DesktopNav from './components/DesktopNav'
 import Input from './components/Input'
 import LoginPage from './LoginPage'
 import MobileNav from './components/MobileNav'
+import Container from './components/Container'
 
 class App extends Component {
   state = {
@@ -60,7 +61,7 @@ class App extends Component {
     const { notifications, announcements } = this.state
     return (
       <Router>
-        <div className="App">
+        <Container>
           <Switch>
             {/* Login */}
             <Route path="/login" exact render={() => <LoginPage />} />
@@ -82,7 +83,7 @@ class App extends Component {
               )}
             />
           </Switch>
-        </div>
+        </Container>
       </Router>
     )
   }
