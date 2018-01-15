@@ -4,7 +4,8 @@ import {
   Switch,
   Route,
   Redirect,
-  Link
+  Link,
+  withRouter
 } from 'react-router-dom'
 import './App.css'
 import { setToken } from './api/init'
@@ -16,13 +17,18 @@ import MobileNav from './components/MobileNav'
 import DesktopNav from './components/DesktopNav'
 import HomePage from './HomePage'
 import NotificationShowPage from './NotificationShowPage'
+import AnnouncementShowPage from './AnnouncementShowPage'
+import CreateNotificationPage from './CreateNotificationPage'
+import CreateAnnouncementPage from './CreateAnnouncementPage'
 
 class App extends Component {
   state = {
     decodedToken: getDecodedToken(),
+    activeTab: 0,
     totalRecipients: 700,
     notifications: [
       {
+        id: '12n3kj12k3',
         title: 'Flood warning',
         sentAt: Date.now(),
         received: 50,
@@ -36,6 +42,7 @@ class App extends Component {
         }
       },
       {
+        id: '2343n4jknj3',
         title: 'Heat wave',
         sentAt: Date.now(),
         received: 50,
@@ -47,12 +54,14 @@ class App extends Component {
     ],
     announcements: [
       {
+        id: '5m65k6m5k6m',
         title: 'Graduation Day for Students of Class 1024',
         sentAt: Date.now(),
         body:
           'The graduation for course eA342 will be hold on Thursday the 2nd of March 2018 at 12am. Please be punctual.'
       },
       {
+        id: '34mk534mk5',
         title: 'Christmas Party',
         sentAt: Date.now(),
         body:
@@ -76,8 +85,12 @@ class App extends Component {
     this.setState({ decodedToken: null })
   }
 
+  handleChangeActiveTab = index => {
+    this.setState({ activeTab: index })
+  }
+
   render() {
-    const { notifications, announcements, decodedToken } = this.state
+    const { notifications, announcements, activeTab, decodedToken } = this.state
 
     return (
       <Router>
@@ -104,15 +117,41 @@ class App extends Component {
               exact
               render={() => (
                 <HomePage
+                  activeTab={activeTab}
                   notifications={notifications}
                   announcements={announcements}
+                  handleChangeActiveTab={this.handleChangeActiveTab}
                   onSignOut={this.onSignOut}
                 />
               )}
             />
             <Route
+              path="/notifications/new"
+              exact
+              render={() => <CreateNotificationPage />}
+            />
+            <Route
+              path="/announcements/new"
+              exact
+              render={() => <CreateAnnouncementPage />}
+            />
+            <Route
               path="/notifications"
-              render={() => <NotificationShowPage />}
+              render={withRouter(props => (
+                <NotificationShowPage
+                  {...props}
+                  notifications={notifications}
+                />
+              ))}
+            />
+            <Route
+              path="/announcements"
+              render={withRouter(props => (
+                <AnnouncementShowPage
+                  {...props}
+                  announcements={announcements}
+                />
+              ))}
             />
             <Route
               render={({ location }) => (
