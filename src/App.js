@@ -56,14 +56,14 @@ class App extends Component {
         <div className="App">
           <Switch>
 
-            {/* Home */}
-            <Route path='/home' exact render={() => (
-              <h1>Homepage</h1>
-            )} />
-
             {/* Login */}
             <Route path='/login' exact render={() => (
               <LoginPage />
+            )} />
+
+            {/* Home */}
+            <Route path='/home' exact render={() => (
+              <h1>Homepage</h1>
             )} />
 
             {/* Route not found */}
@@ -74,6 +74,7 @@ class App extends Component {
                 Page not found: {location.pathname}
               </h2>
             )} />
+
           </Switch>
         </div>
       </Router>
