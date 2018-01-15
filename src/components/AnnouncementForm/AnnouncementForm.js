@@ -1,5 +1,10 @@
 import React from 'react'
 import './AnnouncementForm.css'
+import { Editor } from 'react-draft-wysiwyg'
+import Button from '../../components/Button'
+import Input from '../../components/Input'
+import draftToHtml from 'draftjs-to-html'
+import { Link } from 'react-router-dom'
 
 export default function AnnouncementForm({
   subject,
@@ -31,9 +36,15 @@ export default function AnnouncementForm({
       />
       {/* REACT-EDITOR COMPONENT (Pass options in as props) */}
     <Editor
-      onContentStateChange={this.onContentStateChange}
+      wrapperClassName='editorSection'
+      editorClassName='wrapperSection'
+      handleContentStateChange={handleContentStateChange}
       />
-    <Button text="SEND"/>
+      {/* BOTTOM BUTTONS */}
+    <div className="formActions">
+      <Link className="formBack" to="/">Back</Link>
+      <Button className='sendButton' text="SEND"/>
+    </div>
   </form>
   )
 }

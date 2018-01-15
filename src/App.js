@@ -7,11 +7,6 @@ import {
   Link,
   withRouter
 } from 'react-router-dom'
-// react-draft-wysywig + dependencies
-import { Editor } from 'react-draft-wysiwyg'
-import '../node_modules/react-draft-wysiwyg/dist/react-draft-wysiwyg.css'
-import draftToHtml from 'draftjs-to-html'
-// ------
 import './App.css'
 import HomePage from './HomePage'
 import NotificationShowPage from './NotificationShowPage'
@@ -77,7 +72,7 @@ class App extends Component {
   handleContentStateChange = (contentState) => {
     this.setState({ contentState })
   }
-  
+
   handleChangeActiveTab = index => {
     this.setState({ activeTab: index })
   }
@@ -110,7 +105,10 @@ class App extends Component {
             <Route
               path="/announcements/new"
               exact
-              render={() => <CreateAnnouncementPage />}
+              render={() => <CreateAnnouncementPage 
+                              handleContentStateChange={ this.handleContentStateChange}
+                              />
+                            }
             />
             <Route
               path="/notifications"

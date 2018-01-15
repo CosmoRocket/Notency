@@ -1,0 +1,17 @@
+.editorSection {
+  border: 1px solid #4d4d4d;
+  border-radius: 2px;
+}
+
+.formActions {
+  display: flex;
+  justify-content: space-between;
+}
+
+.formBack {
+  padding-top: 1.5em;
+}
+
+.sendButton {
+  margin-top: 1em;
+}
