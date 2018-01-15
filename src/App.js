@@ -11,6 +11,8 @@ import './App.css'
 import HomePage from './HomePage'
 import NotificationShowPage from './NotificationShowPage'
 import AnnouncementShowPage from './AnnouncementShowPage'
+import CreateNotificationPage from './CreateNotificationPage'
+import CreateAnnouncementPage from './CreateAnnouncementPage'
 import DesktopNav from './components/DesktopNav'
 import Input from './components/Input'
 import LoginPage from './LoginPage'
@@ -76,14 +78,7 @@ class App extends Component {
         <Container>
           <Switch>
             {/* Login */}
-            <Route
-              path="/login"
-              exact
-              render={() =>
-                <LoginPage
-
-                />}
-            />
+            <Route path="/login" exact render={() => <LoginPage />} />
             <Route
               path="/"
               exact
@@ -96,8 +91,16 @@ class App extends Component {
                 />
               )}
             />
-            <Route path="/notifications/new" exact render={() => <div />} />
-            <Route path="/announcements/new" exact render={() => <div />} />
+            <Route
+              path="/notifications/new"
+              exact
+              render={() => <CreateNotificationPage />}
+            />
+            <Route
+              path="/announcements/new"
+              exact
+              render={() => <CreateAnnouncementPage />}
+            />
             <Route
               path="/notifications"
               render={withRouter(props => (
