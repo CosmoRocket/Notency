@@ -3,7 +3,7 @@ import { Icon } from 'react-fa'
 import './MobileNav.css'
 import { Link } from 'react-router-dom'
 
-export default function MobileNav({}) {
+export default function MobileNav({ onSignOut }) {
   return (
     <nav>
       <ul className="mobile-nav-list d-sm-none d-flex justify-content-between">
@@ -22,7 +22,7 @@ export default function MobileNav({}) {
           </Link>
         </li>
         <li className="mobile-nav-item m-0 p-0 text-center">
-          <Link to="logout">
+          <Link to="logout" onClick={onSignOut}>
             <Icon size="2x" name="sign-out" />
             <p className="mobile-nav-item-text text-uppercase">Logout</p>
           </Link>

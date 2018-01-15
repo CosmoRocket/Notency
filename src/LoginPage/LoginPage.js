@@ -21,7 +21,8 @@ function LoginPage({ onSignIn, passwordLink }) {
           const password = form.password.value
 
           onSignIn({ username, password })
-        }}>
+        }}
+      >
         <Input type="text" name="username" placeholder="User" iconName="user" />
         <Input
           type="password"
@@ -31,7 +32,7 @@ function LoginPage({ onSignIn, passwordLink }) {
         />
         <LoginButton />
         <div className="d-flex justify-content-between">
-          <Checkbox name="rememberMe" value="rememberMe" text="Rember me" />
+          <Checkbox name="rememberMe" value="rememberMe" text="Remember me" />
           <p>
             <a href={passwordLink} className="password-link">
               Forgot your password?

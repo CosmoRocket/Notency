@@ -23,7 +23,7 @@ const DesktopNav = ({ onSignOut }) => {
           </Link>
         </li>
         <li class="nav-item">
-          <Link class="nav-link" to="login" onClick={onSignOut}>
+          <Link class="nav-link" to="logout" onClick={onSignOut}>
             Logout
           </Link>
         </li>
