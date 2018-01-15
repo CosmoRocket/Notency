@@ -6,6 +6,11 @@ import {
   Redirect,
   Link
 } from 'react-router-dom'
+// react-draft-wysywig + dependencies
+import { Editor } from 'react-draft-wysiwyg'
+import '../node_modules/react-draft-wysiwyg/dist/react-draft-wysiwyg.css'
+import draftToHtml from 'draftjs-to-html'
+// ------
 import './App.css'
 import HomePage from './HomePage'
 import NotificationShowPage from './NotificationShowPage'
@@ -17,6 +22,8 @@ import Container from './components/Container'
 
 class App extends Component {
   state = {
+    error: null,
+    contentState: null, // Captures current contents of Editor
     totalRecipients: 700,
     notifications: [
       {
@@ -56,6 +63,10 @@ class App extends Component {
           'Please note there will be a Christmas Party in your respective classes on 11 December 2018. Wishing you all a Merry Christmas and Happy New Year'
       }
     ]
+  }
+
+  handleContentStateChange = (contentState) => {
+    this.setState({ contentState })
   }
 
   render() {

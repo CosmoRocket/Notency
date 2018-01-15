@@ -1,13 +1,10 @@
 import React from 'react'
 import './AnnouncementForm.css'
-import { Editor } from 'react-draft-wysiwyg'
-import '../../../node_modules/react-draft-wysiwyg/dist/react-draft-wysiwyg.css'
-import draftToHtml from 'draftjs-to-html'
 
 export default function AnnouncementForm({
   subject,
-  contentData,
-  // onCreateAnnouncement
+  handleContentStateChange,
+  contentState
 }) {
   return (
   <form
@@ -22,14 +19,17 @@ export default function AnnouncementForm({
         contentData: contentData
       }
 
-      // this.onCreateAnnouncement(announcement)
+      this.handleCreateAnnouncement(announcement)
     }}
     >
+
+    {/* INPUT FOR EMAIL SUBJECT */}
     <Input 
       type='subject'
       name='subject'
       placeholder="Subject"
       />
+      {/* REACT-EDITOR COMPONENT (Pass options in as props) */}
     <Editor
       onContentStateChange={this.onContentStateChange}
       />
