@@ -1,9 +1,4 @@
-import React, { Component } from 'react'
-import ContentContainer from '../components/ContentContainer'
-import MobileNav from '../components/MobileNav'
-import DesktopNav from '../components/DesktopNav'
-import TabbedNav from '../components/TabbedNav'
-import Message from '../components/Message'
+import React, { Component, Fragment } from 'react'
 import moment from 'moment'
 import { Link } from 'react-router-dom'
 
@@ -13,9 +8,9 @@ class AnnouncementShowPage extends Component {
   }
 
   componentDidMount() {
-    const { announcements, location } = this.props
+    const { announcements, match } = this.props
     const currentAnnouncement = announcements.find(announcement => {
-      return announcement.id === location.pathname.split('/').slice(-1)[0]
+      return announcement.id === match.params.id
     })
 
     this.setState({ currentAnnouncement })
@@ -25,20 +20,14 @@ class AnnouncementShowPage extends Component {
     const { currentAnnouncement } = this.state
 
     return (
-      <div>
-        <MobileNav />
-        <div className="d-flex">
-          <DesktopNav />
-          <ContentContainer>
-            <p className="text-right">
-              {moment(currentAnnouncement.sentAt).format('D MMM YYYY')}
-            </p>
-            <h2 className="text-center">{currentAnnouncement.title}</h2>
-            <p>{currentAnnouncement.body}</p>
-            <Link to="/">Back</Link>
-          </ContentContainer>
-        </div>
-      </div>
+      <Fragment>
+        <p className="text-right">
+          {moment(currentAnnouncement.sentAt).format('D MMM YYYY')}
+        </p>
+        <h2 className="text-center">{currentAnnouncement.title}</h2>
+        <p>{currentAnnouncement.body}</p>
+        <Link to="/">Back</Link>
+      </Fragment>
     )
   }
 }
