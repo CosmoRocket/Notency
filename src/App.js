@@ -9,6 +9,7 @@ import {
 import './App.css'
 import HomePage from './HomePage'
 import NotificationShowPage from './NotificationShowPage'
+import AnnouncementShowPage from './AnnouncementShowPage'
 import DesktopNav from './components/DesktopNav'
 import Input from './components/Input'
 import LoginPage from './LoginPage'
@@ -79,6 +80,10 @@ class App extends Component {
             <Route
               path="/notifications"
               render={() => <NotificationShowPage />}
+            />
+            <Route
+              path="/announcements"
+              render={() => <AnnouncementShowPage />}
             />
             <Route
               render={({ location }) => (
