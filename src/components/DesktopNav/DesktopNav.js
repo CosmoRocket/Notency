@@ -1,30 +1,31 @@
 import React from 'react'
 import pic from './embassy_english.png'
 import './DesktopNav.css'
+import { Link } from 'react-router-dom'
 
 const DesktopNav = () => {
   return (
-    <nav className="DesktopNav">
+    <nav className="DesktopNav d-none d-sm-block">
       <ul class="nav flex-column">
         <li class="nav-item">
-          <a class="nav-link" href="#">
+          <Link class="nav-link" to="/">
             <img className="logo" src={pic} alt="Embassy English Logo" />
-          </a>
+          </Link>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">
+          <Link class="nav-link" to="/">
             Home
-          </a>
+          </Link>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">
+          <Link class="nav-link" to="update_contacts">
             Update Contacts
-          </a>
+          </Link>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">
+          <Link class="nav-link" to="logout">
             Logout
-          </a>
+          </Link>
         </li>
       </ul>
     </nav>
