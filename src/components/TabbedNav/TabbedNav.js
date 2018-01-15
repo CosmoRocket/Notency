@@ -1,9 +1,13 @@
 import React from 'react'
+import './TabbedNav.css'
 
 export default function TabbedNav({ handleChangeActiveTab, activeTab, tabs }) {
   const navTabs = tabs.map((TabContent, index) => {
     return (
-      <li class="nav-item" onClick={() => handleChangeActiveTab(index)}>
+      <li
+        class="nav-item tabbed-nav-link"
+        onClick={() => handleChangeActiveTab(index)}
+      >
         <a class={`nav-link ${activeTab === index && 'active'}`} href="#">
           <TabContent />
         </a>
