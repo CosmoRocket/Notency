@@ -1,6 +1,7 @@
 .editorSection {
   border: 1px solid #4d4d4d;
   border-radius: 2px;
+  background-color: #fff;
 }
 
 .formActions {
@@ -14,4 +15,14 @@
 
 .sendButton {
   margin-top: 1em;
+  height: 40px;
+  width: 100px;
+  background: #5969E2;
+  border-radius: 2px;
+  padding: 2px;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2)
+}
+
+.sendButton:hover {
+  background: rgb(74, 87, 189);
 }
