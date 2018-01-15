@@ -62,28 +62,6 @@ class App extends Component {
       <Router>
         <div className="App">
           <Switch>
-<<<<<<< HEAD
-
-            {/* Login */}
-            <Route path='/login' exact render={() => (
-              <LoginPage />
-            )} />
-
-            {/* Home */}
-            <Route path='/home' exact render={() => (
-              <h1>Homepage</h1>
-            )} />
-
-            {/* Route not found */}
-            <Route render={({ location }) => (
-              <h2
-                className='text-center text-danger'
-              >
-                Page not found: {location.pathname}
-              </h2>
-            )} />
-
-=======
             {/* Login */}
             <Route path="/login" exact render={() => <LoginPage />} />
             <Route
@@ -103,7 +81,6 @@ class App extends Component {
                 </h2>
               )}
             />
->>>>>>> 97ef1c5cb70866af1d12b8a86368c252822390f9
           </Switch>
         </div>
       </Router>
