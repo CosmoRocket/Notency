@@ -4,7 +4,8 @@ import {
   Switch,
   Route,
   Redirect,
-  Link
+  Link,
+  withRouter
 } from 'react-router-dom'
 // react-draft-wysywig + dependencies
 import { Editor } from 'react-draft-wysiwyg'
@@ -14,6 +15,9 @@ import draftToHtml from 'draftjs-to-html'
 import './App.css'
 import HomePage from './HomePage'
 import NotificationShowPage from './NotificationShowPage'
+import AnnouncementShowPage from './AnnouncementShowPage'
+import CreateNotificationPage from './CreateNotificationPage'
+import CreateAnnouncementPage from './CreateAnnouncementPage'
 import DesktopNav from './components/DesktopNav'
 import Input from './components/Input'
 import LoginPage from './LoginPage'
@@ -24,9 +28,11 @@ class App extends Component {
   state = {
     error: null,
     contentState: null, // Captures current contents of Editor
+    activeTab: 0,
     totalRecipients: 700,
     notifications: [
       {
+        id: '12n3kj12k3',
         title: 'Flood warning',
         sentAt: Date.now(),
         received: 50,
@@ -40,6 +46,7 @@ class App extends Component {
         }
       },
       {
+        id: '2343n4jknj3',
         title: 'Heat wave',
         sentAt: Date.now(),
         received: 50,
@@ -51,12 +58,14 @@ class App extends Component {
     ],
     announcements: [
       {
+        id: '5m65k6m5k6m',
         title: 'Graduation Day for Students of Class 1024',
         sentAt: Date.now(),
         body:
           'The graduation for course eA342 will be hold on Thursday the 2nd of March 2018 at 12am. Please be punctual.'
       },
       {
+        id: '34mk534mk5',
         title: 'Christmas Party',
         sentAt: Date.now(),
         body:
@@ -68,35 +77,58 @@ class App extends Component {
   handleContentStateChange = (contentState) => {
     this.setState({ contentState })
   }
+  
+  handleChangeActiveTab = index => {
+    this.setState({ activeTab: index })
+  }
 
   render() {
-    const { notifications, announcements } = this.state
+    const { notifications, announcements, activeTab } = this.state
     return (
       <Router>
         <Container>
           <Switch>
             {/* Login */}
-            <Route
-              path="/login"
-              exact
-              render={() =>
-                <LoginPage
-
-                />}
-            />
+            <Route path="/login" exact render={() => <LoginPage />} />
             <Route
               path="/"
               exact
               render={() => (
                 <HomePage
+                  activeTab={activeTab}
                   notifications={notifications}
                   announcements={announcements}
+                  handleChangeActiveTab={this.handleChangeActiveTab}
                 />
               )}
             />
             <Route
+              path="/notifications/new"
+              exact
+              render={() => <CreateNotificationPage />}
+            />
+            <Route
+              path="/announcements/new"
+              exact
+              render={() => <CreateAnnouncementPage />}
+            />
+            <Route
               path="/notifications"
-              render={() => <NotificationShowPage />}
+              render={withRouter(props => (
+                <NotificationShowPage
+                  {...props}
+                  notifications={notifications}
+                />
+              ))}
+            />
+            <Route
+              path="/announcements"
+              render={withRouter(props => (
+                <AnnouncementShowPage
+                  {...props}
+                  announcements={announcements}
+                />
+              ))}
             />
             <Route
               render={({ location }) => (

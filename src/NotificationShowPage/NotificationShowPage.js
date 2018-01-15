@@ -3,19 +3,46 @@ import ContentContainer from '../components/ContentContainer'
 import MobileNav from '../components/MobileNav'
 import DesktopNav from '../components/DesktopNav'
 import TabbedNav from '../components/TabbedNav'
+import Message from '../components/Message'
+import { Link } from 'react-router-dom'
+import moment from 'moment'
 
 class NotificationShowPage extends Component {
-  state = {}
+  state = {
+    currentNotification: {},
+    activeTab: 0
+  }
+
+  componentDidMount() {
+    const { notifications, location } = this.props
+    const currentNotification = notifications.find(notification => {
+      return notification.id === location.pathname.split('/').slice(-1)[0]
+    })
+
+    this.setState({ currentNotification })
+  }
+
+  handleChangeActiveTab = index => {
+    this.setState({ activeTab: index })
+  }
+
   render() {
-    const { activeTab } = this.props
+    const { currentNotification, activeTab } = this.state
+
     return (
       <div>
         <MobileNav />
         <div className="d-flex">
           <DesktopNav />
           <ContentContainer>
+            <p className="text-right">
+              {moment(currentNotification.sentAt).format('D MMM YYYY')}
+            </p>
+            <h2 className="text-center">{currentNotification.title}</h2>
+            <p>{currentNotification.body}</p>
             <TabbedNav
               activeTab={activeTab}
+              handleChangeActiveTab={this.handleChangeActiveTab}
               tabs={[
                 () => (
                   <div className="text-center text-success">
@@ -36,8 +63,16 @@ class NotificationShowPage extends Component {
                   </div>
                 )
               ]}
-              handleChangeActiveTab={this.handleChangeActiveTab}
             />
+            {activeTab === 0 && (
+              <Message
+                recipientId="123891273"
+                contactNumber="0476143646"
+                recipientName="John Voon"
+                messageBody="OK"
+              />
+            )}
+            <Link to="/">Back</Link>
           </ContentContainer>
         </div>
       </div>
