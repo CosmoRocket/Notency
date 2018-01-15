@@ -6,7 +6,7 @@ import Message from '../components/Message'
 import MobileNav from '../components/MobileNav'
 import DesktopNav from '../components/DesktopNav'
 import Checkbox from '../components/Checkbox'
-import MediaQuery from 'react-responsive'
+import ContentContainer from '../components/ContentContainer'
 
 class HomePage extends React.Component {
   state = {
@@ -31,7 +31,7 @@ class HomePage extends React.Component {
         <MobileNav />
         <div className="d-flex">
           <DesktopNav />
-          <div>
+          <ContentContainer>
             <TabbedNav
               activeTab={activeTab}
               tabs={[
@@ -76,7 +76,7 @@ class HomePage extends React.Component {
               <Checkbox />
               <a>Forgot your password</a>
             </div>
-          </div>
+          </ContentContainer>
         </div>
       </div>
     )
