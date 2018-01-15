@@ -1,6 +1,7 @@
 import React from 'react'
 import TabbedNav from '../components/TabbedNav'
 import Notification from '../components/Notification'
+import Announcement from '../components/Announcement'
 import Button from '../components/Button'
 import Message from '../components/Message'
 import MobileNav from '../components/MobileNav'
@@ -24,7 +25,7 @@ class HomePage extends React.Component {
       return <Notification {...notification} responses="10/60" />
     })
     const announcementsList = announcements.map(announcement => {
-      return <Notification {...announcement} />
+      return <Announcement {...announcement} />
     })
     return (
       <div>
