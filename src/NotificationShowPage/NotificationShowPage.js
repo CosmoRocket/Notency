@@ -3,6 +3,7 @@ import TabbedNav from '../components/TabbedNav'
 import Message from '../components/Message'
 import { Link } from 'react-router-dom'
 import moment from 'moment'
+import { groupBy } from 'ramda'
 
 class NotificationShowPage extends Component {
   state = {
@@ -25,12 +26,27 @@ class NotificationShowPage extends Component {
 
   render() {
     const { currentNotification, activeTab } = this.state
+    const capitalize = string =>
+      string.charAt(0).toUpperCase() + string.slice(1)
+    const categories =
+      currentNotification.groups &&
+      groupBy(group => group.name)(currentNotification.groups)
+    const groupElements =
+      currentNotification.groups &&
+      Object.keys(categories).map(category => (
+        <p>
+          {capitalize(category)}:{' '}
+          {categories[category].map(group => group.selected).join(', ')}
+        </p>
+      ))
 
     return (
       <Fragment>
         <p className="text-right">
           {moment(currentNotification.createdAt).format('D MMM YYYY')}
         </p>
+        <p>Groups Sent To:</p>
+        {groupElements}
         <h2 className="text-center">{currentNotification.subject}</h2>
         <p>{currentNotification.body}</p>
         <TabbedNav
