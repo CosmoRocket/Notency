@@ -71,7 +71,6 @@ class App extends Component {
     this.setState({ activeTab: index })
   }
 
-<<<<<<< HEAD
   onUpload = (csvFile) => {
     uploadFile(csvFile)
       .then(data => {
@@ -80,7 +79,8 @@ class App extends Component {
       .catch(error => {
         console.error("error in appJs", error)
       })
-=======
+  }
+
   load() {
     const { userData } = this.state
     const saveError = error => {
@@ -97,7 +97,6 @@ class App extends Component {
 
   componentDidMount() {
     this.load()
->>>>>>> 6e4b8ac2762858157fef51e676e80b044e191007
   }
 
   render() {
