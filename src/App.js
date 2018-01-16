@@ -21,12 +21,9 @@ import CreateAnnouncementPage from './CreateAnnouncementPage'
 
 class App extends Component {
   state = {
-<<<<<<< HEAD
     userData: getDecodedToken(),
-=======
     error: null,
     contentState: null, // Captures current contents of Editor
->>>>>>> 04-AnnouncementForm
     activeTab: 0,
     totalRecipients: 700,
     notifications: [
