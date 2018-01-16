@@ -70,7 +70,6 @@ class App extends Component {
     ]
   }
 
-<<<<<<< HEAD
   onSignIn = ({ username, password }) => {
     signIn({ username, password })
       .then(userData => {
@@ -84,10 +83,10 @@ class App extends Component {
   onSignOut = () => {
     signOutNow()
     this.setState({ userData: null })
-=======
-  handleContentStateChange = (contentState) => {
+  }
+
+  handleContentStateChange = contentState => {
     this.setState({ contentState })
->>>>>>> 04-AnnouncementForm
   }
 
   handleChangeActiveTab = index => {
@@ -108,7 +107,6 @@ class App extends Component {
             <Route
               path="/login"
               exact
-<<<<<<< HEAD
               render={() =>
                 userData ? (
                   <Redirect to="/" />
@@ -116,47 +114,6 @@ class App extends Component {
                   <LoginPage onSignIn={this.onSignIn} />
                 )
               }
-=======
-              render={() => (
-                <HomePage
-                  activeTab={activeTab}
-                  notifications={notifications}
-                  announcements={announcements}
-                  handleChangeActiveTab={this.handleChangeActiveTab}
-                />
-              )}
-            />
-            <Route
-              path="/notifications/new"
-              exact
-              render={() => <CreateNotificationPage />}
-            />
-            <Route
-              path="/announcements/new"
-              exact
-              render={() => <CreateAnnouncementPage 
-                              handleContentStateChange={ this.handleContentStateChange}
-                              />
-                            }
-            />
-            <Route
-              path="/notifications"
-              render={withRouter(props => (
-                <NotificationShowPage
-                  {...props}
-                  notifications={notifications}
-                />
-              ))}
-            />
-            <Route
-              path="/announcements"
-              render={withRouter(props => (
-                <AnnouncementShowPage
-                  {...props}
-                  announcements={announcements}
-                />
-              ))}
->>>>>>> 04-AnnouncementForm
             />
             <Route path="/logout" render={() => <Redirect to="/login" />} />
             <ContentContainer onSignOut={this.onSignOut}>
