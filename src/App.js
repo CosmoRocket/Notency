@@ -12,6 +12,7 @@ import { getDecodedToken } from './api/token'
 import { signIn, signOutNow } from './api/auth'
 import { uploadFile } from './api/fileupload'
 import { listNotifications } from './api/notifications'
+import { listAnnouncements } from './api/announcements'
 import Container from './components/Container'
 import ContentContainer from './components/ContentContainer'
 import LoginPage from './LoginPage'
@@ -30,22 +31,7 @@ class App extends Component {
     activeTab: 0,
     totalRecipients: 700,
     notifications: [],
-    announcements: [
-      {
-        id: '5m65k6m5k6m',
-        subject: 'Graduation Day for Students of Class 1024',
-        createdAt: Date.now(),
-        body:
-          'The graduation for course eA342 will be hold on Thursday the 2nd of March 2018 at 12am. Please be punctual.'
-      },
-      {
-        id: '34mk534mk5',
-        subject: 'Christmas Party',
-        createdAt: Date.now(),
-        body:
-          'Please note there will be a Christmas Party in your respective classes on 11 December 2018. Wishing you all a Merry Christmas and Happy New Year'
-      }
-    ]
+    announcements: []
   }
 
   onSignIn = ({ username, password }) => {
@@ -71,13 +57,13 @@ class App extends Component {
     this.setState({ activeTab: index })
   }
 
-  onUpload = (csvFile) => {
+  onUpload = csvFile => {
     uploadFile(csvFile)
       .then(data => {
         console.log(data)
       })
       .catch(error => {
-        console.error("error in appJs", error)
+        console.error('error in appJs', error)
       })
   }
 
@@ -89,8 +75,13 @@ class App extends Component {
 
     listNotifications()
       .then(notifications => {
-        console.log(notifications)
         this.setState({ notifications })
+      })
+      .catch(saveError)
+
+    listAnnouncements()
+      .then(announcements => {
+        this.setState({ announcements })
       })
       .catch(saveError)
   }
@@ -117,8 +108,8 @@ class App extends Component {
                 userData ? (
                   <Redirect to="/" />
                 ) : (
-                    <LoginPage onSignIn={this.onSignIn} />
-                  )
+                  <LoginPage onSignIn={this.onSignIn} />
+                )
               }
             />
             <Route path="/logout" render={() => <Redirect to="/login" />} />
@@ -173,11 +164,7 @@ class App extends Component {
                 path="/update_contacts"
                 exact
                 render={requireAuth(
-                  withRouter(props => (
-                    <ContactsPage
-                      onUpload={this.onUpload}
-                    />
-                  ))
+                  withRouter(props => <ContactsPage onUpload={this.onUpload} />)
                 )}
               />
             </ContentContainer>
