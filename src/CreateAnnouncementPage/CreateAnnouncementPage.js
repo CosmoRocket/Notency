@@ -1,7 +1,4 @@
-import React, { Component } from 'react'
-import ContentContainer from '../components/ContentContainer'
-import MobileNav from '../components/MobileNav'
-import DesktopNav from '../components/DesktopNav'
+import React, { Component, Fragment } from 'react'
 import { Link } from 'react-router-dom'
 import AnnouncementForm from '../components/AnnouncementForm'
 // react-draft-wysywig + dependencies
@@ -14,16 +11,11 @@ export default function CreateAnnouncementPage({
   contentState
 }) {
   return (
-    <div>
-      <MobileNav />
-      <div className="d-flex">
-        <DesktopNav />
-        <ContentContainer>
-          <AnnouncementForm 
-            contentState={ contentState }
-            handleContentStateChange={ handleContentStateChange }/>
-        </ContentContainer>
-      </div>
-    </div>
+    <Fragment>
+      <AnnouncementForm
+        contentState={contentState}
+        handleContentStateChange={handleContentStateChange}
+      />
+    </Fragment>
   )
 }

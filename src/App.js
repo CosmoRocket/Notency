@@ -1,26 +1,27 @@
-import React, { Component, Fragment } from 'react'
+import React, { Component } from 'react'
 import {
   BrowserRouter as Router,
   Switch,
   Route,
   Redirect,
-  Link,
   withRouter
 } from 'react-router-dom'
 import './App.css'
+import { setToken } from './api/init'
+import { getDecodedToken } from './api/token'
+import { signIn, signOutNow } from './api/auth'
+import Container from './components/Container'
+import ContentContainer from './components/ContentContainer'
+import LoginPage from './LoginPage'
 import HomePage from './HomePage'
 import NotificationShowPage from './NotificationShowPage'
 import AnnouncementShowPage from './AnnouncementShowPage'
 import CreateNotificationPage from './CreateNotificationPage'
 import CreateAnnouncementPage from './CreateAnnouncementPage'
-import DesktopNav from './components/DesktopNav'
-import Input from './components/Input'
-import LoginPage from './LoginPage'
-import MobileNav from './components/MobileNav'
-import Container from './components/Container'
 
 class App extends Component {
   state = {
+    userData: getDecodedToken(),
     error: null,
     contentState: null, // Captures current contents of Editor
     activeTab: 0,
@@ -69,7 +70,22 @@ class App extends Component {
     ]
   }
 
-  handleContentStateChange = (contentState) => {
+  onSignIn = ({ username, password }) => {
+    signIn({ username, password })
+      .then(userData => {
+        this.setState({ userData })
+      })
+      .catch(error => {
+        this.setState({ error })
+      })
+  }
+
+  onSignOut = () => {
+    signOutNow()
+    this.setState({ userData: null })
+  }
+
+  handleContentStateChange = contentState => {
     this.setState({ contentState })
   }
 
@@ -78,56 +94,76 @@ class App extends Component {
   }
 
   render() {
-    const { notifications, announcements, activeTab } = this.state
+    const { notifications, announcements, activeTab, userData } = this.state
+
+    const requireAuth = render => props =>
+      userData ? render(props) : <Redirect to="/login" />
+
     return (
       <Router>
         <Container>
           <Switch>
             {/* Login */}
-            <Route path="/login" exact render={() => <LoginPage />} />
             <Route
-              path="/"
+              path="/login"
               exact
-              render={() => (
-                <HomePage
-                  activeTab={activeTab}
-                  notifications={notifications}
-                  announcements={announcements}
-                  handleChangeActiveTab={this.handleChangeActiveTab}
-                />
-              )}
+              render={() =>
+                userData ? (
+                  <Redirect to="/" />
+                ) : (
+                  <LoginPage onSignIn={this.onSignIn} />
+                )
+              }
             />
-            <Route
-              path="/notifications/new"
-              exact
-              render={() => <CreateNotificationPage />}
-            />
-            <Route
-              path="/announcements/new"
-              exact
-              render={() => <CreateAnnouncementPage 
-                              handleContentStateChange={ this.handleContentStateChange}
-                              />
-                            }
-            />
-            <Route
-              path="/notifications"
-              render={withRouter(props => (
-                <NotificationShowPage
-                  {...props}
-                  notifications={notifications}
-                />
-              ))}
-            />
-            <Route
-              path="/announcements"
-              render={withRouter(props => (
-                <AnnouncementShowPage
-                  {...props}
-                  announcements={announcements}
-                />
-              ))}
-            />
+            <Route path="/logout" render={() => <Redirect to="/login" />} />
+            <ContentContainer onSignOut={this.onSignOut}>
+              <Route
+                path="/"
+                exact
+                render={requireAuth(() => (
+                  <HomePage
+                    activeTab={activeTab}
+                    notifications={notifications}
+                    announcements={announcements}
+                    handleChangeActiveTab={this.handleChangeActiveTab}
+                  />
+                ))}
+              />
+              <Route
+                path="/new_notification"
+                exact
+                render={requireAuth(() => <CreateNotificationPage />)}
+              />
+              <Route
+                path="/new_announcement"
+                exact
+                render={requireAuth(() => <CreateAnnouncementPage />)}
+              />
+              <Route
+                path="/notifications/:id"
+                exact
+                render={requireAuth(
+                  withRouter(props => (
+                    <NotificationShowPage
+                      {...props}
+                      notifications={notifications}
+                    />
+                  ))
+                )}
+              />
+              <Route
+                path="/announcements/:id"
+                exact
+                render={requireAuth(
+                  withRouter(props => (
+                    <AnnouncementShowPage
+                      {...props}
+                      announcements={announcements}
+                    />
+                  ))
+                )}
+              />
+            </ContentContainer>
             <Route
               render={({ location }) => (
                 <h2 className="text-center text-danger">

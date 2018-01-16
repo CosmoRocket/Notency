@@ -1,5 +1,4 @@
 import React from 'react'
-import { Icon } from 'react-fa'
 import './Message.css'
 
 export default function Message({
