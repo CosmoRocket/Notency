@@ -1,8 +1,4 @@
-import axios from 'axios'
-
-const api = axios.create({
-  baseURL: 'http://localhost:7000'
-})
+import api from './init'
 
 export function uploadFile(csvFile) {
   console.log('uploading')
