@@ -28,6 +28,16 @@ export default function AnnouncementForm({
     }}
     >
 
+    {/* RADIO BUTTONS - select all or by group */}
+      <div className="radioMenu">
+        <p>To: </p>
+        <input type='radio' id='allChoice' name='groupSelect' value='all'/> 
+        <label htmlFor="allChoice">All</label>
+        <input type='radio' id='nationalityChoice' name='groupSelect' value='nationality'/>
+        <label htmlFor="nationalityChoice">Nationality</label>
+        <input type='radio' id='gradDateChoice' name='groupSelect' value='gradDate'/>
+        <label htmlFor="gradDateChoice">Grad Date</label>
+      </div>
     {/* INPUT FOR EMAIL SUBJECT */}
     <Input 
       type='subject'
@@ -39,6 +49,9 @@ export default function AnnouncementForm({
       wrapperClassName='editorSection'
       editorClassName='wrapperSection'
       handleContentStateChange={handleContentStateChange}
+      toolbar={{
+        options: ['inline', 'blockType', 'fontSize', 'fontFamily']
+      }}
       />
       {/* BOTTOM BUTTONS */}
     <div className="formActions">
