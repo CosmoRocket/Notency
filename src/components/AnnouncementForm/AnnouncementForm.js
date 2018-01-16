@@ -35,6 +35,8 @@ export default function AnnouncementForm({
         <label htmlFor="allChoice">All</label>
         <input type='radio' id='nationalityChoice' name='groupSelect' value='nationality'/>
         <label htmlFor="nationalityChoice">Nationality</label>
+        <input type='radio' id='roleChoice' name='groupSelect' value='role'/> 
+        <label htmlFor="roleChoice">Role</label>
         <input type='radio' id='gradDateChoice' name='groupSelect' value='gradDate'/>
         <label htmlFor="gradDateChoice">Grad Date</label>
       </div>

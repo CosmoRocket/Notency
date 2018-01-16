@@ -1,18 +1,17 @@
 import React, { Component, Fragment } from 'react'
-import { Link } from 'react-router-dom'
+import NotificationForm from '../components/NotificationForm'
 
-class CreateNotificationPage extends Component {
-  state = {}
-
-  componentDidMount() {}
-
-  render() {
-    return (
+export default function CreateNotificationPage({
+  handleMessageChange,
+  textBody
+})  {
+  return(
       <Fragment>
-        <Link to="/">Back</Link>
+        <NotificationForm
+          textBody={textBody}
+          handleMessageChange={handleMessageChange}
+          // handleCreateNotification={handleCreateNotification}
+        />
       </Fragment>
-    )
-  }
+  )
 }
-
-export default CreateNotificationPage
