@@ -10,6 +10,7 @@ import './App.css'
 import { setToken } from './api/init'
 import { getDecodedToken } from './api/token'
 import { signIn, signOutNow } from './api/auth'
+import { listNotifications } from './api/notifications'
 import Container from './components/Container'
 import ContentContainer from './components/ContentContainer'
 import LoginPage from './LoginPage'
@@ -26,44 +27,19 @@ class App extends Component {
     contentState: null, // Captures current contents of Editor
     activeTab: 0,
     totalRecipients: 700,
-    notifications: [
-      {
-        id: '12n3kj12k3',
-        title: 'Flood warning',
-        sentAt: Date.now(),
-        received: 50,
-        failed: 10,
-        responded: 10,
-        body:
-          'Please note that there has been an announcement about a flood coming.',
-        group: {
-          country: 'France',
-          status: 'Student'
-        }
-      },
-      {
-        id: '2343n4jknj3',
-        title: 'Heat wave',
-        sentAt: Date.now(),
-        received: 50,
-        failed: 10,
-        responded: 10,
-        body:
-          'Please note that there has been an announcement about a heat wave.'
-      }
-    ],
+    notifications: [],
     announcements: [
       {
         id: '5m65k6m5k6m',
-        title: 'Graduation Day for Students of Class 1024',
-        sentAt: Date.now(),
+        subject: 'Graduation Day for Students of Class 1024',
+        createdAt: Date.now(),
         body:
           'The graduation for course eA342 will be hold on Thursday the 2nd of March 2018 at 12am. Please be punctual.'
       },
       {
         id: '34mk534mk5',
-        title: 'Christmas Party',
-        sentAt: Date.now(),
+        subject: 'Christmas Party',
+        createdAt: Date.now(),
         body:
           'Please note there will be a Christmas Party in your respective classes on 11 December 2018. Wishing you all a Merry Christmas and Happy New Year'
       }
@@ -91,6 +67,24 @@ class App extends Component {
 
   handleChangeActiveTab = index => {
     this.setState({ activeTab: index })
+  }
+
+  load() {
+    const { userData } = this.state
+    const saveError = error => {
+      this.setState({ error })
+    }
+
+    listNotifications()
+      .then(notifications => {
+        console.log(notifications)
+        this.setState({ notifications })
+      })
+      .catch(saveError)
+  }
+
+  componentDidMount() {
+    this.load()
   }
 
   render() {

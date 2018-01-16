@@ -22,9 +22,9 @@ class AnnouncementShowPage extends Component {
     return (
       <Fragment>
         <p className="text-right">
-          {moment(currentAnnouncement.sentAt).format('D MMM YYYY')}
+          {moment(currentAnnouncement.createdAt).format('D MMM YYYY')}
         </p>
-        <h2 className="text-center">{currentAnnouncement.title}</h2>
+        <h2 className="text-center">{currentAnnouncement.subject}</h2>
         <p>{currentAnnouncement.body}</p>
         <Link to="/">Back</Link>
       </Fragment>

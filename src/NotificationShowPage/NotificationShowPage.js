@@ -13,7 +13,7 @@ class NotificationShowPage extends Component {
   componentDidMount() {
     const { notifications, match } = this.props
     const currentNotification = notifications.find(notification => {
-      return notification.id === match.params.id
+      return notification._id === match.params.id
     })
 
     this.setState({ currentNotification })
@@ -29,9 +29,9 @@ class NotificationShowPage extends Component {
     return (
       <Fragment>
         <p className="text-right">
-          {moment(currentNotification.sentAt).format('D MMM YYYY')}
+          {moment(currentNotification.createdAt).format('D MMM YYYY')}
         </p>
-        <h2 className="text-center">{currentNotification.title}</h2>
+        <h2 className="text-center">{currentNotification.subject}</h2>
         <p>{currentNotification.body}</p>
         <TabbedNav
           activeTab={activeTab}

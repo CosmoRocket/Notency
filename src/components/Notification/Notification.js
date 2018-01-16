@@ -4,18 +4,26 @@ import './Notification.css'
 import { Link } from 'react-router-dom'
 import moment from 'moment'
 
-export default function Notification({ id, title, body, sentAt, responses }) {
+export default function Notification({
+  _id,
+  subject,
+  body,
+  createdAt,
+  responses
+}) {
   return (
     <div className="Notification py-1">
-      <Link to={`/notifications/${id}`}>
+      <Link to={`/notifications/${_id}`}>
         <div className="d-flex justify-content-between">
-          <small className="m-0">{moment(sentAt).format('D MMM YYYY')}</small>
+          <small className="m-0">
+            {moment(createdAt).format('D MMM YYYY')}
+          </small>
           <small>
             <Icon className="text-success mr-2" name="mail-reply" />
             {responses}
           </small>
         </div>
-        <p className="m-0 font-weight-bold">{title}</p>
+        <p className="m-0 font-weight-bold">{subject}</p>
       </Link>
     </div>
   )
