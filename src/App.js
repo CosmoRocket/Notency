@@ -10,6 +10,7 @@ import './App.css'
 import { setToken } from './api/init'
 import { getDecodedToken } from './api/token'
 import { signIn, signOutNow } from './api/auth'
+import { uploadFile } from './api/fileupload'
 import Container from './components/Container'
 import ContentContainer from './components/ContentContainer'
 import LoginPage from './LoginPage'
@@ -18,6 +19,7 @@ import NotificationShowPage from './NotificationShowPage'
 import AnnouncementShowPage from './AnnouncementShowPage'
 import CreateNotificationPage from './CreateNotificationPage'
 import CreateAnnouncementPage from './CreateAnnouncementPage'
+import ContactsPage from './ContactsPage'
 
 class App extends Component {
   state = {
@@ -87,6 +89,16 @@ class App extends Component {
     this.setState({ activeTab: index })
   }
 
+  onUpload = (csvFile) => {
+    uploadFile(csvFile)
+      .then(data => {
+        console.log(data)
+      })
+      .catch(error => {
+        console.error("error in appJs", error)
+      })
+  }
+
   render() {
     const { notifications, announcements, activeTab, userData } = this.state
 
@@ -105,8 +117,8 @@ class App extends Component {
                 userData ? (
                   <Redirect to="/" />
                 ) : (
-                  <LoginPage onSignIn={this.onSignIn} />
-                )
+                    <LoginPage onSignIn={this.onSignIn} />
+                  )
               }
             />
             <Route path="/logout" render={() => <Redirect to="/login" />} />
@@ -153,6 +165,17 @@ class App extends Component {
                     <AnnouncementShowPage
                       {...props}
                       announcements={announcements}
+                    />
+                  ))
+                )}
+              />
+              <Route
+                path="/update_contacts"
+                exact
+                render={requireAuth(
+                  withRouter(props => (
+                    <ContactsPage
+                      onUpload={this.onUpload}
                     />
                   ))
                 )}
