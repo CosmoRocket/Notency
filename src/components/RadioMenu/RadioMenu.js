@@ -8,16 +8,19 @@ function camelize(text) {
   })
 }
 
-const RadioMenu = ({ name, options, onChange }) => {
+const RadioMenu = ({ name, options, onChange, selectedValue }) => {
   const radioOptions = options.map(option => {
+    const camelizedOption = camelize(option)
+    const camelizedSelectedValue = camelize(selectedValue)
     return (
       <Fragment>
         <input
           type="radio"
-          id={camelize(option)}
+          id={camelizedOption}
           name={name}
-          value={camelize(option)}
+          value={camelizedOption}
           onChange={onChange}
+          checked={camelizedOption === camelizedSelectedValue}
         />
         <label htmlFor={camelize(option)}>{option}</label>
       </Fragment>

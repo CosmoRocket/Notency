@@ -12,7 +12,7 @@ import { getDecodedToken } from './api/token'
 import { signIn, signOutNow } from './api/auth'
 import { uploadFile } from './api/fileupload'
 import { listNotifications } from './api/notifications'
-import { listAnnouncements } from './api/announcements'
+import { listAnnouncements, createAnnouncement } from './api/announcements'
 import { listRecipients } from './api/recipients'
 import Container from './components/Container'
 import ContentContainer from './components/ContentContainer'
@@ -27,8 +27,6 @@ import ContactsPage from './ContactsPage'
 class App extends Component {
   state = {
     userData: getDecodedToken(),
-    error: null,
-    contentState: null, // Captures current contents of Editor
     activeTab: 0,
     totalRecipients: 700,
     notifications: [],
@@ -51,12 +49,21 @@ class App extends Component {
     this.setState({ userData: null })
   }
 
-  handleContentStateChange = contentState => {
-    this.setState({ contentState })
-  }
-
   handleChangeActiveTab = index => {
     this.setState({ activeTab: index })
+  }
+
+  handleCreateAnnouncement = announcementData => {
+    createAnnouncement(announcementData).then(newAnnouncement => {
+      this.setState(prevState => {
+        const updatedAnnouncements = prevState.announcements.concat(
+          newAnnouncement
+        )
+        return {
+          announcements: updatedAnnouncements
+        }
+      })
+    })
   }
 
   onUpload = csvFile => {
@@ -150,7 +157,12 @@ class App extends Component {
               <Route
                 path="/new_announcement"
                 exact
-                render={requireAuth(() => <CreateAnnouncementPage />)}
+                render={requireAuth(() => (
+                  <CreateAnnouncementPage
+                    recipients={recipients}
+                    handleCreateAnnouncement={this.handleCreateAnnouncement}
+                  />
+                ))}
               />
               <Route
                 path="/notifications/:id"

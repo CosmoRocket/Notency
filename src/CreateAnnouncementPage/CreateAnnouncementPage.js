@@ -2,15 +2,14 @@ import React, { Component, Fragment } from 'react'
 import AnnouncementForm from '../components/AnnouncementForm'
 
 export default function CreateAnnouncementPage({
-  handleContentStateChange,
-  contentState
+  recipients,
+  handleCreateAnnouncement
 }) {
   return (
     <Fragment>
       <AnnouncementForm
-        contentState={contentState}
-        handleContentStateChange={handleContentStateChange}
-        // handleCreateAnnouncement={handleCreateAnnouncement}
+        recipients={recipients}
+        handleCreateAnnouncement={handleCreateAnnouncement}
       />
     </Fragment>
   )
