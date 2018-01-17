@@ -13,6 +13,7 @@ import { signIn, signOutNow } from './api/auth'
 import { uploadFile } from './api/fileupload'
 import { listNotifications } from './api/notifications'
 import { listAnnouncements } from './api/announcements'
+import { listRecipients } from './api/recipients'
 import Container from './components/Container'
 import ContentContainer from './components/ContentContainer'
 import LoginPage from './LoginPage'
@@ -31,7 +32,8 @@ class App extends Component {
     activeTab: 0,
     totalRecipients: 700,
     notifications: [],
-    announcements: []
+    announcements: [],
+    recipients: []
   }
 
   onSignIn = ({ username, password }) => {
@@ -84,6 +86,12 @@ class App extends Component {
         this.setState({ announcements })
       })
       .catch(saveError)
+
+    listRecipients()
+      .then(recipients => {
+        this.setState({ recipients })
+      })
+      .catch(saveError)
   }
 
   componentDidMount() {
@@ -91,7 +99,13 @@ class App extends Component {
   }
 
   render() {
-    const { notifications, announcements, activeTab, userData } = this.state
+    const {
+      notifications,
+      announcements,
+      recipients,
+      activeTab,
+      userData
+    } = this.state
 
     const requireAuth = render => props =>
       userData ? render(props) : <Redirect to="/login" />
@@ -129,7 +143,9 @@ class App extends Component {
               <Route
                 path="/new_notification"
                 exact
-                render={requireAuth(() => <CreateNotificationPage />)}
+                render={requireAuth(() => (
+                  <CreateNotificationPage recipients={recipients} />
+                ))}
               />
               <Route
                 path="/new_announcement"
