@@ -4,7 +4,7 @@ import moment from 'moment'
 import './Announcement.css'
 
 export default function Announcement({
-  id,
+  _id,
   subject,
   body,
   createdAt,
@@ -12,7 +12,7 @@ export default function Announcement({
 }) {
   return (
     <div className="Announcement py-1">
-      <Link to={`/announcements/${id}`}>
+      <Link to={`/announcements/${_id}`}>
         <div className="d-flex justify-content-between">
           <small className="m-0">
             {moment(createdAt).format('D MMM YYYY')}

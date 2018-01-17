@@ -6,18 +6,25 @@ export default function Input({
   type,
   name,
   placeholder,
-  inputStyle,
-  iconName
+  iconName,
+  errorMessage,
+  onChange,
+  onBlur,
+  value
 }) {
   return (
-    <div className="inputContainer">
+    <div className="Input">
       <input
         type={type}
+        value={value}
         name={name}
         placeholder={placeholder}
-        className={`${iconName && 'pl-4'} ${inputStyle}`}
+        className={`${iconName && 'pl-4'} ${errorMessage && 'error'}`}
+        onChange={onChange}
+        onBlur={onBlur}
       />
       {iconName ? <Icon name={iconName} className="icon" /> : null}
+      {errorMessage && <p className="error-message">{errorMessage}</p>}
     </div>
   )
 }

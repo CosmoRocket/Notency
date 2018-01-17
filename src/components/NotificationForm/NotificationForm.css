@@ -1,0 +1,11 @@
+textarea {
+  width: 100%;
+}
+
+.char-length {
+  margin-top: 1.05em;
+}
+
+.char-limit-reached {
+  color: #dc3545;
+}

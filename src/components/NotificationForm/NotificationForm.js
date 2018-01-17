@@ -1,41 +1,50 @@
 import React from 'react'
-import './AnnouncementForm.css'
-import { Editor } from 'react-draft-wysiwyg'
-import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css'
+import './NotificationForm.css'
 import Button from '../../components/Button'
 import Input from '../../components/Input'
 import TextArea from '../../components/TextArea'
 import RadioMenu from '../../components/RadioMenu'
-import draftToHtml from 'draftjs-to-html'
-import { Link } from 'react-router-dom'
 import ReactSelect from 'react-select'
+import 'react-select/dist/react-select.css'
+import { Link } from 'react-router-dom'
 import { Formik } from 'formik'
 import Yup from 'yup'
 import { groupBy } from 'ramda'
 import capitalize from 'lodash/capitalize'
+import isEmpty from 'lodash/isEmpty'
+import { createNotification } from '../../api/notifications'
+import { reject } from 'ramda'
 
-export default function AnnouncementForm({
-  recipients,
-  handleCreateAnnouncement
-}) {
+export default function NotificationForm({ recipients }) {
   return (
     <Formik
       initialValues={{
         subject: '',
-        recipients: recipients,
+        code: '',
+        body: '',
         bodyHtml: '',
         group: 'all',
+        recipients: recipients,
         nationality: [],
         role: undefined,
         groups: []
       }}
-      onSubmit={(values, { setSubmitting, setErrors }) => {
-        handleCreateAnnouncement(values)
-      }}
       validationSchema={Yup.object().shape({
+        code: Yup.string().required('Please enter a 3-digit code'),
         subject: Yup.string().required('Please enter a subject'),
         body: Yup.string().required('Please enter a message')
       })}
+      onSubmit={(values, { setSubmitting, setErrors }) => {
+        createNotification(values).then(
+          notification => {
+            setSubmitting(false)
+            return notification
+          },
+          errors => {
+            setSubmitting(false)
+          }
+        )
+      }}
       render={({
         values,
         errors,
@@ -71,7 +80,6 @@ export default function AnnouncementForm({
 
         return (
           <form onSubmit={handleSubmit}>
-            {/* RADIO BUTTONS - select all or by group */}
             <div className="d-flex">
               <p className="m-0">To: </p>
               <RadioMenu
@@ -129,7 +137,20 @@ export default function AnnouncementForm({
                 ]}
               />
             )}
-            {/* INPUT FOR EMAIL SUBJECT */}
+            <Input
+              name="code"
+              placeholder="Enter a 3-digit code"
+              value={values.code}
+              onChange={e => {
+                handleChange(e)
+                setFieldValue(
+                  'body',
+                  `Reply with '${e.target.value} OK' if you are safe.`
+                )
+              }}
+              onBlur={handleBlur}
+              errorMessage={errors.code && touched.code && errors.code}
+            />
             <Input
               name="subject"
               placeholder="Subject"
@@ -138,24 +159,36 @@ export default function AnnouncementForm({
               onBlur={handleBlur}
               errorMessage={errors.subject && touched.subject && errors.subject}
             />
-            {/* REACT CONTENT EDITOR (pass in options as props) */}
-            <Editor
+            <TextArea
               name="body"
-              wrapperClassName="editorSection"
-              editorClassName="wrapperSection"
-              onContentStateChange={contentState => {
-                setFieldValue('body', contentState)
-                setFieldValue('bodyHtml', draftToHtml(contentState))
+              id="body"
+              rows="10"
+              maxLength="160"
+              placeholder="Type your message here..."
+              value={values.body}
+              onChange={e => {
+                handleChange(e)
+                setFieldValue(
+                  'bodyHtml',
+                  `<p>${reject(
+                    el => el === '',
+                    e.target.value.split('\n')
+                  ).join('</p><p>')}</p>`
+                )
               }}
-              toolbar={{
-                options: ['inline', 'blockType', 'fontSize', 'fontFamily']
-              }}
+              onBlur={handleBlur}
+              errorMessage={errors.body && touched.body && errors.body}
             />
-            {/* BOTTOM BUTTONS */}
             <div className="formActions">
               <Link className="formBack" to="/">
                 Back
               </Link>
+              <p
+                className={`char-length ${values.body.length === 160 &&
+                  'char-limit-reached'}`}
+              >
+                Characters used: {values.body.length}/160
+              </p>
               <Button className="sendButton" text="SEND" />
             </div>
           </form>

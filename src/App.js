@@ -12,6 +12,8 @@ import { getDecodedToken } from './api/token'
 import { signIn, signOutNow } from './api/auth'
 import { uploadFile } from './api/fileupload'
 import { listNotifications } from './api/notifications'
+import { listAnnouncements, createAnnouncement } from './api/announcements'
+import { listRecipients } from './api/recipients'
 import Container from './components/Container'
 import ContentContainer from './components/ContentContainer'
 import LoginPage from './LoginPage'
@@ -25,27 +27,11 @@ import ContactsPage from './ContactsPage'
 class App extends Component {
   state = {
     userData: getDecodedToken(),
-    error: null,
-    contentState: null, // Captures current contents of Editor
     activeTab: 0,
     totalRecipients: 700,
     notifications: [],
-    announcements: [
-      {
-        id: '5m65k6m5k6m',
-        subject: 'Graduation Day for Students of Class 1024',
-        createdAt: Date.now(),
-        body:
-          'The graduation for course eA342 will be hold on Thursday the 2nd of March 2018 at 12am. Please be punctual.'
-      },
-      {
-        id: '34mk534mk5',
-        subject: 'Christmas Party',
-        createdAt: Date.now(),
-        body:
-          'Please note there will be a Christmas Party in your respective classes on 11 December 2018. Wishing you all a Merry Christmas and Happy New Year'
-      }
-    ]
+    announcements: [],
+    recipients: []
   }
 
   onSignIn = ({ username, password }) => {
@@ -63,21 +49,30 @@ class App extends Component {
     this.setState({ userData: null })
   }
 
-  handleContentStateChange = contentState => {
-    this.setState({ contentState })
-  }
-
   handleChangeActiveTab = index => {
     this.setState({ activeTab: index })
   }
 
-  onUpload = (formData) => {
+  handleCreateAnnouncement = announcementData => {
+    createAnnouncement(announcementData).then(newAnnouncement => {
+      this.setState(prevState => {
+        const updatedAnnouncements = prevState.announcements.concat(
+          newAnnouncement
+        )
+        return {
+          announcements: updatedAnnouncements
+        }
+      })
+    })
+  }
+
+  onUpload = formData => {
     uploadFile(formData)
       .then(data => {
         console.log(data)
       })
       .catch(error => {
-        console.error("error in appJs", error)
+        console.error('error in appJs', error)
       })
   }
 
@@ -92,6 +87,18 @@ class App extends Component {
         this.setState({ notifications })
       })
       .catch(saveError)
+
+    listAnnouncements()
+      .then(announcements => {
+        this.setState({ announcements })
+      })
+      .catch(saveError)
+
+    listRecipients()
+      .then(recipients => {
+        this.setState({ recipients })
+      })
+      .catch(saveError)
   }
 
   componentDidMount() {
@@ -99,7 +106,13 @@ class App extends Component {
   }
 
   render() {
-    const { notifications, announcements, activeTab, userData } = this.state
+    const {
+      notifications,
+      announcements,
+      recipients,
+      activeTab,
+      userData
+    } = this.state
 
     const requireAuth = render => props =>
       userData ? render(props) : <Redirect to="/login" />
@@ -137,12 +150,19 @@ class App extends Component {
               <Route
                 path="/new_notification"
                 exact
-                render={requireAuth(() => <CreateNotificationPage />)}
+                render={requireAuth(() => (
+                  <CreateNotificationPage recipients={recipients} />
+                ))}
               />
               <Route
                 path="/new_announcement"
                 exact
-                render={requireAuth(() => <CreateAnnouncementPage />)}
+                render={requireAuth(() => (
+                  <CreateAnnouncementPage
+                    recipients={recipients}
+                    handleCreateAnnouncement={this.handleCreateAnnouncement}
+                  />
+                ))}
               />
               <Route
                 path="/notifications/:id"
@@ -172,11 +192,7 @@ class App extends Component {
                 path="/update_contacts"
                 exact
                 render={requireAuth(
-                  withRouter(props => (
-                    <ContactsPage
-                      onUpload={this.onUpload}
-                    />
-                  ))
+                  withRouter(props => <ContactsPage onUpload={this.onUpload} />)
                 )}
               />
             </ContentContainer>
