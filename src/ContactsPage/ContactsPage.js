@@ -4,13 +4,13 @@ import Button from '../components/Button'
 
 class ContactsPage extends React.Component {
   state = {
-    fileName: 'No file uploaded',
-    csvFile: '',
+    fileName: 'No file selected',
+    csvFile: ''
   }
 
-  onChange = (event) => { 
+  onChange = (event) => {
     let fileName = event.target.value
-    fileName = fileName.slice(fileName.lastIndexOf('\\')+1)
+    fileName = fileName.slice(fileName.lastIndexOf('\\') + 1)
     this.setState({
       fileName: fileName,
       csvFile: event.target.files[0]
@@ -19,12 +19,13 @@ class ContactsPage extends React.Component {
 
   render() {
     const { fileName, csvFile } = this.state;
-    const { onUpload } = this.props
+    const { onUpload, successUpload } = this.props
 
     return (
       <form
         encType="multipart/form-data"
         onSubmit={event => {
+          event.preventDefault()
           const formData = new FormData();
 
           formData.append('description', fileName);
@@ -40,6 +41,7 @@ class ContactsPage extends React.Component {
           btnStyle='danger btn-contacts'
           text='Upload'
         />
+        <span className='ml-3'>{successUpload}</span>
       </form>
     )
   }

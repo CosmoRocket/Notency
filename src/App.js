@@ -28,6 +28,7 @@ class App extends Component {
   state = {
     userData: getDecodedToken(),
     activeTab: 0,
+    successUpload: '',
     totalRecipients: 700,
     notifications: [],
     announcements: [],
@@ -68,11 +69,11 @@ class App extends Component {
 
   onUpload = formData => {
     uploadFile(formData)
-      .then(data => {
-        console.log(data)
+      .then(() => {
+        this.setState({ successUpload: 'File successfully uploaded' })
       })
       .catch(error => {
-        console.error('error in appJs', error)
+        this.setState({ successUpload: 'Uploading failed. Please retry' })
       })
   }
 
@@ -111,7 +112,8 @@ class App extends Component {
       announcements,
       recipients,
       activeTab,
-      userData
+      userData,
+      successUpload
     } = this.state
 
     const requireAuth = render => props =>
@@ -192,7 +194,7 @@ class App extends Component {
                 path="/update_contacts"
                 exact
                 render={requireAuth(
-                  withRouter(props => <ContactsPage onUpload={this.onUpload} />)
+                  withRouter(props => <ContactsPage onUpload={this.onUpload} successUpload={successUpload} />)
                 )}
               />
             </ContentContainer>
