@@ -33,7 +33,30 @@ We made three iterant mock designs, building on the things we liked and the feat
 
 ![Mobile Wireframes](docs/mobile-wireframes.png)
 
-## NPM Packages
+
+## Notency API
+
+A detailed documentation of our API routes can be found in the [Notency API Readme](https://github.com/CosmoRocket/Notency-api/blob/master/README.md)
+
+
+## NPM / Yarn Packages
+- mongoose
+- express
+- react
+- body-parser
+- nodemon
+- dotenv
+- axios
+- twilio
+- mailgun
+- exceljs
+- react-draft-wysiwyg
+- immutable.js
+- draft.js
+- flow
+- jest
+- multer
+- moment
 
 ## How our API works
 
