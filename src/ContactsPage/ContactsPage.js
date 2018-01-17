@@ -8,9 +8,11 @@ class ContactsPage extends React.Component {
     csvFile: '',
   }
 
-  onChange = (event) => {
+  onChange = (event) => { 
+    let fileName = event.target.value
+    fileName = fileName.slice(fileName.lastIndexOf('\\')+1)
     this.setState({
-      fileName: event.target.value,
+      fileName: fileName,
       csvFile: event.target.files[0]
     })
   }

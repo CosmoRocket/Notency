@@ -5,10 +5,11 @@ export default function TabbedNav({ handleChangeActiveTab, activeTab, tabs }) {
   const navTabs = tabs.map((TabContent, index) => {
     return (
       <li
-        class="nav-item tabbed-nav-link"
+        key={index}
+        className="nav-item tabbed-nav-link"
         onClick={() => handleChangeActiveTab(index)}
       >
-        <a class={`nav-link ${activeTab === index && 'active'}`} href="#">
+        <a className={`nav-link ${activeTab === index && 'active'}`} href="#">
           <TabContent />
         </a>
       </li>
@@ -16,7 +17,7 @@ export default function TabbedNav({ handleChangeActiveTab, activeTab, tabs }) {
   })
   return (
     <nav>
-      <ul class="nav nav-tabs d-flex">{navTabs}</ul>
+      <ul className="nav nav-tabs d-flex">{navTabs}</ul>
     </nav>
   )
 }
