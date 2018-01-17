@@ -39,7 +39,10 @@ export default function NotificationForm({ recipients }) {
         const nationalities =
           recipients &&
           Object.keys(arrangeByNationality(recipients)).map(nationality => {
-            return { value: nationality, label: capitalize(nationality) }
+            return {
+              value: { name: 'nationality', item: nationality },
+              label: capitalize(nationality)
+            }
           })
 
         return (
@@ -48,7 +51,6 @@ export default function NotificationForm({ recipients }) {
               event.preventDefault()
             }}
           >
-            {/* RADIO BUTTONS - select all or by group */}
             <div className="d-flex">
               <p className="m-0">To: </p>
               <RadioMenu
@@ -76,12 +78,14 @@ export default function NotificationForm({ recipients }) {
                 onChange={selectedValue => setFieldValue('role', selectedValue)}
                 value={values.role}
                 options={[
-                  { value: 'teacher', label: 'Teacher' },
-                  { value: 'student', label: 'Student' }
+                  {
+                    value: { name: 'role', item: 'teacher' },
+                    label: 'Teacher'
+                  },
+                  { value: { name: 'role', item: 'student' }, label: 'Student' }
                 ]}
               />
             )}
-            {/* INPUT FOR SMS SUBJECT */}
             <Input
               name="subject"
               placeholder="Subject"
@@ -90,7 +94,6 @@ export default function NotificationForm({ recipients }) {
               onBlur={handleBlur}
               errorMessage={errors.subject && touched.subject && errors.subject}
             />
-            {/* TEXT AREA FOR SMS BODY (restrict input to <160 chars) */}
             <TextArea
               name="body"
               id="body"
@@ -102,7 +105,6 @@ export default function NotificationForm({ recipients }) {
               onBlur={handleBlur}
               errorMessage={errors.body && touched.body && errors.body}
             />
-            {/* BOTTOM BUTTONS */}
             <div className="formActions">
               <Link className="formBack" to="/">
                 Back
