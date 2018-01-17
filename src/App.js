@@ -71,8 +71,8 @@ class App extends Component {
     this.setState({ activeTab: index })
   }
 
-  onUpload = (csvFile) => {
-    uploadFile(csvFile)
+  onUpload = (formData) => {
+    uploadFile(formData)
       .then(data => {
         console.log(data)
       })
@@ -89,7 +89,6 @@ class App extends Component {
 
     listNotifications()
       .then(notifications => {
-        console.log(notifications)
         this.setState({ notifications })
       })
       .catch(saveError)

@@ -4,42 +4,41 @@ import Button from '../components/Button'
 
 class ContactsPage extends React.Component {
   state = {
-    fileName: 'No file uploaded'
+    fileName: 'No file uploaded',
+    csvFile: '',
   }
 
-  onChangeFile = (event) => {
-    let fileName = event.target.value
-    // fileName = fileName.split('/').slice(-1)[0]
+  onChange = (event) => {
     this.setState({
-      fileName: fileName
+      fileName: event.target.value,
+      csvFile: event.target.files[0]
     })
-
   }
+
   render() {
-    const { fileName } = this.state
+    const { fileName, csvFile } = this.state;
     const { onUpload } = this.props
 
     return (
       <form
         encType="multipart/form-data"
         onSubmit={event => {
-          event.preventDefault()
+          const formData = new FormData();
 
-          const form = event.target
-          const file = form.csvFile.files
-          console.log(file)
+          formData.append('description', fileName);
+          formData.append('csvFile', csvFile);
 
-          onUpload(file)
+          onUpload(formData)
         }}>
         <label htmlFor='csvFile' className='btn btn-dark btn-file btn-contacts'>Search File</label>
-        <input type='file' id='csvFile' name='csvFile' className='d-none' onChange={this.onChangeFile} />
+        <input type='file' id='csvFile' name='csvFile' className='d-none' onChange={this.onChange} />
         <span className='ml-3 file-name'>{fileName}</span>
         <br />
         <Button
           btnStyle='danger btn-contacts'
           text='Upload'
         />
-      </form >
+      </form>
     )
   }
 }
