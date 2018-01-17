@@ -107,8 +107,12 @@ export default function NotificationForm({ recipients }) {
               <Link className="formBack" to="/">
                 Back
               </Link>
-              {/* Char validation for textarea */}
-              {/* <p id='charLength'>Characters used: ${textLength}/160</p> */}
+              <p
+                className={`char-length ${values.body.length === 160 &&
+                  'char-limit-reached'}`}
+              >
+                Characters used: {values.body.length}/160
+              </p>
               <Button className="sendButton" text="SEND" />
             </div>
           </form>

@@ -2,6 +2,10 @@ textarea {
   width: 100%;
 }
 
-#charLength {
+.char-length {
   margin-top: 1.05em;
+}
+
+.char-limit-reached {
+  color: #dc3545;
 }
