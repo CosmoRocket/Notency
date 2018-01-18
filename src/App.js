@@ -10,10 +10,16 @@ import './App.css'
 import { getDecodedToken } from './api/token'
 import { signIn, signOutNow } from './api/auth'
 import { uploadFile } from './api/fileupload'
-import { listNotifications, createNotification } from './api/notifications'
-import { listAnnouncements, createAnnouncement } from './api/announcements'
-import { sendSms } from './api/sms'
-import { sendEmail } from './api/email'
+import {
+  listSomeNotifications,
+  listNotifications,
+  createNotification
+} from './api/notifications'
+import {
+  listSomeAnnouncements,
+  listAnnouncements,
+  createAnnouncement
+} from './api/announcements'
 import { listRecipients } from './api/recipients'
 import Container from './components/Container'
 import ContentContainer from './components/ContentContainer'
@@ -54,45 +60,58 @@ class App extends Component {
     this.setState({ activeTab: index })
   }
 
-  handleCreateAnnouncement = data => {
-    createAnnouncement(data).then(newAnnouncement => {
+  handleLoadMore = activeTab => {
+    const saveError = error => {
+      this.setState({ error })
+    }
+    if (activeTab === 0)
+      listNotifications()
+        .then(notifications => {
+          this.setState({ notifications })
+        })
+        .catch(saveError)
+    else
+      listAnnouncements()
+        .then(announcements => {
+          this.setState({ announcements })
+        })
+        .catch(saveError)
+  }
+
+  handleCreateAnnouncement = announcementData => {
+    return createAnnouncement(announcementData).then(newAnnouncement => {
       this.setState(prevState => {
         return {
           announcements: [newAnnouncement, ...prevState.announcements]
         }
       })
+
+      return { announcementData, newAnnouncement }
     })
   }
 
   handleCreateNotification = notificationData => {
-    createNotification(notificationData)
-      .then(newNotification => {
-        this.setState(prevState => {
-          const updatedNotifications = prevState.notifications.concat(
-            newNotification
-          )
-          return {
-            notifications: updatedNotifications
-          }
-        })
-        return notificationData
+    return createNotification(notificationData).then(newNotification => {
+      this.setState(prevState => {
+        return {
+          notifications: [newNotification, ...prevState.notifications]
+        }
       })
-      .then(notificationData => {
-        sendSms({
-          recipients: [+61439204670],
-          message: notificationData.body
-        })
-        sendEmail({
-          to: ['alessio.palumbo4@gmail.com'],
-          subject: notificationData.subject,
-          text: notificationData.body,
-          html: notificationData.bodyHtml
-        })
-      })
+      return { notificationData, newNotification }
+    })
   }
 
   onUpload = formData => {
-    return uploadFile(formData)
+    const saveError = error => {
+      this.setState({ error })
+    }
+    return uploadFile(formData).then(() => {
+      listRecipients()
+        .then(recipients => {
+          this.setState({ recipients })
+        })
+        .catch(saveError)
+    })
   }
 
   load() {
@@ -100,13 +119,13 @@ class App extends Component {
       this.setState({ error })
     }
 
-    listNotifications()
+    listSomeNotifications()
       .then(notifications => {
         this.setState({ notifications })
       })
       .catch(saveError)
 
-    listAnnouncements()
+    listSomeAnnouncements()
       .then(announcements => {
         this.setState({ announcements })
       })
@@ -162,6 +181,7 @@ class App extends Component {
                     notifications={notifications}
                     announcements={announcements}
                     handleChangeActiveTab={this.handleChangeActiveTab}
+                    handleLoadMore={this.handleLoadMore}
                   />
                 ))}
               />

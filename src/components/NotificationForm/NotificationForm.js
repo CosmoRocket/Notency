@@ -6,18 +6,17 @@ import TextArea from '../../components/TextArea'
 import RadioMenu from '../../components/RadioMenu'
 import ReactSelect from 'react-select'
 import 'react-select/dist/react-select.css'
-import { Link } from 'react-router-dom'
+import { sendSms } from '../../api/sms'
+import { sendEmail } from '../../api/email'
+import { Link, withRouter } from 'react-router-dom'
 import { Formik } from 'formik'
 import Yup from 'yup'
 import { groupBy } from 'ramda'
 import capitalize from 'lodash/capitalize'
 import { reject } from 'ramda'
 
-export default function NotificationForm({
-  recipients,
-  handleCreateNotification
-}) {
-  if (recipients !== 0) {
+function NotificationForm({ recipients, handleCreateNotification, history }) {
+  if (recipients.length !== 0) {
     return (
       <Formik
         initialValues={{
@@ -40,6 +39,29 @@ export default function NotificationForm({
             groups: values.groups.map(group => group.value),
             recipients: values.recipients
           })
+            .then(({ notificationData, newNotification }) => {
+              history.push(`/notifications/${newNotification._id}`)
+              return { notificationData, newNotification }
+            })
+            .then(({ notificationData }) => {
+              sendSms({
+                recipients: notificationData.recipients.map(
+                  recipient => recipient.mobile
+                ),
+                message: notificationData.body
+              })
+              sendEmail({
+                recipients: notificationData.recipients.map(
+                  recipient => recipient.email
+                ),
+                subject: notificationData.subject,
+                text: notificationData.body,
+                html: notificationData.bodyHtml
+              })
+            })
+            .catch(error => {
+              console.log('There was an error')
+            })
         }}
         validationSchema={Yup.object().shape({
           code: Yup.string().required('Please enter a 3-digit code'),
@@ -62,7 +84,9 @@ export default function NotificationForm({
                 return true
               } else {
                 return groups.some(
-                  group => recipient[category] === group.value.item
+                  group =>
+                    recipient[category].toLowerCase() ===
+                    group.value.item.toLowerCase()
                 )
               }
             })
@@ -107,6 +131,8 @@ export default function NotificationForm({
                   }}
                 />
               </div>
+              <div>Number of Recipients: {values.recipients.length}</div>
+
               {values.group === 'nationality' && (
                 <ReactSelect
                   name="nationality"
@@ -215,3 +241,5 @@ export default function NotificationForm({
     return <div>Loading</div>
   }
 }
+
+export default withRouter(NotificationForm)

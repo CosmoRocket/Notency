@@ -1,3 +1,4 @@
 .tabbed-nav-link {
-    font-size: 13px;
+  font-size: 13px;
+  cursor: pointer;
 }
