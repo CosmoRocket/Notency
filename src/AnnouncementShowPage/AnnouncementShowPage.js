@@ -38,8 +38,9 @@ class AnnouncementShowPage extends Component {
         <p className="text-right">
           {moment(currentAnnouncement.createdAt).format('D MMM YYYY')}
         </p>
-        <p>Groups Sent To:</p>
-        {groupElements}
+        {
+          groupElements === '' ? <p>Groups Sent To: {groupElements}</p> : <p>Sent to All</p>
+        }
         <h2 className="text-center">{currentAnnouncement.subject}</h2>
         <div
           dangerouslySetInnerHTML={{ __html: currentAnnouncement.bodyHtml }}

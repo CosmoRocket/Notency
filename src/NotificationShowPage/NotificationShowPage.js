@@ -45,8 +45,10 @@ class NotificationShowPage extends Component {
         <p className="text-right">
           {moment(currentNotification.createdAt).format('D MMM YYYY')}
         </p>
-        <p>Groups Sent To:</p>
-        {groupElements}
+        {
+          groupElements === '' ? <p>Groups Sent To: {groupElements}</p> : <p>Sent to All</p>
+        }
+
         <h2 className="text-center">{currentNotification.subject}</h2>
         <p>{currentNotification.body}</p>
         <TabbedNav
