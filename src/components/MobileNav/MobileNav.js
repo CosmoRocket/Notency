@@ -22,7 +22,7 @@ export default function MobileNav({ onSignOut }) {
           </Link>
         </li>
         <li className="mobile-nav-item m-0 p-0 text-center">
-          <Link to="logout" onClick={onSignOut}>
+          <Link to="/logout" onClick={onSignOut}>
             <Icon size="2x" name="sign-out" />
             <p className="mobile-nav-item-text text-uppercase">Logout</p>
           </Link>
