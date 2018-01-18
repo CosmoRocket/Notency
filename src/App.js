@@ -53,6 +53,24 @@ class App extends Component {
     this.setState({ activeTab: index })
   }
 
+  handleLoadMore = (activeTab) => {
+    const saveError = error => {
+      this.setState({ error })
+    }
+    if (activeTab === 0)
+      listNotifications()
+        .then(notifications => {
+          this.setState({ notifications })
+        })
+        .catch(saveError)
+    else
+      listAnnouncements()
+        .then(announcements => {
+          this.setState({ announcements })
+        })
+        .catch(saveError)
+  }
+
   handleCreateAnnouncement = announcementData => {
     createAnnouncement(announcementData).then(newAnnouncement => {
       this.setState(prevState => {
@@ -81,18 +99,6 @@ class App extends Component {
     const saveError = error => {
       this.setState({ error })
     }
-
-    listNotifications()
-      .then(notifications => {
-        this.setState({ notifications })
-      })
-      .catch(saveError)
-
-    // listAnnouncements()
-    //   .then(announcements => {
-    //     this.setState({ announcements })
-    //   })
-    //   .catch(saveError)
 
     listSomeAnnouncements()
       .then(announcements => {
@@ -150,6 +156,7 @@ class App extends Component {
                     notifications={notifications}
                     announcements={announcements}
                     handleChangeActiveTab={this.handleChangeActiveTab}
+                    handleLoadMore={this.handleLoadMore}
                   />
                 ))}
               />
