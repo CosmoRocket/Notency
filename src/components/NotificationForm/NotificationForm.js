@@ -17,7 +17,7 @@ export default function NotificationForm({
   recipients,
   handleCreateNotification
 }) {
-  if (recipients !== 0) {
+  if (recipients.length !== 0) {
     return (
       <Formik
         initialValues={{
@@ -107,6 +107,8 @@ export default function NotificationForm({
                   }}
                 />
               </div>
+              <div>Number of Recipients: {values.recipients.length}</div>
+
               {values.group === 'nationality' && (
                 <ReactSelect
                   name="nationality"
