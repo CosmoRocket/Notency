@@ -21,8 +21,6 @@ import {
   createAnnouncement
 } from './api/announcements'
 import { listRecipients } from './api/recipients'
-import { sendSms } from './api/sms'
-import { sendEmail } from './api/email'
 import Container from './components/Container'
 import ContentContainer from './components/ContentContainer'
 import LoginPage from './LoginPage'
@@ -81,59 +79,39 @@ class App extends Component {
   }
 
   handleCreateAnnouncement = announcementData => {
-    createAnnouncement(announcementData).then(newAnnouncement => {
+    return createAnnouncement(announcementData).then(newAnnouncement => {
       this.setState(prevState => {
         return {
           announcements: [newAnnouncement, ...prevState.announcements]
         }
       })
+
+      return { announcementData, newAnnouncement }
     })
   }
 
   handleCreateNotification = notificationData => {
-    createNotification(notificationData)
-      .then(newNotification => {
-        this.setState(prevState => {
-          const updatedNotifications = prevState.notifications.concat(
-            newNotification
-          )
-          return {
-            notifications: updatedNotifications
-          }
-        })
-        return notificationData
-      })
-      .then(notificationData => {
-        const rec = notificationData
-        console.log(rec)
-        sendSms({
-          recipients: notificationData.recipients.map(
-            recipient => recipient.mobile
-          ),
-          message: notificationData.body
-        })
-        sendEmail({
-          recipients: notificationData.recipients.map(
-            recipient => recipient.email
-          ),
-          subject: notificationData.subject,
-          text: notificationData.body,
-          html: notificationData.bodyHtml
-        })
-        const q = {
-          recipients: notificationData.recipients.map(
-            recipient => recipient.email
-          ),
-          subject: notificationData.subject,
-          text: notificationData.body,
-          html: notificationData.bodyHtml
+    return createNotification(notificationData).then(newNotification => {
+      this.setState(prevState => {
+        return {
+          notifications: [newNotification, ...prevState.notifications]
         }
-        console.log(q)
       })
+      return { notificationData, newNotification }
+    })
   }
 
   onUpload = formData => {
-    return uploadFile(formData)
+    const saveError = error => {
+      this.setState({ error })
+    }
+    return uploadFile(formData).then(() => {
+      listRecipients()
+        .then(recipients => {
+          this.setState({ recipients })
+        })
+        .catch(saveError)
+    })
   }
 
   load() {
@@ -155,7 +133,6 @@ class App extends Component {
 
     listRecipients()
       .then(recipients => {
-        console.log(recipients)
         this.setState({ recipients })
       })
       .catch(saveError)

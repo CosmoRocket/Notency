@@ -6,7 +6,8 @@ import Button from '../../components/Button'
 import Input from '../../components/Input'
 import RadioMenu from '../../components/RadioMenu'
 import draftToHtml from 'draftjs-to-html'
-import { Link } from 'react-router-dom'
+import { sendEmail } from '../../api/email'
+import { Link, withRouter } from 'react-router-dom'
 import ReactSelect from 'react-select'
 import { Formik } from 'formik'
 import Yup from 'yup'
@@ -15,10 +16,7 @@ import capitalize from 'lodash/capitalize'
 import isEmpty from 'lodash/isEmpty'
 import moment from 'moment'
 
-export default function AnnouncementForm({
-  recipients,
-  handleCreateAnnouncement
-}) {
+function AnnouncementForm({ recipients, handleCreateAnnouncement, history }) {
   if (recipients.length !== 0) {
     return (
       <Formik
@@ -39,6 +37,23 @@ export default function AnnouncementForm({
             groups: values.groups.map(group => group.value),
             recipients: values.recipients
           })
+            .then(({ newAnnouncement, announcementData }) => {
+              history.push(`/announcements/${newAnnouncement._id}`)
+              return { newAnnouncement, announcementData }
+            })
+            .then(({ announcementData }) => {
+              sendEmail({
+                recipients: announcementData.recipients.map(
+                  recipient => recipient.email
+                ),
+                subject: announcementData.subject,
+                text: announcementData.body,
+                html: announcementData.bodyHtml
+              })
+            })
+            .catch(error => {
+              console.log('There was an error')
+            })
         }}
         validationSchema={Yup.object().shape({
           subject: Yup.string().required('Please enter a subject'),
@@ -67,7 +82,9 @@ export default function AnnouncementForm({
                 )
               } else {
                 return groups.some(
-                  group => recipient[category] === group.value.item
+                  group =>
+                    recipient[category].toLowerCase() ===
+                    group.value.item.toLowerCase()
                 )
               }
             })
@@ -221,3 +238,5 @@ export default function AnnouncementForm({
     return <div>Loading...</div>
   }
 }
+
+export default withRouter(AnnouncementForm)
