@@ -11,8 +11,8 @@ import { setToken } from './api/init'
 import { getDecodedToken } from './api/token'
 import { signIn, signOutNow } from './api/auth'
 import { uploadFile } from './api/fileupload'
-import { listNotifications, createNotification } from './api/notifications'
-import { listAnnouncements, createAnnouncement } from './api/announcements'
+import { listSomeNotifications, listNotifications, createNotification } from './api/notifications'
+import { listSomeAnnouncements, listAnnouncements, createAnnouncement } from './api/announcements'
 import { listRecipients } from './api/recipients'
 import Container from './components/Container'
 import ContentContainer from './components/ContentContainer'
@@ -53,6 +53,24 @@ class App extends Component {
     this.setState({ activeTab: index })
   }
 
+  handleLoadMore = (activeTab) => {
+    const saveError = error => {
+      this.setState({ error })
+    }
+    if (activeTab === 0)
+      listNotifications()
+        .then(notifications => {
+          this.setState({ notifications })
+        })
+        .catch(saveError)
+    else
+      listAnnouncements()
+        .then(announcements => {
+          this.setState({ announcements })
+        })
+        .catch(saveError)
+  }
+
   handleCreateAnnouncement = announcementData => {
     createAnnouncement(announcementData).then(newAnnouncement => {
       this.setState(prevState => {
@@ -90,13 +108,13 @@ class App extends Component {
       this.setState({ error })
     }
 
-    listNotifications()
+    listSomeNotifications()
       .then(notifications => {
         this.setState({ notifications })
       })
       .catch(saveError)
-
-    listAnnouncements()
+    
+    listSomeAnnouncements()
       .then(announcements => {
         this.setState({ announcements })
       })
@@ -153,6 +171,7 @@ class App extends Component {
                     notifications={notifications}
                     announcements={announcements}
                     handleChangeActiveTab={this.handleChangeActiveTab}
+                    handleLoadMore={this.handleLoadMore}
                   />
                 ))}
               />

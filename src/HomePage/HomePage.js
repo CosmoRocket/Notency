@@ -1,13 +1,16 @@
 import React, { Fragment } from 'react'
+import './HomePage.css'
 import TabbedNav from '../components/TabbedNav'
 import Notification from '../components/Notification'
 import Announcement from '../components/Announcement'
 import { Link } from 'react-router-dom'
+import Button from '../components/Button'
 
 const HomePage = ({
   notifications,
   announcements,
   handleChangeActiveTab,
+  handleLoadMore,
   activeTab
 }) => {
   const notificationsList = notifications.map(notification => {
@@ -43,6 +46,17 @@ const HomePage = ({
       )}
 
       {activeTab === 0 ? notificationsList : announcementsList}
+      {/* Show All Button */}
+      <form 
+        className='showAllButton'
+        onSubmit={ () => { 
+        handleLoadMore(activeTab) 
+      }}
+      >
+        <Button 
+          text='Show All'
+        />
+      </form>
     </Fragment>
   )
 }
