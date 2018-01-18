@@ -31,6 +31,7 @@ export default function AnnouncementForm({
       }}
       onSubmit={(values, { setSubmitting, setErrors }) => {
         handleCreateAnnouncement(values)
+        console.log(values)
       }}
       validationSchema={Yup.object().shape({
         subject: Yup.string().required('Please enter a subject'),

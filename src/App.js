@@ -12,7 +12,7 @@ import { getDecodedToken } from './api/token'
 import { signIn, signOutNow } from './api/auth'
 import { uploadFile } from './api/fileupload'
 import { listNotifications } from './api/notifications'
-import { listAnnouncements, createAnnouncement } from './api/announcements'
+import { listSomeAnnouncements, listAnnouncements, createAnnouncement } from './api/announcements'
 import { listRecipients } from './api/recipients'
 import Container from './components/Container'
 import ContentContainer from './components/ContentContainer'
@@ -88,7 +88,13 @@ class App extends Component {
       })
       .catch(saveError)
 
-    listAnnouncements()
+    // listAnnouncements()
+    //   .then(announcements => {
+    //     this.setState({ announcements })
+    //   })
+    //   .catch(saveError)
+
+    listSomeAnnouncements()
       .then(announcements => {
         this.setState({ announcements })
       })
