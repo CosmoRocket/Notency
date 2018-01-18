@@ -1,4 +1,8 @@
 .showAllButton {
+  text-align: center;
+}
+
+.showAllButton button {
   margin-top: 1em;
   height: 40px;
   width: 100px;

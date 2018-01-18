@@ -1,7 +1,7 @@
 import api from './init'
 
 export function listSomeAnnouncements() {
-  const announcementLimit = 5 // set initial number of announcements returned on home page, could be set in .env or even stored as settings in db?
+  const announcementLimit = 10 // set initial number of announcements returned on home page, could be set in .env or even stored as settings in db?
   return api.get(`/announcements/latest/${announcementLimit}`)
     .then(res => res.data)
 }

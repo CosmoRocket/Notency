@@ -47,12 +47,13 @@ const HomePage = ({
 
       {activeTab === 0 ? notificationsList : announcementsList}
       {/* Show All Button */}
-      <form onSubmit={ () => { 
+      <form 
+        className='showAllButton'
+        onSubmit={ () => { 
         handleLoadMore(activeTab) 
       }}
       >
         <Button 
-          className='showAllButton'
           text='Show All'
         />
       </form>

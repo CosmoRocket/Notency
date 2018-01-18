@@ -11,7 +11,7 @@ import { setToken } from './api/init'
 import { getDecodedToken } from './api/token'
 import { signIn, signOutNow } from './api/auth'
 import { uploadFile } from './api/fileupload'
-import { listNotifications } from './api/notifications'
+import { listSomeNotifications, listNotifications } from './api/notifications'
 import { listSomeAnnouncements, listAnnouncements, createAnnouncement } from './api/announcements'
 import { listRecipients } from './api/recipients'
 import Container from './components/Container'
@@ -100,6 +100,12 @@ class App extends Component {
       this.setState({ error })
     }
 
+    listSomeNotifications()
+      .then(notifications => {
+        this.setState({ notifications })
+      })
+      .catch(saveError)
+    
     listSomeAnnouncements()
       .then(announcements => {
         this.setState({ announcements })
