@@ -53,14 +53,11 @@ class App extends Component {
     this.setState({ activeTab: index })
   }
 
-  handleCreateAnnouncement = announcementData => {
-    createAnnouncement(announcementData).then(newAnnouncement => {
+  handleCreateAnnouncement = data => {
+    createAnnouncement(data).then(newAnnouncement => {
       this.setState(prevState => {
-        const updatedAnnouncements = prevState.announcements.concat(
-          newAnnouncement
-        )
         return {
-          announcements: updatedAnnouncements
+          announcements: [newAnnouncement, ...prevState.announcements]
         }
       })
     })

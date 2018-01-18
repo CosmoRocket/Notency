@@ -13,6 +13,8 @@ import { Formik } from 'formik'
 import Yup from 'yup'
 import { groupBy } from 'ramda'
 import capitalize from 'lodash/capitalize'
+import isEmpty from 'lodash/isEmpty'
+import moment from 'moment'
 
 export default function AnnouncementForm({
   recipients,
@@ -26,11 +28,17 @@ export default function AnnouncementForm({
         bodyHtml: '',
         group: 'all',
         nationality: [],
-        role: undefined,
+        graduationDate: {},
+        role: undefined, // set to undefined so that placeholder will show up
         groups: []
       }}
       onSubmit={(values, { setSubmitting, setErrors }) => {
-        handleCreateAnnouncement(values)
+        handleCreateAnnouncement({
+          subject: values.subject,
+          bodyHtml: values.bodyHtml,
+          groups: values.groups.map(group => group.value),
+          recipients: values.recipients
+        })
       }}
       validationSchema={Yup.object().shape({
         subject: Yup.string().required('Please enter a subject'),
@@ -48,7 +56,7 @@ export default function AnnouncementForm({
       }) => {
         const filterRecipients = (allRecipients, category, groups) => {
           const filteredRecipients = allRecipients.filter(recipient => {
-            if (groups.length === 0) {
+            if (groups.length === 0 || category === 'all') {
               return true
             } else {
               return groups.some(
@@ -76,23 +84,29 @@ export default function AnnouncementForm({
               <p className="m-0">To: </p>
               <RadioMenu
                 name="group"
-                options={['All', 'Nationality', 'Role']}
+                options={['All', 'Nationality', 'Role', 'Graduation Date']}
                 selectedValue={values.group}
                 onChange={e => {
                   handleChange(e)
-                  e.target.value === 'all' &&
-                    setFieldValue('groups', []) &&
-                    filterRecipients(recipients, 'all', [])
-                  e.target.value === 'nationality' &&
-                    setFieldValue('groups', values.nationality) &&
-                    filterRecipients(
-                      recipients,
-                      'nationality',
-                      values.nationality
-                    )
-                  e.target.value === 'role' &&
-                    setFieldValue('groups', values.role ? [] : [values.role]) &&
-                    filterRecipients(recipients, 'role', [values.role])
+                  if (e.target.value === 'all') {
+                    const groups = []
+                    setFieldValue('groups', groups)
+                    filterRecipients(recipients, 'all', groups)
+                  } else if (e.target.value === 'nationality') {
+                    const groups = values.nationality
+                    setFieldValue('groups', groups)
+                    filterRecipients(recipients, 'nationality', groups)
+                  } else if (e.target.value === 'role') {
+                    const groups = values.role ? [values.role] : []
+                    setFieldValue('groups', groups)
+                    filterRecipients(recipients, 'role', groups)
+                  } else if (e.target.value === 'graduationDate') {
+                    const groups = isEmpty(values.graduationDate)
+                      ? []
+                      : [values.graduationDate]
+                    setFieldValue('groups', groups)
+                    filterRecipients(recipients, 'graduationDate', groups)
+                  }
                 }}
               />
             </div>
@@ -115,18 +129,47 @@ export default function AnnouncementForm({
                 name="role"
                 placeholder="Select a role"
                 onChange={selectedValue => {
-                  setFieldValue('role', selectedValue)
-                  setFieldValue('groups', [selectedValue])
-                  filterRecipients(recipients, 'role', [selectedValue])
+                  if (selectedValue === null) {
+                    selectedValue = undefined
+                    setFieldValue('role', selectedValue)
+                    setFieldValue('groups', [])
+                    filterRecipients(recipients, 'role', [])
+                  } else {
+                    setFieldValue('role', selectedValue)
+                    setFieldValue('groups', [selectedValue])
+                    filterRecipients(recipients, 'role', [selectedValue])
+                  }
                 }}
                 value={values.role}
                 options={[
                   {
-                    value: { name: 'role', item: 'teacher' },
-                    label: 'Teacher'
+                    value: { name: 'role', item: 'staff' },
+                    label: 'Staff'
                   },
                   { value: { name: 'role', item: 'student' }, label: 'Student' }
                 ]}
+              />
+            )}
+            {values.group === 'graduationDate' && (
+              <Input
+                name="graduationDate"
+                type="date"
+                value={values.graduationDate.label}
+                onChange={e => {
+                  const group = {
+                    value: {
+                      name: 'graduationDate',
+                      item: moment(e.target.value, 'YYYY-MM-DD').format(
+                        'DD/MM/YYYY'
+                      )
+                    },
+                    label: e.target.value
+                  }
+                  setFieldValue('graduationDate', group)
+                  setFieldValue('groups', [group])
+                  filterRecipients(recipients, 'graduationDate', [group])
+                }}
+                onBlur={handleBlur}
               />
             )}
             {/* INPUT FOR EMAIL SUBJECT */}
