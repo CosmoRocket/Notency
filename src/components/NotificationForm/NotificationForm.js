@@ -12,11 +12,12 @@ import Yup from 'yup'
 import { groupBy } from 'ramda'
 import capitalize from 'lodash/capitalize'
 import isEmpty from 'lodash/isEmpty'
-import { createNotification } from '../../api/notifications'
 import { reject } from 'ramda'
 
 export default function NotificationForm({
-  recipients, handleCreateNotification }) {
+  recipients,
+  handleCreateNotification
+}) {
   return (
     <Formik
       initialValues={{
@@ -57,7 +58,7 @@ export default function NotificationForm({
       }) => {
         const filterRecipients = (allRecipients, category, groups) => {
           const filteredRecipients = allRecipients.filter(recipient => {
-            if (groups.length === 0) {
+            if (groups.length === 0 || category === 'all') {
               return true
             } else {
               return groups.some(
@@ -88,19 +89,19 @@ export default function NotificationForm({
                 selectedValue={values.group}
                 onChange={e => {
                   handleChange(e)
-                  e.target.value === 'all' &&
-                    setFieldValue('groups', []) &&
-                    filterRecipients(recipients, 'all', [])
-                  e.target.value === 'nationality' &&
-                    setFieldValue('groups', values.nationality) &&
-                    filterRecipients(
-                      recipients,
-                      'nationality',
-                      values.nationality
-                    )
-                  e.target.value === 'role' &&
-                    setFieldValue('groups', values.role ? [] : [values.role]) &&
-                    filterRecipients(recipients, 'role', [values.role])
+                  if (e.target.value === 'all') {
+                    const groups = []
+                    setFieldValue('groups', groups)
+                    filterRecipients(recipients, 'all', groups)
+                  } else if (e.target.value === 'nationality') {
+                    const groups = values.nationality
+                    setFieldValue('groups', groups)
+                    filterRecipients(recipients, 'nationality', groups)
+                  } else if (e.target.value === 'role') {
+                    const groups = values.role ? [values.role] : []
+                    setFieldValue('groups', groups)
+                    filterRecipients(recipients, 'role', groups)
+                  }
                 }}
               />
             </div>
@@ -123,15 +124,22 @@ export default function NotificationForm({
                 name="role"
                 placeholder="Select a role"
                 onChange={selectedValue => {
-                  setFieldValue('role', selectedValue)
-                  setFieldValue('groups', [selectedValue])
-                  filterRecipients(recipients, 'role', [selectedValue])
+                  if (selectedValue === null) {
+                    selectedValue = undefined
+                    setFieldValue('role', selectedValue)
+                    setFieldValue('groups', [])
+                    filterRecipients(recipients, 'role', [])
+                  } else {
+                    setFieldValue('role', selectedValue)
+                    setFieldValue('groups', [selectedValue])
+                    filterRecipients(recipients, 'role', [selectedValue])
+                  }
                 }}
                 value={values.role}
                 options={[
                   {
-                    value: { name: 'role', item: 'teacher' },
-                    label: 'Teacher'
+                    value: { name: 'role', item: 'staff' },
+                    label: 'Staff'
                   },
                   { value: { name: 'role', item: 'student' }, label: 'Student' }
                 ]}
