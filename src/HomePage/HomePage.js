@@ -11,10 +11,16 @@ const HomePage = ({
   activeTab
 }) => {
   const notificationsList = notifications.map(notification => {
-    return <Notification {...notification} responses="10/60" />
+    return (
+      <Notification
+        {...notification}
+        key={notification._id}
+        responses="10/60"
+      />
+    )
   })
   const announcementsList = announcements.map(announcement => {
-    return <Announcement {...announcement} />
+    return <Announcement {...announcement} key={announcement._id} />
   })
   return (
     <Fragment>

@@ -4,7 +4,6 @@ import { Editor } from 'react-draft-wysiwyg'
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css'
 import Button from '../../components/Button'
 import Input from '../../components/Input'
-import TextArea from '../../components/TextArea'
 import RadioMenu from '../../components/RadioMenu'
 import draftToHtml from 'draftjs-to-html'
 import { Link } from 'react-router-dom'
@@ -79,7 +78,6 @@ export default function AnnouncementForm({
 
         return (
           <form onSubmit={handleSubmit}>
-            {/* RADIO BUTTONS - select all or by group */}
             <div className="d-flex">
               <p className="m-0">To: </p>
               <RadioMenu
@@ -172,7 +170,6 @@ export default function AnnouncementForm({
                 onBlur={handleBlur}
               />
             )}
-            {/* INPUT FOR EMAIL SUBJECT */}
             <Input
               name="subject"
               placeholder="Subject"
@@ -181,7 +178,6 @@ export default function AnnouncementForm({
               onBlur={handleBlur}
               errorMessage={errors.subject && touched.subject && errors.subject}
             />
-            {/* REACT CONTENT EDITOR (pass in options as props) */}
             <Editor
               name="body"
               wrapperClassName="editorSection"
@@ -194,7 +190,6 @@ export default function AnnouncementForm({
                 options: ['inline', 'blockType', 'fontSize', 'fontFamily']
               }}
             />
-            {/* BOTTOM BUTTONS */}
             <div className="formActions">
               <Link className="formBack" to="/">
                 Back

@@ -11,7 +11,6 @@ import { Formik } from 'formik'
 import Yup from 'yup'
 import { groupBy } from 'ramda'
 import capitalize from 'lodash/capitalize'
-import isEmpty from 'lodash/isEmpty'
 import { reject } from 'ramda'
 
 export default function NotificationForm({

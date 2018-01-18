@@ -7,7 +7,6 @@ import {
   withRouter
 } from 'react-router-dom'
 import './App.css'
-import { setToken } from './api/init'
 import { getDecodedToken } from './api/token'
 import { signIn, signOutNow } from './api/auth'
 import { uploadFile } from './api/fileupload'
@@ -66,17 +65,18 @@ class App extends Component {
   }
 
   handleCreateNotification = notificationData => {
-    createNotification(notificationData).then(newNotification => {
-      this.setState(prevState => {
-        const updatedNotifications = prevState.notifications.concat(
-          newNotification
-        )
-        return {
-          notifications: updatedNotifications
-        }
+    createNotification(notificationData)
+      .then(newNotification => {
+        this.setState(prevState => {
+          const updatedNotifications = prevState.notifications.concat(
+            newNotification
+          )
+          return {
+            notifications: updatedNotifications
+          }
+        })
+        return notificationData
       })
-      return notificationData
-    })
       .then(notificationData => {
         sendSms({
           recipients: [+61439204670],
@@ -96,7 +96,6 @@ class App extends Component {
   }
 
   load() {
-    const { userData } = this.state
     const saveError = error => {
       this.setState({ error })
     }
@@ -130,8 +129,7 @@ class App extends Component {
       announcements,
       recipients,
       activeTab,
-      userData,
-      successUpload
+      userData
     } = this.state
 
     const requireAuth = render => props =>
@@ -149,8 +147,8 @@ class App extends Component {
                 userData ? (
                   <Redirect to="/" />
                 ) : (
-                    <LoginPage onSignIn={this.onSignIn} />
-                  )
+                  <LoginPage onSignIn={this.onSignIn} />
+                )
               }
             />
             <Route path="/logout" render={() => <Redirect to="/login" />} />
@@ -171,10 +169,10 @@ class App extends Component {
                 path="/new_notification"
                 exact
                 render={requireAuth(() => (
-                  <CreateNotificationPage recipients={recipients}
+                  <CreateNotificationPage
+                    recipients={recipients}
                     handleCreateNotification={this.handleCreateNotification}
                   />
-
                 ))}
               />
               <Route
