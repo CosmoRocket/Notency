@@ -81,16 +81,26 @@ class App extends Component {
       return notificationData
     })
       .then(notificationData => {
+        const rec = notificationData
+        console.log(rec)
         sendSms({
-          recipients: [+61439204670],
+          recipients: notificationData.recipients.map(recipient => recipient.mobile),
           message: notificationData.body
         })
         sendEmail({
-          to: ['alessio.palumbo4@gmail.com'],
+          recipients: notificationData.recipients.map(recipient => recipient.email),
           subject: notificationData.subject,
           text: notificationData.body,
           html: notificationData.bodyHtml
         })
+        const q = {
+          recipients: notificationData.recipients.map(recipient => recipient.email),
+          subject: notificationData.subject,
+          text: notificationData.body,
+          html: notificationData.bodyHtml
+        }
+        console.log(q)
+
       })
   }
 
@@ -118,6 +128,7 @@ class App extends Component {
 
     listRecipients()
       .then(recipients => {
+        console.log(recipients)
         this.setState({ recipients })
       })
       .catch(saveError)
@@ -143,6 +154,7 @@ class App extends Component {
     return (
       <Router>
         <Container>
+          {recipients.length}
           <Switch>
             {/* Login */}
             <Route
