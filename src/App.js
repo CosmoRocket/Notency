@@ -84,14 +84,22 @@ class App extends Component {
     })
   }
 
-  onUpload = csvFile => {
-    uploadFile(csvFile)
-      .then(data => {
-        console.log(data)
+  handleCreateNotification = notificationData => {
+    createNotification(notificationData).then(newNotification => {
+      console.log(notificationData)
+      this.setState(prevState => {
+        const updatedNotifications = prevState.notifications.concat(
+          newNotification
+        )
+        return {
+          notifications: updatedNotifications
+        }
       })
-      .catch(error => {
-        console.error('error in appJs', error)
-      })
+    })
+  }
+
+  onUpload = formData => {
+    return uploadFile(formData)
   }
 
   load() {
@@ -129,7 +137,8 @@ class App extends Component {
       announcements,
       recipients,
       activeTab,
-      userData
+      userData,
+      successUpload
     } = this.state
 
     const requireAuth = render => props =>
@@ -147,8 +156,8 @@ class App extends Component {
                 userData ? (
                   <Redirect to="/" />
                 ) : (
-                  <LoginPage onSignIn={this.onSignIn} />
-                )
+                    <LoginPage onSignIn={this.onSignIn} />
+                  )
               }
             />
             <Route path="/logout" render={() => <Redirect to="/login" />} />
@@ -170,7 +179,10 @@ class App extends Component {
                 path="/new_notification"
                 exact
                 render={requireAuth(() => (
-                  <CreateNotificationPage recipients={recipients} />
+                  <CreateNotificationPage recipients={recipients}
+                    handleCreateNotification={this.handleCreateNotification}
+                  />
+
                 ))}
               />
               <Route

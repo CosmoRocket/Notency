@@ -1,5 +1,7 @@
 .btn-contacts {
-  width: 140px;
+  width: 160px;
+  text-transform: uppercase;
+  font-weight: bold;
 }
 
 .file-name {
