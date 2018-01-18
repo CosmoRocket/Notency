@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react'
+import React, { Fragment } from 'react'
 import AnnouncementForm from '../components/AnnouncementForm'
 
 export default function CreateAnnouncementPage({

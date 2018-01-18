@@ -9,7 +9,7 @@ export default function TabbedNav({ handleChangeActiveTab, activeTab, tabs }) {
         className="nav-item tabbed-nav-link"
         onClick={() => handleChangeActiveTab(index)}
       >
-        <a className={`nav-link ${activeTab === index && 'active'}`} href="#">
+        <a className={`nav-link ${activeTab === index && 'active'}`}>
           <TabContent />
         </a>
       </li>

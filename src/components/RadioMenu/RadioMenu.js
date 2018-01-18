@@ -13,7 +13,7 @@ const RadioMenu = ({ name, options, onChange, selectedValue }) => {
     const camelizedOption = camelize(option)
     const camelizedSelectedValue = camelize(selectedValue)
     return (
-      <Fragment>
+      <Fragment key={camelizedOption}>
         <input
           type="radio"
           id={camelizedOption}
