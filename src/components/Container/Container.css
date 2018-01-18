@@ -1,5 +1,11 @@
 .Container {
-    max-width: 1000px;
-    margin: 0 auto;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 10px;
+}
+
+@media (min-width: 576px) {
+  .Container {
     padding: 20px;
+  }
 }
