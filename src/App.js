@@ -10,11 +10,19 @@ import './App.css'
 import { getDecodedToken } from './api/token'
 import { signIn, signOutNow } from './api/auth'
 import { uploadFile } from './api/fileupload'
-import { listNotifications, createNotification } from './api/notifications'
-import { listAnnouncements, createAnnouncement } from './api/announcements'
+import {
+  listSomeNotifications,
+  listNotifications,
+  createNotification
+} from './api/notifications'
+import {
+  listSomeAnnouncements,
+  listAnnouncements,
+  createAnnouncement
+} from './api/announcements'
+import { listRecipients } from './api/recipients'
 import { sendSms } from './api/sms'
 import { sendEmail } from './api/email'
-import { listRecipients } from './api/recipients'
 import Container from './components/Container'
 import ContentContainer from './components/ContentContainer'
 import LoginPage from './LoginPage'
@@ -54,8 +62,26 @@ class App extends Component {
     this.setState({ activeTab: index })
   }
 
-  handleCreateAnnouncement = data => {
-    createAnnouncement(data).then(newAnnouncement => {
+  handleLoadMore = activeTab => {
+    const saveError = error => {
+      this.setState({ error })
+    }
+    if (activeTab === 0)
+      listNotifications()
+        .then(notifications => {
+          this.setState({ notifications })
+        })
+        .catch(saveError)
+    else
+      listAnnouncements()
+        .then(announcements => {
+          this.setState({ announcements })
+        })
+        .catch(saveError)
+  }
+
+  handleCreateAnnouncement = announcementData => {
+    createAnnouncement(announcementData).then(newAnnouncement => {
       this.setState(prevState => {
         return {
           announcements: [newAnnouncement, ...prevState.announcements]
@@ -81,23 +107,28 @@ class App extends Component {
         const rec = notificationData
         console.log(rec)
         sendSms({
-          recipients: notificationData.recipients.map(recipient => recipient.mobile),
+          recipients: notificationData.recipients.map(
+            recipient => recipient.mobile
+          ),
           message: notificationData.body
         })
         sendEmail({
-          recipients: notificationData.recipients.map(recipient => recipient.email),
+          recipients: notificationData.recipients.map(
+            recipient => recipient.email
+          ),
           subject: notificationData.subject,
           text: notificationData.body,
           html: notificationData.bodyHtml
         })
         const q = {
-          recipients: notificationData.recipients.map(recipient => recipient.email),
+          recipients: notificationData.recipients.map(
+            recipient => recipient.email
+          ),
           subject: notificationData.subject,
           text: notificationData.body,
           html: notificationData.bodyHtml
         }
         console.log(q)
-
       })
   }
 
@@ -110,13 +141,13 @@ class App extends Component {
       this.setState({ error })
     }
 
-    listNotifications()
+    listSomeNotifications()
       .then(notifications => {
         this.setState({ notifications })
       })
       .catch(saveError)
 
-    listAnnouncements()
+    listSomeAnnouncements()
       .then(announcements => {
         this.setState({ announcements })
       })
@@ -158,8 +189,8 @@ class App extends Component {
                 userData ? (
                   <Redirect to="/" />
                 ) : (
-                    <LoginPage onSignIn={this.onSignIn} />
-                  )
+                  <LoginPage onSignIn={this.onSignIn} />
+                )
               }
             />
             <Route path="/logout" render={() => <Redirect to="/login" />} />
@@ -173,6 +204,7 @@ class App extends Component {
                     notifications={notifications}
                     announcements={announcements}
                     handleChangeActiveTab={this.handleChangeActiveTab}
+                    handleLoadMore={this.handleLoadMore}
                   />
                 ))}
               />

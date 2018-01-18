@@ -1,0 +1,14 @@
+.showAllButton {
+  text-align: center;
+}
+
+.showAllButton button {
+  margin-top: 1em;
+  height: 40px;
+  width: 100px;
+  background: #fff;
+  border-radius: 2px;
+  color: #5969E2;
+  border-color: #5969E2;
+  padding: 2px;
+}
