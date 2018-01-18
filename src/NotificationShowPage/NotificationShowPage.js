@@ -4,6 +4,7 @@ import Message from '../components/Message'
 import { Link } from 'react-router-dom'
 import moment from 'moment'
 import { groupBy } from 'ramda'
+import capitalize from 'lodash/capitalize'
 
 class NotificationShowPage extends Component {
   state = {
@@ -27,8 +28,6 @@ class NotificationShowPage extends Component {
   render() {
     const { currentNotification, activeTab } = this.state
     if (!!currentNotification) {
-      const capitalize = string =>
-        string.charAt(0).toUpperCase() + string.slice(1)
       const categories =
         currentNotification.groups &&
         groupBy(group => group.name)(currentNotification.groups)

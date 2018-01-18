@@ -70,7 +70,7 @@ class App extends Component {
           this.setState({ notifications })
         })
         .catch(saveError)
-    else
+    else if (activeTab === 1)
       listAnnouncements()
         .then(announcements => {
           this.setState({ announcements })
