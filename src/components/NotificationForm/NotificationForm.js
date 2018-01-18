@@ -15,7 +15,8 @@ import isEmpty from 'lodash/isEmpty'
 import { createNotification } from '../../api/notifications'
 import { reject } from 'ramda'
 
-export default function NotificationForm({ recipients }) {
+export default function NotificationForm({
+  recipients, handleCreateNotification }) {
   return (
     <Formik
       initialValues={{
@@ -29,22 +30,21 @@ export default function NotificationForm({ recipients }) {
         role: undefined,
         groups: []
       }}
+      onSubmit={(values, { setSubmitting, setErrors }) => {
+        handleCreateNotification({
+          code: values.code,
+          subject: values.subject,
+          body: values.body,
+          bodyHtml: values.bodyHtml,
+          groups: values.groups.map(group => group.value),
+          recipients: values.recipients
+        })
+      }}
       validationSchema={Yup.object().shape({
         code: Yup.string().required('Please enter a 3-digit code'),
         subject: Yup.string().required('Please enter a subject'),
         body: Yup.string().required('Please enter a message')
       })}
-      onSubmit={(values, { setSubmitting, setErrors }) => {
-        createNotification(values).then(
-          notification => {
-            setSubmitting(false)
-            return notification
-          },
-          errors => {
-            setSubmitting(false)
-          }
-        )
-      }}
       render={({
         values,
         errors,

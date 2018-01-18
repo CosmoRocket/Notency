@@ -11,7 +11,7 @@ import { setToken } from './api/init'
 import { getDecodedToken } from './api/token'
 import { signIn, signOutNow } from './api/auth'
 import { uploadFile } from './api/fileupload'
-import { listNotifications } from './api/notifications'
+import { listNotifications, createNotification } from './api/notifications'
 import { listAnnouncements, createAnnouncement } from './api/announcements'
 import { listRecipients } from './api/recipients'
 import Container from './components/Container'
@@ -28,7 +28,6 @@ class App extends Component {
   state = {
     userData: getDecodedToken(),
     activeTab: 0,
-    successUpload: '',
     totalRecipients: 700,
     notifications: [],
     announcements: [],
@@ -67,14 +66,22 @@ class App extends Component {
     })
   }
 
+  handleCreateNotification = notificationData => {
+    createNotification(notificationData).then(newNotification => {
+      console.log(notificationData)
+      this.setState(prevState => {
+        const updatedNotifications = prevState.notifications.concat(
+          newNotification
+        )
+        return {
+          notifications: updatedNotifications
+        }
+      })
+    })
+  }
+
   onUpload = formData => {
-    uploadFile(formData)
-      .then(() => {
-        this.setState({ successUpload: 'File successfully uploaded' })
-      })
-      .catch(error => {
-        this.setState({ successUpload: 'Uploading failed. Please retry' })
-      })
+    return uploadFile(formData)
   }
 
   load() {
@@ -153,7 +160,10 @@ class App extends Component {
                 path="/new_notification"
                 exact
                 render={requireAuth(() => (
-                  <CreateNotificationPage recipients={recipients} />
+                  <CreateNotificationPage recipients={recipients}
+                    handleCreateNotification={this.handleCreateNotification}
+                  />
+
                 ))}
               />
               <Route
@@ -194,7 +204,7 @@ class App extends Component {
                 path="/update_contacts"
                 exact
                 render={requireAuth(
-                  withRouter(props => <ContactsPage onUpload={this.onUpload} successUpload={successUpload} />)
+                  withRouter(props => <ContactsPage onUpload={this.onUpload} />)
                 )}
               />
             </ContentContainer>

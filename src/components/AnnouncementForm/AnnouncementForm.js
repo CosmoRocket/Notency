@@ -30,7 +30,12 @@ export default function AnnouncementForm({
         groups: []
       }}
       onSubmit={(values, { setSubmitting, setErrors }) => {
-        handleCreateAnnouncement(values)
+        handleCreateAnnouncement({
+          subject: values.subject,
+          bodyHtml: values.bodyHtml,
+          group: values.groups.map(group => group.value),
+
+        })
       }}
       validationSchema={Yup.object().shape({
         subject: Yup.string().required('Please enter a subject'),

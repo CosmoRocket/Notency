@@ -5,7 +5,8 @@ import Button from '../components/Button'
 class ContactsPage extends React.Component {
   state = {
     fileName: 'No file selected',
-    csvFile: ''
+    csvFile: '',
+    successUpload: ''
   }
 
   onChange = (event) => {
@@ -13,13 +14,14 @@ class ContactsPage extends React.Component {
     fileName = fileName.slice(fileName.lastIndexOf('\\') + 1)
     this.setState({
       fileName: fileName,
-      csvFile: event.target.files[0]
+      csvFile: event.target.files[0],
+      successUpload: ''
     })
   }
 
   render() {
-    const { fileName, csvFile } = this.state;
-    const { onUpload, successUpload } = this.props
+    const { fileName, csvFile, successUpload } = this.state;
+    const { onUpload } = this.props
 
     return (
       <form
@@ -32,6 +34,14 @@ class ContactsPage extends React.Component {
           formData.append('csvFile', csvFile);
 
           onUpload(formData)
+            .then(() => {
+              this.setState({ successUpload: 'Successfully uploaded' })
+            })
+            .catch(error => {
+              this.setState({
+                successUpload: 'Could\'t upload. Please retry.'
+              })
+            })
         }}>
         <label htmlFor='csvFile' className='btn btn-dark btn-file btn-contacts'>Search File</label>
         <input type='file' id='csvFile' name='csvFile' className='d-none' onChange={this.onChange} />
