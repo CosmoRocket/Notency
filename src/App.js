@@ -149,7 +149,6 @@ class App extends Component {
     return (
       <Router>
         <Container>
-          {recipients.length}
           <Switch>
             {/* Login */}
             <Route
@@ -159,8 +158,8 @@ class App extends Component {
                 userData ? (
                   <Redirect to="/" />
                 ) : (
-                  <LoginPage onSignIn={this.onSignIn} />
-                )
+                    <LoginPage onSignIn={this.onSignIn} />
+                  )
               }
             />
             <Route path="/logout" render={() => <Redirect to="/login" />} />
