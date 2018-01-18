@@ -13,6 +13,8 @@ import { signIn, signOutNow } from './api/auth'
 import { uploadFile } from './api/fileupload'
 import { listNotifications, createNotification } from './api/notifications'
 import { listAnnouncements, createAnnouncement } from './api/announcements'
+import { sendSms } from './api/sms'
+import { sendEmail } from './api/email'
 import { listRecipients } from './api/recipients'
 import Container from './components/Container'
 import ContentContainer from './components/ContentContainer'
@@ -68,7 +70,6 @@ class App extends Component {
 
   handleCreateNotification = notificationData => {
     createNotification(notificationData).then(newNotification => {
-      console.log(notificationData)
       this.setState(prevState => {
         const updatedNotifications = prevState.notifications.concat(
           newNotification
@@ -77,7 +78,20 @@ class App extends Component {
           notifications: updatedNotifications
         }
       })
+      return notificationData
     })
+      .then(notificationData => {
+        sendSms({
+          recipients: [+61439204670],
+          message: notificationData.body
+        })
+        sendEmail({
+          to: ['alessio.palumbo4@gmail.com'],
+          subject: notificationData.subject,
+          text: notificationData.body,
+          html: notificationData.bodyHtml
+        })
+      })
   }
 
   onUpload = formData => {
