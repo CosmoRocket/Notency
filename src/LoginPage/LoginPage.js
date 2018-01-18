@@ -16,7 +16,6 @@ function LoginPage({ onSignIn, passwordLink }) {
           event.preventDefault()
 
           const form = event.target
-          const elements = form.elements
           const username = form.username.value
           const password = form.password.value
 

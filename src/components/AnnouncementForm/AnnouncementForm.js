@@ -36,8 +36,13 @@ export default function AnnouncementForm({
         handleCreateAnnouncement({
           subject: values.subject,
           bodyHtml: values.bodyHtml,
+<<<<<<< HEAD
           groups: values.groups.map(group => group.value),
           recipients: values.recipients
+=======
+          group: values.groups.map(group => group.value),
+
+>>>>>>> 0026a4e127ee5cc9dec7368f8b9edcc56927e683
         })
       }}
       validationSchema={Yup.object().shape({

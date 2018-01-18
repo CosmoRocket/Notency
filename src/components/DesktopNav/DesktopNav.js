@@ -6,24 +6,24 @@ import { Link } from 'react-router-dom'
 const DesktopNav = ({ onSignOut }) => {
   return (
     <nav className="DesktopNav d-none d-sm-block">
-      <ul class="nav flex-column">
-        <li class="nav-item">
-          <Link class="nav-link" to="/">
+      <ul className="nav flex-column">
+        <li className="nav-item">
+          <Link className="nav-link" to="/">
             <img className="logo" src={pic} alt="Embassy English Logo" />
           </Link>
         </li>
-        <li class="nav-item">
-          <Link class="nav-link" to="/">
+        <li className="nav-item">
+          <Link className="nav-link" to="/">
             Home
           </Link>
         </li>
-        <li class="nav-item">
-          <Link class="nav-link" to="update_contacts">
+        <li className="nav-item">
+          <Link className="nav-link" to="update_contacts">
             Update Contacts
           </Link>
         </li>
-        <li class="nav-item">
-          <Link class="nav-link" to="logout" onClick={onSignOut}>
+        <li className="nav-item">
+          <Link className="nav-link" to="logout" onClick={onSignOut}>
             Logout
           </Link>
         </li>

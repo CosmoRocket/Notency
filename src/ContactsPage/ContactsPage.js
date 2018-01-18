@@ -4,19 +4,23 @@ import Button from '../components/Button'
 
 class ContactsPage extends React.Component {
   state = {
-    fileName: 'No file uploaded'
+    fileName: 'No file selected',
+    csvFile: '',
+    successUpload: ''
   }
 
-  onChangeFile = (event) => {
+  onChange = (event) => {
     let fileName = event.target.value
-    // fileName = fileName.split('/').slice(-1)[0]
+    fileName = fileName.slice(fileName.lastIndexOf('\\') + 1)
     this.setState({
-      fileName: fileName
+      fileName: fileName,
+      csvFile: event.target.files[0],
+      successUpload: ''
     })
-
   }
+
   render() {
-    const { fileName } = this.state
+    const { fileName, csvFile, successUpload } = this.state;
     const { onUpload } = this.props
 
     return (
@@ -24,22 +28,31 @@ class ContactsPage extends React.Component {
         encType="multipart/form-data"
         onSubmit={event => {
           event.preventDefault()
+          const formData = new FormData();
 
-          const form = event.target
-          const file = form.csvFile.files
-          console.log(file)
+          formData.append('description', fileName);
+          formData.append('csvFile', csvFile);
 
-          onUpload(file)
+          onUpload(formData)
+            .then(() => {
+              this.setState({ successUpload: 'Successfully uploaded' })
+            })
+            .catch(error => {
+              this.setState({
+                successUpload: 'Could\'t upload. Please retry.'
+              })
+            })
         }}>
         <label htmlFor='csvFile' className='btn btn-dark btn-file btn-contacts'>Search File</label>
-        <input type='file' id='csvFile' name='csvFile' className='d-none' onChange={this.onChangeFile} />
+        <input type='file' id='csvFile' name='csvFile' className='d-none' onChange={this.onChange} />
         <span className='ml-3 file-name'>{fileName}</span>
         <br />
         <Button
           btnStyle='danger btn-contacts'
           text='Upload'
         />
-      </form >
+        <span className='ml-3'>{successUpload}</span>
+      </form>
     )
   }
 }
