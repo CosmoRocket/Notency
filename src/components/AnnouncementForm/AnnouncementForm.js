@@ -15,6 +15,7 @@ import { groupBy } from 'ramda'
 import capitalize from 'lodash/capitalize'
 import isEmpty from 'lodash/isEmpty'
 import moment from 'moment'
+import striptags from 'striptags'
 
 function AnnouncementForm({ recipients, handleCreateAnnouncement, history }) {
   if (recipients.length !== 0) {
@@ -23,6 +24,7 @@ function AnnouncementForm({ recipients, handleCreateAnnouncement, history }) {
         initialValues={{
           subject: '',
           recipients: recipients,
+          body: '',
           bodyHtml: '',
           group: 'all',
           nationality: [],
@@ -47,7 +49,7 @@ function AnnouncementForm({ recipients, handleCreateAnnouncement, history }) {
                   recipient => recipient.email
                 ),
                 subject: announcementData.subject,
-                text: announcementData.body,
+                text: values.body,
                 html: announcementData.bodyHtml
               })
             })
@@ -216,8 +218,9 @@ function AnnouncementForm({ recipients, handleCreateAnnouncement, history }) {
                 wrapperClassName="editorSection"
                 editorClassName="wrapperSection"
                 onContentStateChange={contentState => {
-                  setFieldValue('body', contentState)
-                  setFieldValue('bodyHtml', draftToHtml(contentState))
+                  const htmlContent = draftToHtml(contentState)
+                  setFieldValue('body', striptags(htmlContent))
+                  setFieldValue('bodyHtml', htmlContent)
                 }}
                 toolbar={{
                   options: ['inline', 'blockType', 'fontSize', 'fontFamily']
