@@ -78,6 +78,7 @@ class NotificationShowPage extends Component {
       const okResponses = ok.map(response => {
         return (
           <Message
+            key={response.sender._id}
             recipientId={response.sender._id}
             contactNumber={response.sender.mobile}
             recipientName={`${response.sender.firstName} ${
@@ -90,6 +91,7 @@ class NotificationShowPage extends Component {
       const notOkResponses = notOk.map(response => {
         return (
           <Message
+            key={response.sender._id}
             recipientId={response.sender._id}
             contactNumber={response.sender.mobile}
             recipientName={`${response.sender.firstName} ${
@@ -100,14 +102,13 @@ class NotificationShowPage extends Component {
         )
       })
       const nonRespondingRecipients = nonResponders.map(nonResponder => {
-        return <div>{nonResponder.idNo}</div>
+        return <div key={nonResponder._id}>{nonResponder.idNo}</div>
       })
       const categories = groupBy(group => group.name)(
         currentNotification.groups
       )
-      console.log(categories)
       const groupElements = Object.keys(categories).map(category => (
-        <div>
+        <div key={category}>
           {capitalize(category)}:{' '}
           {categories[category].map(group => group.item).join(', ')}
         </div>

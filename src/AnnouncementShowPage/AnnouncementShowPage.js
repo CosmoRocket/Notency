@@ -26,7 +26,7 @@ class AnnouncementShowPage extends Component {
         currentAnnouncement.groups
       )
       const groupElements = Object.keys(categories).map(category => (
-        <div>
+        <div key={category}>
           {capitalize(category)}:{' '}
           {categories[category].map(group => group.item).join(', ')}
         </div>
