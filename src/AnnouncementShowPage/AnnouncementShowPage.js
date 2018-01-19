@@ -2,6 +2,8 @@ import React, { Component, Fragment } from 'react'
 import moment from 'moment'
 import { Link } from 'react-router-dom'
 import { groupBy } from 'ramda'
+import capitalize from 'lodash/capitalize'
+import isEmpty from 'lodash/isEmpty'
 
 class AnnouncementShowPage extends Component {
   state = {
@@ -19,30 +21,26 @@ class AnnouncementShowPage extends Component {
 
   render() {
     const { currentAnnouncement } = this.state
-    if (!!currentAnnouncement) {
-      const capitalize = string =>
-        string.charAt(0).toUpperCase() + string.slice(1)
-      const categories =
-        currentAnnouncement.groups &&
-        groupBy(group => group.name)(currentAnnouncement.groups)
-      const groupElements =
-        currentAnnouncement.groups &&
-        Object.keys(categories).map(category => (
-          <p>
-            {capitalize(category)}:{' '}
-            {categories[category].map(group => group.selected).join(', ')}
-          </p>
-        ))
+    if (!isEmpty(currentAnnouncement)) {
+      const categories = groupBy(group => group.name)(
+        currentAnnouncement.groups
+      )
+      const groupElements = Object.keys(categories).map(category => (
+        <div>
+          {capitalize(category)}:{' '}
+          {categories[category].map(group => group.item).join(', ')}
+        </div>
+      ))
 
       return (
         <Fragment>
           <p className="text-right">
             {moment(currentAnnouncement.createdAt).format('D MMM YYYY')}
           </p>
-          {groupElements ? (
-            <p>Groups Sent To: {groupElements}</p>
+          {isEmpty(groupElements) ? (
+            <div>Sent to All</div>
           ) : (
-            <p>Sent to All</p>
+            <div>Groups Sent To: {groupElements}</div>
           )}
           <h2 className="text-center">{currentAnnouncement.subject}</h2>
           <div

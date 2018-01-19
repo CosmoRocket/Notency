@@ -105,11 +105,12 @@ class NotificationShowPage extends Component {
       const categories = groupBy(group => group.name)(
         currentNotification.groups
       )
+      console.log(categories)
       const groupElements = Object.keys(categories).map(category => (
-        <p>
+        <div>
           {capitalize(category)}:{' '}
-          {categories[category].map(group => group.selected).join(', ')}
-        </p>
+          {categories[category].map(group => group.item).join(', ')}
+        </div>
       ))
 
       return (
@@ -118,9 +119,9 @@ class NotificationShowPage extends Component {
             {moment(currentNotification.createdAt).format('D MMM YYYY')}
           </p>
           {isEmpty(groupElements) ? (
-            <p>Sent to All</p>
+            <div>Sent to All</div>
           ) : (
-            <p>Groups Sent To: {groupElements}</p>
+            <div>Groups Sent To: {groupElements}</div>
           )}
 
           <h2 className="text-center">{currentNotification.subject}</h2>
