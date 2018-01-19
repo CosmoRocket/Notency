@@ -1,6 +1,7 @@
 import React from 'react'
 import './ContactsPage.css'
 import Button from '../components/Button'
+import FileUpload from '../components/FileUpload'
 
 class ContactsPage extends React.Component {
   state = {
@@ -9,7 +10,7 @@ class ContactsPage extends React.Component {
     successUpload: ''
   }
 
-  onChange = (event) => {
+  onChange = event => {
     let fileName = event.target.value
     fileName = fileName.slice(fileName.lastIndexOf('\\') + 1)
     this.setState({
@@ -20,7 +21,7 @@ class ContactsPage extends React.Component {
   }
 
   render() {
-    const { fileName, csvFile, successUpload } = this.state;
+    const { fileName, csvFile, successUpload } = this.state
     const { onUpload } = this.props
 
     return (
@@ -28,10 +29,10 @@ class ContactsPage extends React.Component {
         encType="multipart/form-data"
         onSubmit={event => {
           event.preventDefault()
-          const formData = new FormData();
+          const formData = new FormData()
 
-          formData.append('description', fileName);
-          formData.append('csvFile', csvFile);
+          formData.append('description', fileName)
+          formData.append('csvFile', csvFile)
 
           onUpload(formData)
             .then(() => {
@@ -39,19 +40,16 @@ class ContactsPage extends React.Component {
             })
             .catch(error => {
               this.setState({
-                successUpload: 'Could\'t upload. Please retry.'
+                successUpload: "Could't upload. Please retry."
               })
             })
-        }}>
-        <label htmlFor='csvFile' className='btn btn-dark btn-file btn-contacts'>Search File</label>
-        <input type='file' id='csvFile' name='csvFile' className='d-none' onChange={this.onChange} />
-        <span className='ml-3 file-name'>{fileName}</span>
+        }}
+      >
+        <FileUpload name="csvFile" onChange={this.onChange} />
+        <span className="ml-3 file-name">{fileName}</span>
         <br />
-        <Button
-          btnStyle='danger btn-contacts'
-          text='Upload'
-        />
-        <span className='ml-3'>{successUpload}</span>
+        <Button btnStyle="danger btn-contacts" text="Upload" />
+        <span className="ml-3">{successUpload}</span>
       </form>
     )
   }
