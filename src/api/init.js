@@ -2,7 +2,7 @@ import axios from 'axios'
 import { rememberToken, getValidToken } from './token'
 
 const api = axios.create({
-  baseURL: 'http://localhost:7000'
+  baseURL: 'https://notency-api.now.sh'
 })
 
 export function setToken(token) {
