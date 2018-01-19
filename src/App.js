@@ -114,7 +114,7 @@ class App extends Component {
     })
   }
 
-  load() {
+  load = () => {
     const saveError = error => {
       this.setState({ error })
     }
@@ -177,6 +177,7 @@ class App extends Component {
                 exact
                 render={requireAuth(() => (
                   <HomePage
+                    loadAppData={this.load}
                     activeTab={activeTab}
                     notifications={notifications}
                     announcements={announcements}
