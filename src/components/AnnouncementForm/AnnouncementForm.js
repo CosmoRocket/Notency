@@ -4,6 +4,7 @@ import { Editor } from 'react-draft-wysiwyg'
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css'
 import Button from '../../components/Button'
 import Input from '../../components/Input'
+import FileUpload from '../../components/FileUpload'
 import RadioMenu from '../../components/RadioMenu'
 import draftToHtml from 'draftjs-to-html'
 import { sendEmail } from '../../api/email'
@@ -30,7 +31,9 @@ function AnnouncementForm({ recipients, handleCreateAnnouncement, history }) {
           nationality: [],
           graduationDate: {},
           role: undefined, // set to undefined so that placeholder will show up
-          groups: []
+          groups: [],
+          attachmentFileName: '',
+          attachment: ''
         }}
         onSubmit={(values, { setSubmitting, setErrors }) => {
           handleCreateAnnouncement({
@@ -44,14 +47,16 @@ function AnnouncementForm({ recipients, handleCreateAnnouncement, history }) {
               return { newAnnouncement, announcementData }
             })
             .then(({ announcementData }) => {
-              sendEmail({
-                recipients: announcementData.recipients.map(
-                  recipient => recipient.email
-                ),
-                subject: announcementData.subject,
-                text: values.body,
-                html: announcementData.bodyHtml
-              })
+              const formData = new FormData()
+              formData.append(
+                'recipients',
+                announcementData.recipients.map(recipient => recipient.email)
+              )
+              formData.append('subject', announcementData.subject)
+              formData.append('text', values.body)
+              formData.append('html', announcementData.bodyHtml)
+              formData.append('attachment', values.attachment)
+              sendEmail(formData)
             })
             .catch(error => {
               console.log('There was an error')
@@ -226,6 +231,14 @@ function AnnouncementForm({ recipients, handleCreateAnnouncement, history }) {
                   options: ['inline', 'blockType', 'fontSize', 'fontFamily']
                 }}
               />
+              <FileUpload
+                name="attachment"
+                onChange={e => {
+                  setFieldValue('attachmentFileName', e.target.value)
+                  setFieldValue('attachment', e.target.files[0])
+                }}
+              />
+              <div className="file-name">{values.attachmentFileName}</div>
               <div className="formActions">
                 <Link className="formBack" to="/">
                   Back
