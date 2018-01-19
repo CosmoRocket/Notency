@@ -16,7 +16,6 @@ import { groupBy } from 'ramda'
 import capitalize from 'lodash/capitalize'
 import isEmpty from 'lodash/isEmpty'
 import moment from 'moment'
-import striptags from 'striptags'
 
 function AnnouncementForm({ recipients, handleCreateAnnouncement, history }) {
   if (recipients.length !== 0) {
@@ -224,7 +223,7 @@ function AnnouncementForm({ recipients, handleCreateAnnouncement, history }) {
                 editorClassName="wrapperSection"
                 onContentStateChange={contentState => {
                   const htmlContent = draftToHtml(contentState)
-                  setFieldValue('body', striptags(htmlContent))
+                  setFieldValue('body', htmlContent.replace(/<[^>]+>/g, ''))
                   setFieldValue('bodyHtml', htmlContent)
                 }}
                 toolbar={{
