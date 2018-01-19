@@ -39,7 +39,7 @@ class AnnouncementShowPage extends Component {
           <p className="text-right">
             {moment(currentAnnouncement.createdAt).format('D MMM YYYY')}
           </p>
-          {groupElements === '' ? (
+          {groupElements ? (
             <p>Groups Sent To: {groupElements}</p>
           ) : (
             <p>Sent to All</p>

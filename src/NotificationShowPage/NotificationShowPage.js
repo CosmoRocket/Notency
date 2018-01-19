@@ -6,6 +6,7 @@ import moment from 'moment'
 import { groupBy, reject } from 'ramda'
 import capitalize from 'lodash/capitalize'
 import messageParser from './message-parser'
+import isEmpty from 'lodash/isEmpty'
 
 class NotificationShowPage extends Component {
   state = {
@@ -73,7 +74,7 @@ class NotificationShowPage extends Component {
       nonResponders
     } = this.state
 
-    if (!!currentNotification) {
+    if (!isEmpty(currentNotification)) {
       const okResponses = ok.map(response => {
         return (
           <Message
@@ -101,27 +102,25 @@ class NotificationShowPage extends Component {
       const nonRespondingRecipients = nonResponders.map(nonResponder => {
         return <div>{nonResponder.idNo}</div>
       })
-      const categories =
-        currentNotification.groups &&
-        groupBy(group => group.name)(currentNotification.groups)
-      const groupElements =
-        currentNotification.groups &&
-        Object.keys(categories).map(category => (
-          <p>
-            {capitalize(category)}:{' '}
-            {categories[category].map(group => group.selected).join(', ')}
-          </p>
-        ))
+      const categories = groupBy(group => group.name)(
+        currentNotification.groups
+      )
+      const groupElements = Object.keys(categories).map(category => (
+        <p>
+          {capitalize(category)}:{' '}
+          {categories[category].map(group => group.selected).join(', ')}
+        </p>
+      ))
 
       return (
         <Fragment>
           <p className="text-right">
             {moment(currentNotification.createdAt).format('D MMM YYYY')}
           </p>
-          {groupElements === '' ? (
-            <p>Groups Sent To: {groupElements}</p>
-          ) : (
+          {isEmpty(groupElements) ? (
             <p>Sent to All</p>
+          ) : (
+            <p>Groups Sent To: {groupElements}</p>
           )}
 
           <h2 className="text-center">{currentNotification.subject}</h2>
