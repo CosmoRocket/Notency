@@ -38,7 +38,8 @@ class App extends Component {
     totalRecipients: 700,
     notifications: [],
     announcements: [],
-    recipients: []
+    recipients: [],
+    showButtonText: 'Show All'
   }
 
   onSignIn = ({ username, password }) => {
@@ -70,13 +71,19 @@ class App extends Component {
       if (notifications.length > 5)
         listSomeNotifications()
           .then(notifications => {
-            this.setState({ notifications })
+            this.setState({
+              notifications,
+              showButtonText: 'Show All'
+            })
           })
           .catch(saveError)
       else
         listNotifications()
           .then(notifications => {
-            this.setState({ notifications })
+            this.setState({
+              notifications,
+              showButtonText: 'Hide'
+            })
           })
           .catch(saveError)
     }
@@ -166,7 +173,8 @@ class App extends Component {
       announcements,
       recipients,
       activeTab,
-      userData
+      userData,
+      showButtonText
     } = this.state
 
     const requireAuth = render => props =>
@@ -201,6 +209,7 @@ class App extends Component {
                     announcements={announcements}
                     handleChangeActiveTab={this.handleChangeActiveTab}
                     handleLoadMore={this.handleLoadMore}
+                    showButtonText={showButtonText}
                   />
                 ))}
               />

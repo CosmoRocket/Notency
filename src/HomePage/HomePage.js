@@ -8,24 +8,21 @@ import Button from '../components/Button'
 import isEmpty from 'lodash/isEmpty'
 
 class HomePage extends Component {
-  state = {
-    text: 'Show All'
-  }
   componentDidMount() {
     this.props.loadAppData()
   }
 
   render() {
-    const { text } = this.state
     const {
       notifications,
       announcements,
       handleChangeActiveTab,
       handleLoadMore,
-      activeTab
+      activeTab,
+      showButtonText
     } = this.props
 
-    if (!isEmpty(notifications) && !isEmpty(announcements)) {
+    if (activeTab === 0 && !isEmpty(notifications) || activeTab === 1 && !isEmpty(announcements)) {
       const notificationsList = notifications.map(notification => {
         return (
           <Notification
@@ -70,10 +67,8 @@ class HomePage extends Component {
             <Button
               onClick={() => {
                 handleLoadMore(activeTab)
-                this.state.text === 'Show All' ? this.setState({ text: 'Hide' })
-                  : this.setState({ text: 'Show All' })
               }}
-              text={text}
+              text={showButtonText}
             />
           </div>
         </Fragment>
