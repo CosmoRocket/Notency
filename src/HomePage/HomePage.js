@@ -37,9 +37,10 @@ const HomePage = ({
         handleChangeActiveTab={handleChangeActiveTab}
       />
       {activeTab === 0 ? (
+        // <button className="primaryButton"></button>
         <Link
           to="/new_notification"
-          className="btn btn-danger text-uppercase font-weight-bold my-2"
+          className="btn btn-danger text-uppercase font-weight-bold my-2 mx-auto"
         >
           New Notification
         </Link>
