@@ -25,7 +25,7 @@ class HomePage extends Component {
       activeTab
     } = this.props
 
-    if (!isEmpty(notifications) && !isEmpty(announcements)) {
+    if (!isEmpty(notifications) || !isEmpty(announcements)) {
       const notificationsList = notifications.map(notification => {
         return (
           <Notification
