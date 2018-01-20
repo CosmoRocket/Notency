@@ -22,7 +22,7 @@ class HomePage extends Component {
       showButtonText
     } = this.props
 
-    if (activeTab === 0 && !isEmpty(notifications) || activeTab === 1 && !isEmpty(announcements)) {
+    if (!isEmpty(notifications) || !isEmpty(announcements)) {
       const notificationsList = notifications.map(notification => {
         return (
           <Notification
