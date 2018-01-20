@@ -8,79 +8,80 @@ import Button from '../components/Button'
 import isEmpty from 'lodash/isEmpty'
 
 class HomePage extends Component {
-  state = {
-    text: 'Show All'
-  }
   componentDidMount() {
     this.props.loadAppData()
   }
 
   render() {
-    const { text } = this.state
     const {
       notifications,
       announcements,
       handleChangeActiveTab,
       handleLoadMore,
-      activeTab
+      activeTab,
+      showButtonText
     } = this.props
 
-    if (!isEmpty(notifications) || !isEmpty(announcements)) {
-      const notificationsList = notifications.map(notification => {
-        return (
-          <Notification
-            {...notification}
-            key={notification._id}
-            responses={`${notification.responses.length}/${notification.recipients.length}`}
-          />
-        )
-      })
-      const announcementsList = announcements.map(announcement => {
-        return <Announcement {...announcement} key={announcement._id} />
-      })
+    const notificationsList = notifications.map(notification => {
       return (
-        <Fragment>
-          <TabbedNav
-            activeTab={activeTab}
-            tabs={[
-              () => <p className="m-0">Emergency Notifications</p>,
-              () => <p className="m-0">General Announcements</p>
-            ]}
-            handleChangeActiveTab={handleChangeActiveTab}
-          />
-          {activeTab === 0 ? (
+        <Notification
+          {...notification}
+          key={notification._id}
+          responses="10/60"
+        />
+      )
+    })
+    const announcementsList = announcements.map(announcement => {
+      return <Announcement {...announcement} key={announcement._id} />
+    })
+
+    return (
+      <Fragment>
+        <TabbedNav
+          activeTab={activeTab}
+          tabs={[
+            () => <p className="m-0">Emergency Notifications</p>,
+            () => <p className="m-0">General Announcements</p>
+          ]}
+          handleChangeActiveTab={handleChangeActiveTab}
+        />
+        {activeTab === 0 ? (
+          <Link
+            to="/new_notification"
+            className="btn btn-danger text-uppercase font-weight-bold my-2"
+          >
+            New Notification
+            </Link>
+        ) : (
             <Link
-              to="/new_notification"
+              to="/new_announcement"
               className="btn btn-danger text-uppercase font-weight-bold my-2"
             >
-              New Notification
+              New Announcement
             </Link>
-          ) : (
-              <Link
-                to="/new_announcement"
-                className="btn btn-danger text-uppercase font-weight-bold my-2"
-              >
-                New Announcement
-            </Link>
-            )}
+          )}
+        {
+          (!isEmpty(notifications) || !isEmpty(announcements)) ?
+            (
+              <Fragment>
+                {activeTab === 0 ? notificationsList : announcementsList}
+                <div className="showAllButton">
+                  <Button
+                    onClick={() => {
+                      handleLoadMore(activeTab)
+                    }}
+                    text={showButtonText}
+                  />
+                </div>
+              </Fragment>
+            ) : (
+              <div>Loading notifications and announcements...</div>
+            )
 
-          {activeTab === 0 ? notificationsList : announcementsList}
-          {/* Show All Button */}
-          <div className="showAllButton">
-            <Button
-              onClick={() => {
-                handleLoadMore(activeTab)
-                this.state.text === 'Show All' ? this.setState({ text: 'Hide' })
-                  : this.setState({ text: 'Show All' })
-              }}
-              text={text}
-            />
-          </div>
-        </Fragment>
-      )
-    } else {
-      return <div>Loading notifications and announcements...</div>
-    }
+        }
+      </Fragment>
+    )
+
   }
 }
 
