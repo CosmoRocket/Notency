@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "axios": "^0.17.1",
+    "dotenv": "^4.0.0",
     "draft-js": "^0.10.4",
     "draftjs-to-html": "^0.8.2",
     "formik": "^0.10.5",
