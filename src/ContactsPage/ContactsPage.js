@@ -45,9 +45,7 @@ class ContactsPage extends React.Component {
             })
         }}
       >
-        <FileUpload name="csvFile" onChange={this.onChange} />
-        <span className="ml-3 file-name">{fileName}</span>
-        <br />
+        <FileUpload name="csvFile" onChange={this.onChange} fileName={fileName} />
         <Button btnStyle="danger btn-contacts" text="Upload" />
         <span className="ml-3">{successUpload}</span>
       </form>

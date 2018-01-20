@@ -85,7 +85,7 @@ function NotificationForm({ recipients, handleCreateNotification, history }) {
               } else {
                 return groups.some(
                   group =>
-                    recipient[category].toLowerCase() ===
+                    recipient[category] && recipient[category].toLowerCase() ===
                     group.value.item.toLowerCase()
                 )
               }

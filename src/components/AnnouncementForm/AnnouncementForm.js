@@ -89,7 +89,7 @@ function AnnouncementForm({ recipients, handleCreateAnnouncement, history }) {
               } else {
                 return groups.some(
                   group =>
-                    recipient[category].toLowerCase() ===
+                    recipient[category] && recipient[category].toLowerCase() ===
                     group.value.item.toLowerCase()
                 )
               }
@@ -233,7 +233,8 @@ function AnnouncementForm({ recipients, handleCreateAnnouncement, history }) {
               <FileUpload
                 name="attachment"
                 onChange={e => {
-                  setFieldValue('attachmentFileName', e.target.value)
+                  const fileName = e.target.value
+                  setFieldValue('attachmentFileName', fileName.slice(fileName.lastIndexOf('\\') + 1))
                   setFieldValue('attachment', e.target.files[0])
                 }}
               />

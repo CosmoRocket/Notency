@@ -1,9 +1,5 @@
 .btn-contacts {
-  width: 160px;
+  width: 180px;
   text-transform: uppercase;
   font-weight: bold;
-}
-
-.file-name {
-  vertical-align: text-bottom;
 }
