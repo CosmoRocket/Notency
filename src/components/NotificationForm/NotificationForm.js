@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import './NotificationForm.css'
 import Button from '../../components/Button'
 import Input from '../../components/Input'
@@ -238,7 +238,14 @@ function NotificationForm({ recipients, handleCreateNotification, history }) {
       />
     )
   } else {
-    return <div>Loading</div>
+    return (
+      <Fragment>
+        <div>Loading</div>
+        <Link className="formBack" to="/">
+          Back
+        </Link>
+      </Fragment>
+    )
   }
 }
 
