@@ -59,6 +59,7 @@ class App extends Component {
 
   handleChangeActiveTab = index => {
     this.setState({ activeTab: index })
+    this.load()
   }
 
   handleLoadMore = activeTab => {
