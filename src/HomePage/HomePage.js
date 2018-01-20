@@ -31,7 +31,7 @@ class HomePage extends Component {
           <Notification
             {...notification}
             key={notification._id}
-            responses="10/60"
+            responses={`${notification.responses.length}/${notification.recipients.length}`}
           />
         )
       })
