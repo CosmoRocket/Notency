@@ -64,18 +64,36 @@ class App extends Component {
     const saveError = error => {
       this.setState({ error })
     }
-    if (activeTab === 0)
-      listNotifications()
-        .then(notifications => {
-          this.setState({ notifications })
-        })
-        .catch(saveError)
-    else if (activeTab === 1)
-      listAnnouncements()
-        .then(announcements => {
-          this.setState({ announcements })
-        })
-        .catch(saveError)
+    const { notifications, announcements } = this.state
+
+    if (activeTab === 0) {
+      if (notifications.length > 5)
+        listSomeNotifications()
+          .then(notifications => {
+            this.setState({ notifications })
+          })
+          .catch(saveError)
+      else
+        listNotifications()
+          .then(notifications => {
+            this.setState({ notifications })
+          })
+          .catch(saveError)
+    }
+    else if (activeTab === 1) {
+      if (announcements.length > 5)
+        listSomeAnnouncements()
+          .then(announcements => {
+            this.setState({ announcements })
+          })
+          .catch(saveError)
+      else
+        listAnnouncements()
+          .then(announcements => {
+            this.setState({ announcements })
+          })
+          .catch(saveError)
+    }
   }
 
   handleCreateAnnouncement = announcementData => {
