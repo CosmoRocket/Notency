@@ -1,3 +1,15 @@
 * {
   outline: none;
 }
+
+body {
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  /* background: linear-gradient(180deg, rgb(237, 243, 250), rgb(200, 248, 200)); */
+  background: linear-gradient(180deg, white, rgb(173, 173, 173)) fixed;
+}
+
+.nav-link {
+  font-size: 1.1em;
+  color: #0090D3;
+}
