@@ -9,7 +9,8 @@ export default function Notification({
   subject,
   body,
   createdAt,
-  responses
+  responses,
+  recipients
 }) {
   return (
     <div className="Notification py-1">
@@ -20,7 +21,7 @@ export default function Notification({
           </small>
           <small>
             <Icon className="text-success mr-2" name="mail-reply" />
-            {responses}
+            {`${responses}/${recipients}`}
           </small>
         </div>
         <p className="m-0 font-weight-bold">{subject}</p>

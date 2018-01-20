@@ -18,7 +18,8 @@ const HomePage = ({
       <Notification
         {...notification}
         key={notification._id}
-        responses="10/60"
+        responses={notification.responses.length}
+        recipients={notification.recipients.length}
       />
     )
   })
