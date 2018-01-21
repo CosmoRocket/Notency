@@ -1,0 +1,7 @@
+.nonResponder p {
+  font-weight: bold;
+}
+
+.nonResponder:nth-child(odd) {
+  background: rgb(55, 55, 184)
+}
