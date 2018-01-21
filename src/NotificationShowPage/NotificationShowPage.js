@@ -99,7 +99,12 @@ class NotificationShowPage extends Component {
         )
       })
       const nonRespondingRecipients = nonResponders.map(nonResponder => {
-        return <div>{nonResponder.idNo}</div>
+        return (
+          <div className="nonResponder">
+            <small>{nonResponder.idNo}</small>
+            <p>{nonResponder.firstName} {nonResponder.lastName}</p>
+          </div>
+        )
       })
       const categories =
         currentNotification.groups &&

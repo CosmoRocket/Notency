@@ -1,17 +1,16 @@
 .Notification {
   cursor: pointer;
-  /* border: 1px solid lightgray; */
   border-left: 1px solid lightgray;
   border-right: 1px solid lightgray;
 }
 
 
 .Notification:nth-child(even) {
-  background: rgb(237, 247, 255);
+  background: rgb(225, 238, 248);
 }
 
 .Notification:nth-child(odd) {
-  background: rgb(234, 236, 250);
+  background: rgb(246, 246, 248);
 }
 
 .Notification a {
@@ -50,4 +49,16 @@
 
 .Notification:hover small {
   color: #fff !important;
+}
+
+.Notification:hover small span {
+  color: #fff !important;
+}
+
+.nonResponder p {
+  font-weight: bold;
+}
+
+.nonResponder:nth-child(odd) {
+  background: rgb(55, 55, 184)
 }
