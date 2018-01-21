@@ -1,9 +1,13 @@
 .ContentContainer {
   width: 100%;
   padding: 20px 0 0 0;
-  border-top: 2px solid #0090D3;
+  border-top: 5px solid #0090D3;
   border-top-right-radius: 1%;
   border-top-left-radius: 1%;
+}
+
+.ContentContainer {
+  text-align: center;
 }
 
 @media (min-width: 576px) {
