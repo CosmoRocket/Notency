@@ -58,3 +58,7 @@
 .sendButton:hover {
   background: rgb(74, 87, 189);
 }
+
+.Select-control {
+  text-align: left;
+}

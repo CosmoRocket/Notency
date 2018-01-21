@@ -24,35 +24,37 @@ class ContactsPage extends React.Component {
     const { onUpload } = this.props
 
     return (
-      <form
-        encType="multipart/form-data"
-        onSubmit={event => {
-          event.preventDefault()
-          const formData = new FormData();
+      <div className="recipientUploadForm">
+        <form
+          encType="multipart/form-data"
+          onSubmit={event => {
+            event.preventDefault()
+            const formData = new FormData();
 
-          formData.append('description', fileName);
-          formData.append('csvFile', csvFile);
+            formData.append('description', fileName);
+            formData.append('csvFile', csvFile);
 
-          onUpload(formData)
-            .then(() => {
-              this.setState({ successUpload: 'Successfully uploaded' })
-            })
-            .catch(error => {
-              this.setState({
-                successUpload: 'Could\'t upload. Please retry.'
+            onUpload(formData)
+              .then(() => {
+                this.setState({ successUpload: 'Successfully uploaded' })
               })
-            })
-        }}>
-        <label htmlFor='csvFile' className='btn btn-dark btn-file btn-contacts'>Search File</label>
-        <input type='file' id='csvFile' name='csvFile' className='d-none' onChange={this.onChange} />
-        <span className='ml-3 file-name'>{fileName}</span>
-        <br />
-        <Button
-          btnStyle='danger btn-contacts'
-          text='Upload'
-        />
-        <span className='ml-3'>{successUpload}</span>
-      </form>
+              .catch(error => {
+                this.setState({
+                  successUpload: 'Could\'t upload. Please retry.'
+                })
+              })
+          }}>
+          <label htmlFor='csvFile' className='btn btn-dark btn-file btn-contacts'>Search File</label>
+          <input type='file' id='csvFile' name='csvFile' className='d-none' onChange={this.onChange} />
+          <span className='ml-3 file-name'>{fileName}</span>
+          <br />
+          <Button
+            btnStyle='danger btn-contacts'
+            text='Upload'
+          />
+          <span className='ml-3'>{successUpload}</span>
+        </form>
+      </div>
     )
   }
 }

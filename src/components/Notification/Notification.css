@@ -1,23 +1,53 @@
 .Notification {
   cursor: pointer;
-  border-bottom: 1px solid #bdbdbd;
+  /* border: 1px solid lightgray; */
+  border-left: 1px solid lightgray;
+  border-right: 1px solid lightgray;
 }
 
-.Notification:hover {
-  color: #5969E2 !important;
+
+.Notification:nth-child(even) {
+  background: rgb(237, 247, 255);
+}
+
+.Notification:nth-child(odd) {
+  background: rgb(234, 236, 250);
+}
+
+.Notification a {
+  text-decoration: none;
 }
 
 .Notification p {
   text-align: left;
   color: hsl(0, 0%, 27%);
+  padding-left: 5px;
 }
 
 .Notification p span {
   color: #777777 !important;
 }
 
+.Notification:hover {
+  transition: 0.2s;
+  background: #0090D3;
+  color: white;
+}
 .Notification small {
   text-align: left;
   color: #777777;
-  font-style: italic;
+  margin-right: 6px;
+  padding-left: 5px;
+}
+
+.Notification:hover p span {
+  color: #fff !important;
+}
+
+.Notification:hover p {
+  color: #fff !important
+}
+
+.Notification:hover small {
+  color: #fff !important;
 }

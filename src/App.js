@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Fragment, Component } from 'react'
 import {
   BrowserRouter as Router,
   Switch,
@@ -156,6 +156,14 @@ class App extends Component {
 
     return (
       <Router>
+        <Fragment>
+        <div className="headerBar">
+          <h2>NOTENCY</h2>
+          <div>
+            <h6>Reset Account</h6>
+            <h6>Submit Issue</h6>
+          </div>
+        </div>
         <Container>
           <Switch>
             {/* Login */}
@@ -246,6 +254,7 @@ class App extends Component {
             />
           </Switch>
         </Container>
+        </Fragment>
       </Router>
     )
   }
