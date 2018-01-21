@@ -5,6 +5,7 @@ import Notification from '../components/Notification'
 import Announcement from '../components/Announcement'
 import { Link } from 'react-router-dom'
 import Button from '../components/Button'
+import { Icon } from 'react-fa'
 
 const HomePage = ({
   notifications,
@@ -31,8 +32,8 @@ const HomePage = ({
       <TabbedNav
         activeTab={activeTab}
         tabs={[
-          () => <p className="m-0">Emergency Notifications</p>,
-          () => <p className="m-0">General Announcements</p>
+          () => <p className="m-0"><Icon name="bell"/> Emergency Notifications</p>,
+          () => <p className="m-0"><Icon name="bullhorn"/> General Announcements</p>
         ]}
         handleChangeActiveTab={handleChangeActiveTab}
       />
@@ -40,7 +41,7 @@ const HomePage = ({
         // <button className="primaryButton"></button>
         <Link
           to="/new_notification"
-          className="btn btn-danger text-uppercase font-weight-bold my-2 mx-auto"
+          className="btn btn-danger text-uppercase font-weight-bold my-2"
         >
           New Notification
         </Link>

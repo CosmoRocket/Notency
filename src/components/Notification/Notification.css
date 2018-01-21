@@ -1,8 +1,23 @@
 .Notification {
-    cursor: pointer;
-    border-bottom: 1px solid #bdbdbd;
+  cursor: pointer;
+  border-bottom: 1px solid #bdbdbd;
+}
+
+.Notification:hover {
+  color: #5969E2 !important;
 }
 
 .Notification p {
-    text-align: left;
+  text-align: left;
+  color: hsl(0, 0%, 27%);
+}
+
+.Notification p span {
+  color: #777777 !important;
+}
+
+.Notification small {
+  text-align: left;
+  color: #777777;
+  font-style: italic;
 }

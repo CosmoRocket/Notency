@@ -24,7 +24,7 @@ export default function Notification({
             {`${responses}/${recipients}`}
           </small>
         </div>
-        <p className="m-0 font-weight-bold">{subject}</p>
+        <p className="m-0 font-weight-bold"><Icon className="text-success mr-2" name="bell" />{subject}</p>
       </Link>
     </div>
   )
