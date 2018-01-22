@@ -23,7 +23,6 @@ class HomePage extends Component {
     const channel = pusher.subscribe('notency-channel')
     channel.bind('notency-receive-response', data => {
       loadAppData()
-      alert(data.message)
     })
   }
 
