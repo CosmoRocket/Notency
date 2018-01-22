@@ -1,0 +1,21 @@
+.NonResponder {
+  text-align: center;
+  border-left: solid 1px lightgray;
+  border-right: solid 1px lightgray;
+}
+
+.NonResponder p {
+  font-weight: bold;
+}
+
+.NonResponder small {
+  display: block;
+}
+
+.NonResponder:nth-child(even) {
+  background: rgb(225, 238, 248);
+}
+
+.NonResponder:nth-child(odd) {
+  background: rgb(246, 246, 248);
+}

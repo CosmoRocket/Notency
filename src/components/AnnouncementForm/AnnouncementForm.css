@@ -12,7 +12,7 @@
   width: 16px;
   height: 16px;
 
-  border: 2px solid #999;
+  border: 2px solid #0090D3;
   transition: 0.2s all linear;
   outline: none;
   margin-right: 5px;
@@ -22,7 +22,11 @@
 }
 
 .radioMenu input:checked {
-  border: 8px solid rgb(107, 107, 107);
+  border: 8px solid #0090D3;
+}
+
+.recipientTally {
+  text-align: left;
 }
 
 .editorSection {
@@ -53,4 +57,8 @@
 
 .sendButton:hover {
   background: rgb(74, 87, 189);
+}
+
+.Select-control {
+  text-align: left;
 }
