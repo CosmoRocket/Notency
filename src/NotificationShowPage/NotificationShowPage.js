@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 import moment from 'moment'
 import { groupBy, reject } from 'ramda'
 import capitalize from 'lodash/capitalize'
-import messageParser from '../MessageParser'
+import messageParser from './message-parser'
 import isEmpty from 'lodash/isEmpty'
 
 class NotificationShowPage extends Component {
@@ -30,9 +30,9 @@ class NotificationShowPage extends Component {
     if (
       !!this.state.currentNotification &&
       prevState.currentNotification.responses !==
-      this.state.currentNotification.responses &&
+        this.state.currentNotification.responses &&
       prevState.currentNotification.recipients !==
-      this.state.currentNotification.recipients
+        this.state.currentNotification.recipients
     ) {
       this.sortOkOrNot()
       this.sortNonResponders()
@@ -83,7 +83,7 @@ class NotificationShowPage extends Component {
             contactNumber={response.sender.mobile}
             recipientName={`${response.sender.firstName} ${
               response.sender.lastName
-              }`}
+            }`}
             messageBody={response.body}
           />
         )
@@ -96,7 +96,7 @@ class NotificationShowPage extends Component {
             contactNumber={response.sender.mobile}
             recipientName={`${response.sender.firstName} ${
               response.sender.lastName
-              }`}
+            }`}
             messageBody={response.body}
           />
         )
@@ -122,8 +122,8 @@ class NotificationShowPage extends Component {
           {isEmpty(groupElements) ? (
             <div>Sent to All</div>
           ) : (
-              <div>Groups Sent To: {groupElements}</div>
-            )}
+            <div>Groups Sent To: {groupElements}</div>
+          )}
 
           <h2 className="text-center">{currentNotification.subject}</h2>
           <p>{currentNotification.body}</p>
@@ -155,7 +155,7 @@ class NotificationShowPage extends Component {
                   <p className="m-0">
                     {!!nonRespondingRecipients &&
                       nonRespondingRecipients.length}/{!!currentNotification.recipients &&
-                        currentNotification.recipients.length}
+                      currentNotification.recipients.length}
                   </p>
                 </div>
               )

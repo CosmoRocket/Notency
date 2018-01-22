@@ -36,7 +36,10 @@ class HomePage extends Component {
       showButtonText
     } = this.props
 
-    if (activeTab === 0 && !isEmpty(notifications) || activeTab === 1 && !isEmpty(announcements)) {
+    if (
+      (activeTab === 0 && !isEmpty(notifications)) ||
+      (activeTab === 1 && !isEmpty(announcements))
+    ) {
       const notificationsList = notifications.map(notification => {
         return (
           <Notification
@@ -67,13 +70,13 @@ class HomePage extends Component {
               New Notification
             </Link>
           ) : (
-              <Link
-                to="/new_announcement"
-                className="btn btn-danger text-uppercase font-weight-bold my-2"
-              >
-                New Announcement
+            <Link
+              to="/new_announcement"
+              className="btn btn-danger text-uppercase font-weight-bold my-2"
+            >
+              New Announcement
             </Link>
-            )}
+          )}
 
           {activeTab === 0 ? notificationsList : announcementsList}
           {/* Show All Button */}
