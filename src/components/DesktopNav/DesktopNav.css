@@ -3,6 +3,10 @@
   flex: 0 0 auto;
 }
 
+DesktopNav span {
+  color: rgb(101, 190, 228);
+}
+
 .logo {
   width: 100%;
 }
