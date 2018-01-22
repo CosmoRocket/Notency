@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 import moment from 'moment'
 import { groupBy, reject } from 'ramda'
 import capitalize from 'lodash/capitalize'
-import messageParser from './message-parser'
+import messageParser from '../MessageParser/message-parser'
 import isEmpty from 'lodash/isEmpty'
 
 class NotificationShowPage extends Component {
