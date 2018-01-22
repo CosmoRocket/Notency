@@ -6,10 +6,18 @@ import Announcement from '../components/Announcement'
 import { Link } from 'react-router-dom'
 import Button from '../components/Button'
 import isEmpty from 'lodash/isEmpty'
+import { groupBy, reject } from 'ramda'
+import messageParser from '../MessageParser/message-parser'
 
 class HomePage extends Component {
   componentDidMount() {
     this.props.loadAppData()
+  }
+
+  okResponses = (responses) => {
+    return responses.filter(response => {
+      return messageParser.isOkMessage(response.body) === true
+    }).length
   }
 
   render() {
@@ -19,7 +27,8 @@ class HomePage extends Component {
       handleChangeActiveTab,
       handleLoadMore,
       activeTab,
-      showButtonText
+      showButtonText,
+      sortOkOrNot
     } = this.props
 
     const notificationsList = notifications.map(notification => {
@@ -27,7 +36,7 @@ class HomePage extends Component {
         <Notification
           {...notification}
           key={notification._id}
-          responses="10/60"
+          responses={`${this.okResponses(notification.responses)}/${notification.recipients.length}`}
         />
       )
     })
