@@ -12,6 +12,7 @@
     "jwt-decode": "^2.2.0",
     "lodash": "^4.17.4",
     "moment": "^2.20.1",
+    "pusher-js": "^4.2.2",
     "ramda": "^0.25.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
