@@ -6,7 +6,7 @@ import moment from 'moment'
 import { groupBy, reject } from 'ramda'
 import capitalize from 'lodash/capitalize'
 import messageParser from './message-parser'
-
+import NonResponder from '../components/NonResponder'
 class NotificationShowPage extends Component {
   state = {
     currentNotification: {},
@@ -100,9 +100,10 @@ class NotificationShowPage extends Component {
       })
       const nonRespondingRecipients = nonResponders.map(nonResponder => {
         return (
-          <nonResponder
+          <NonResponder
             idNo={nonResponder.idNo}
-            contactNumber={nonResponder.mobile}
+            mobile={nonResponder.mobile}
+            email={nonResponder.email}
             nonResponderName={`${nonResponder.firstName} ${
               nonResponder.lastName
             }`}

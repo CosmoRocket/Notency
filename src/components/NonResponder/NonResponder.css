@@ -1,5 +1,19 @@
+.nonResponder {
+  text-align: center;
+  border-left: solid 1px lightgray;
+  border-right: solid 1px lightgray;
+}
+
 .nonResponder p {
   font-weight: bold;
+}
+
+.nonResponder small {
+  display: block;
+}
+
+.nonResponder:nth-child(even) {
+  background: #fdefd5;
 }
 
 .nonResponder:nth-child(odd) {
