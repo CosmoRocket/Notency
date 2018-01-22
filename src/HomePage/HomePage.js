@@ -9,6 +9,7 @@ import isEmpty from 'lodash/isEmpty'
 import Pusher from 'pusher-js'
 import { groupBy, reject } from 'ramda'
 import messageParser from '../MessageParser/message-parser'
+import { Icon } from 'react-fa'
 
 class HomePage extends Component {
   componentDidMount() {
@@ -65,8 +66,8 @@ class HomePage extends Component {
         <TabbedNav
           activeTab={activeTab}
           tabs={[
-            () => <p className="m-0">Emergency Notifications</p>,
-            () => <p className="m-0">General Announcements</p>
+            () => <p className="m-0"><Icon name="bell"/> Emergency Notifications</p>,
+            () => <p className="m-0"><Icon name="bullhorn"/> General Announcements</p>
           ]}
           handleChangeActiveTab={handleChangeActiveTab}
         />

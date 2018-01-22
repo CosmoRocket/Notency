@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Fragment, Component } from 'react'
 import {
   BrowserRouter as Router,
   Switch,
@@ -183,98 +183,107 @@ class App extends Component {
 
     return (
       <Router>
-        <Container>
-          <Switch>
-            {/* Login */}
-            <Route
-              path="/login"
-              exact
-              render={() =>
-                userData ? (
-                  <Redirect to="/" />
-                ) : (
-                    <LoginPage onSignIn={this.onSignIn} />
-                  )
-              }
-            />
-            <Route path="/logout" render={() => <Redirect to="/login" />} />
-            <ContentContainer onSignOut={this.onSignOut}>
+        <Fragment>
+          <div className="headerBar">
+            <h2>NOTENCY</h2>
+            <div>
+              <h6>Reset Account</h6>
+              <h6>Submit Issue</h6>
+            </div>
+          </div>
+          <Container>
+            <Switch>
+              {/* Login */}
               <Route
-                path="/"
+                path="/login"
                 exact
-                render={requireAuth(() => (
-                  <HomePage
-                    loadAppData={this.load}
-                    activeTab={activeTab}
-                    notifications={notifications}
-                    announcements={announcements}
-                    handleChangeActiveTab={this.handleChangeActiveTab}
-                    handleLoadMore={this.handleLoadMore}
-                    showButtonText={showButtonText}
-                  />
-                ))}
+                render={() =>
+                  userData ? (
+                    <Redirect to="/" />
+                  ) : (
+                      <LoginPage onSignIn={this.onSignIn} />
+                    )
+                }
               />
-              <Route
-                path="/new_notification"
-                exact
-                render={requireAuth(() => (
-                  <CreateNotificationPage
-                    recipients={recipients}
-                    handleCreateNotification={this.handleCreateNotification}
-                  />
-                ))}
-              />
-              <Route
-                path="/new_announcement"
-                exact
-                render={requireAuth(() => (
-                  <CreateAnnouncementPage
-                    recipients={recipients}
-                    handleCreateAnnouncement={this.handleCreateAnnouncement}
-                  />
-                ))}
-              />
-              <Route
-                path="/notifications/:id"
-                exact
-                render={requireAuth(
-                  withRouter(props => (
-                    <NotificationShowPage
-                      {...props}
+              <Route path="/logout" render={() => <Redirect to="/login" />} />
+              <ContentContainer onSignOut={this.onSignOut}>
+                <Route
+                  path="/"
+                  exact
+                  render={requireAuth(() => (
+                    <HomePage
+                      loadAppData={this.load}
+                      activeTab={activeTab}
                       notifications={notifications}
-                    />
-                  ))
-                )}
-              />
-              <Route
-                path="/announcements/:id"
-                exact
-                render={requireAuth(
-                  withRouter(props => (
-                    <AnnouncementShowPage
-                      {...props}
                       announcements={announcements}
+                      handleChangeActiveTab={this.handleChangeActiveTab}
+                      handleLoadMore={this.handleLoadMore}
+                      showButtonText={showButtonText}
                     />
-                  ))
-                )}
-              />
+                  ))}
+                />
+                <Route
+                  path="/new_notification"
+                  exact
+                  render={requireAuth(() => (
+                    <CreateNotificationPage
+                      recipients={recipients}
+                      handleCreateNotification={this.handleCreateNotification}
+                    />
+                  ))}
+                />
+                <Route
+                  path="/new_announcement"
+                  exact
+                  render={requireAuth(() => (
+                    <CreateAnnouncementPage
+                      recipients={recipients}
+                      handleCreateAnnouncement={this.handleCreateAnnouncement}
+                    />
+                  ))}
+                />
+                <Route
+                  path="/notifications/:id"
+                  exact
+                  render={requireAuth(
+                    withRouter(props => (
+                      <NotificationShowPage
+                        {...props}
+                        notifications={notifications}
+                      />
+                    ))
+                  )}
+                />
+                <Route
+                  path="/announcements/:id"
+                  exact
+                  render={requireAuth(
+                    withRouter(props => (
+                      <AnnouncementShowPage
+                        {...props}
+                        announcements={announcements}
+                      />
+                    ))
+                  )}
+                />
+                <Route
+                  path="/update_contacts"
+                  exact
+                  render={requireAuth(
+                    withRouter(props => <ContactsPage onUpload={this.onUpload} />)
+                  )}
+                />
+              </ContentContainer>
               <Route
-                path="/update_contacts"
-                exact
-                render={requireAuth(
-                  withRouter(props => <ContactsPage onUpload={this.onUpload} />)
+                render={({ location }) => (
+                  <h2 className="text-center text-danger">
+                    Page not found: {location.pathname}
+                  </h2>
                 )}
               />
-            </ContentContainer>
-            <Route
-              render={({ location }) => (
-                <h2 className="text-center text-danger">
-                  Page not found: {location.pathname}
-                </h2>
-              )}
-            />
-          </Switch>
-        </Container>
+            </Switch>
+          </Container>
+        </Fragment>
       </Router>
     )
   }

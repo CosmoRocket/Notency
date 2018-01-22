@@ -1,5 +1,13 @@
+.recipientUploadForm {
+  text-align: left;
+}
+
 .btn-contacts {
-  width: 180px;
+  width: 160px;
   text-transform: uppercase;
   font-weight: bold;
+}
+
+.file-name {
+  vertical-align: text-bottom;
 }

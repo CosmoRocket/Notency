@@ -7,6 +7,7 @@ import { groupBy, reject } from 'ramda'
 import capitalize from 'lodash/capitalize'
 import messageParser from '../MessageParser/message-parser'
 import isEmpty from 'lodash/isEmpty'
+import NonResponder from '../components/NonResponder'
 
 class NotificationShowPage extends Component {
   state = {
@@ -102,7 +103,17 @@ class NotificationShowPage extends Component {
         )
       })
       const nonRespondingRecipients = nonResponders.map(nonResponder => {
-        return <div key={nonResponder._id}>{nonResponder.idNo}</div>
+        return (
+          <NonResponder
+            key={nonResponder._id}
+            idNo={nonResponder.idNo}
+            mobile={nonResponder.mobile}
+            email={nonResponder.email}
+            nonResponderName={`${nonResponder.firstName} ${
+              nonResponder.lastName
+            }`}
+          />
+        )
       })
       const categories = groupBy(group => group.name)(
         currentNotification.groups
