@@ -29,6 +29,10 @@
   margin-top: 14px;
 }
 
+.headerBar h6 a {
+  color: #fff;
+}
+
 .nav-link {
   font-size: 1.1em;
   color: rgb(0, 93, 133);

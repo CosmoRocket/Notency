@@ -23,7 +23,7 @@
   padding-left: 5px;
 }
 
-.Notification p span {
+.Notification span {
   color: #777777 !important;
 }
 
@@ -39,7 +39,7 @@
   padding-left: 5px;
 }
 
-.Notification:hover p span {
+.Notification:hover div span {
   color: #fff !important;
 }
 
@@ -53,4 +53,12 @@
 
 .Notification:hover small span {
   color: #fff !important;
+}
+
+.responsesBlock {
+  margin-right: 12px;
+}
+
+.responsesBlock p span {
+  color: green !important;
 }
