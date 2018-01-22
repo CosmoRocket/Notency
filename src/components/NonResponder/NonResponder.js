@@ -8,7 +8,7 @@ export default function NonResponder({
   email
 }) {
   return (
-    <div className="nonResponder py-1">
+    <div className="NonResponder py-1">
       <div>
         <p className="m-0">{nonResponderName}</p>
         <small>ID: {idNo}</small>

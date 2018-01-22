@@ -1,4 +1,51 @@
 .Announcement {
   cursor: pointer;
-  border-bottom: 1px solid #bdbdbd;
+  border-left: 1px solid lightgray;
+  border-right: 1px solid lightgray;
+}
+
+.Announcement:nth-child(even) {
+  background: rgb(225, 238, 248);
+}
+
+.Announcement:nth-child(odd) {
+  background: rgb(246, 246, 248);
+}
+
+.Announcement a {
+  text-decoration: none;
+}
+
+.Announcement p {
+  color: #333333;
+}
+
+.Announcement small {
+  color: #777777 !important;
+}
+
+.Announcement p span {
+  color: #777777 !important;
+}
+
+.Announcement:hover {
+  transition: 0.2s;
+  background: #0090D3;
+  color: white;
+}
+
+.Announcement:hover p span {
+  color: #fff !important;
+}
+
+.Announcement:hover p {
+  color: #fff !important
+}
+
+.Announcement:hover small {
+  color: #fff !important;
+}
+
+.Announcement:hover small span {
+  color: #fff !important;
 }

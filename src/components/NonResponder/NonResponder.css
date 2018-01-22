@@ -1,21 +1,21 @@
-.nonResponder {
+.NonResponder {
   text-align: center;
   border-left: solid 1px lightgray;
   border-right: solid 1px lightgray;
 }
 
-.nonResponder p {
+.NonResponder p {
   font-weight: bold;
 }
 
-.nonResponder small {
+.NonResponder small {
   display: block;
 }
 
-.nonResponder:nth-child(even) {
-  background: #fdefd5;
+.NonResponder:nth-child(even) {
+  background: rgb(225, 238, 248);
 }
 
-.nonResponder:nth-child(odd) {
-  background: rgb(55, 55, 184)
+.NonResponder:nth-child(odd) {
+  background: rgb(246, 246, 248);
 }
