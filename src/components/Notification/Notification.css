@@ -39,7 +39,7 @@
   padding-left: 5px;
 }
 
-.Notification:hover div span {
+.Notification:hover p span {
   color: #fff !important;
 }
 
