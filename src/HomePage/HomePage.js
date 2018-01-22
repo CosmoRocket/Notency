@@ -6,10 +6,25 @@ import Announcement from '../components/Announcement'
 import { Link } from 'react-router-dom'
 import Button from '../components/Button'
 import isEmpty from 'lodash/isEmpty'
+import Pusher from 'pusher-js'
 
 class HomePage extends Component {
   componentDidMount() {
-    this.props.loadAppData()
+    const { loadAppData } = this.props
+
+    loadAppData()
+
+    Pusher.logToConsole = true
+    const pusher = new Pusher('5c395da69c6cefb9c67d', {
+      cluster: 'ap1',
+      encrypted: true
+    })
+
+    const channel = pusher.subscribe('notency-channel')
+    channel.bind('notency-receive-response', data => {
+      loadAppData()
+      alert(data.message)
+    })
   }
 
   render() {
