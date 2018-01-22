@@ -7,6 +7,8 @@ import { Link } from 'react-router-dom'
 import Button from '../components/Button'
 import isEmpty from 'lodash/isEmpty'
 import Pusher from 'pusher-js'
+import { groupBy, reject } from 'ramda'
+import messageParser from '../MessageParser/message-parser'
 
 class HomePage extends Component {
   componentDidMount() {
@@ -26,6 +28,12 @@ class HomePage extends Component {
     })
   }
 
+  okResponses = responses => {
+    return responses.filter(response => {
+      return messageParser.isOkMessage(response.body) === true
+    }).length
+  }
+
   render() {
     const {
       notifications,
@@ -33,66 +41,67 @@ class HomePage extends Component {
       handleChangeActiveTab,
       handleLoadMore,
       activeTab,
-      showButtonText
+      showButtonText,
+      sortOkOrNot
     } = this.props
 
-    if (
-      (activeTab === 0 && !isEmpty(notifications)) ||
-      (activeTab === 1 && !isEmpty(announcements))
-    ) {
-      const notificationsList = notifications.map(notification => {
-        return (
-          <Notification
-            {...notification}
-            key={notification._id}
-            responses="10/60"
-          />
-        )
-      })
-      const announcementsList = announcements.map(announcement => {
-        return <Announcement {...announcement} key={announcement._id} />
-      })
+    const notificationsList = notifications.map(notification => {
       return (
-        <Fragment>
-          <TabbedNav
-            activeTab={activeTab}
-            tabs={[
-              () => <p className="m-0">Emergency Notifications</p>,
-              () => <p className="m-0">General Announcements</p>
-            ]}
-            handleChangeActiveTab={handleChangeActiveTab}
-          />
-          {activeTab === 0 ? (
-            <Link
-              to="/new_notification"
-              className="btn btn-danger text-uppercase font-weight-bold my-2"
-            >
-              New Notification
-            </Link>
-          ) : (
-            <Link
-              to="/new_announcement"
-              className="btn btn-danger text-uppercase font-weight-bold my-2"
-            >
-              New Announcement
-            </Link>
-          )}
-
-          {activeTab === 0 ? notificationsList : announcementsList}
-          {/* Show All Button */}
-          <div className="showAllButton">
-            <Button
-              onClick={() => {
-                handleLoadMore(activeTab)
-              }}
-              text={showButtonText}
-            />
-          </div>
-        </Fragment>
+        <Notification
+          {...notification}
+          key={notification._id}
+          responses={`${this.okResponses(notification.responses)}/${
+            notification.recipients.length
+          }`}
+        />
       )
-    } else {
-      return <div>Loading notifications and announcements...</div>
-    }
+    })
+    const announcementsList = announcements.map(announcement => {
+      return <Announcement {...announcement} key={announcement._id} />
+    })
+
+    return (
+      <Fragment>
+        <TabbedNav
+          activeTab={activeTab}
+          tabs={[
+            () => <p className="m-0">Emergency Notifications</p>,
+            () => <p className="m-0">General Announcements</p>
+          ]}
+          handleChangeActiveTab={handleChangeActiveTab}
+        />
+        {activeTab === 0 ? (
+          <Link
+            to="/new_notification"
+            className="btn btn-danger text-uppercase font-weight-bold my-2"
+          >
+            New Notification
+          </Link>
+        ) : (
+          <Link
+            to="/new_announcement"
+            className="btn btn-danger text-uppercase font-weight-bold my-2"
+          >
+            New Announcement
+          </Link>
+        )}
+        {!isEmpty(notifications) || !isEmpty(announcements) ? (
+          <Fragment>
+            {activeTab === 0 ? notificationsList : announcementsList}
+            <div className="showAllButton">
+              <Button
+                onClick={() => {
+                  handleLoadMore(activeTab)
+                }}
+                text={showButtonText}
+              />
+            </div>
+          </Fragment>
+        ) : (
+          <div>Loading notifications and announcements...</div>
+        )}
+      </Fragment>
+    )
   }
 }
 
