@@ -4,6 +4,7 @@ textarea {
 
 .char-length {
   margin-top: 1.05em;
+  background: #fff;
 }
 
 .char-limit-reached {

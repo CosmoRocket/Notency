@@ -75,11 +75,10 @@ class NotificationShowPage extends Component {
       nonResponders
     } = this.state
 
-    if (!isEmpty(currentNotification)) {
+    if (!!currentNotification) {
       const okResponses = ok.map(response => {
         return (
           <Message
-            key={response.sender._id}
             recipientId={response.sender._id}
             contactNumber={response.sender.mobile}
             recipientName={`${response.sender.firstName} ${
@@ -92,7 +91,6 @@ class NotificationShowPage extends Component {
       const notOkResponses = notOk.map(response => {
         return (
           <Message
-            key={response.sender._id}
             recipientId={response.sender._id}
             contactNumber={response.sender.mobile}
             recipientName={`${response.sender.firstName} ${
@@ -115,25 +113,27 @@ class NotificationShowPage extends Component {
           />
         )
       })
-      const categories = groupBy(group => group.name)(
-        currentNotification.groups
-      )
-      const groupElements = Object.keys(categories).map(category => (
-        <div key={category}>
-          {capitalize(category)}:{' '}
-          {categories[category].map(group => group.item).join(', ')}
-        </div>
-      ))
+      const categories =
+        currentNotification.groups &&
+        groupBy(group => group.name)(currentNotification.groups)
+      const groupElements =
+        currentNotification.groups &&
+        Object.keys(categories).map(category => (
+          <p>
+            {capitalize(category)}:{' '}
+            {categories[category].map(group => group.selected).join(', ')}
+          </p>
+        ))
 
       return (
         <Fragment>
           <p className="text-right">
             {moment(currentNotification.createdAt).format('D MMM YYYY')}
           </p>
-          {isEmpty(groupElements) ? (
-            <div>Sent to All</div>
+          {groupElements === '' ? (
+            <p>Groups Sent To: {groupElements}</p>
           ) : (
-            <div>Groups Sent To: {groupElements}</div>
+            <p>Sent to All</p>
           )}
 
           <h2 className="text-center">{currentNotification.subject}</h2>
