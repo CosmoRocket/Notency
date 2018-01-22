@@ -141,7 +141,7 @@ function AnnouncementForm({ recipients, handleCreateAnnouncement, history }) {
                   }}
                 />
               </div>
-              <div>Number of Recipients: {values.recipients.length}</div>
+              <div className='recipientTally'>Number of Recipients: {values.recipients.length}</div>
               {values.group === 'nationality' && (
                 <ReactSelect
                   name="nationality"
