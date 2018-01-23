@@ -63,7 +63,7 @@ class App extends Component {
     const saveError = error => {
       this.setState({ error })
     }
-    const { notifications, announcements, buttonState } = this.state
+    const { buttonState } = this.state
 
     if (activeTab === 0) {
       if (buttonState) {
