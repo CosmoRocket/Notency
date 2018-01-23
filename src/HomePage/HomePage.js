@@ -10,6 +10,7 @@ import Pusher from 'pusher-js'
 import { groupBy, reject } from 'ramda'
 import messageParser from '../MessageParser/message-parser'
 import { Icon } from 'react-fa'
+import ReactTooltip from 'react-tooltip'
 
 class HomePage extends Component {
   componentDidMount() {
@@ -35,6 +36,22 @@ class HomePage extends Component {
     }).length
   }
 
+  sortResponses = responses => {
+    return groupBy(response => {
+      return messageParser.isOkMessage(response.body) === true ? 'ok' : 'notOk'
+    })
+  }
+
+  notOkResponses = responses => {
+    return responses.filter(response => {
+      return messageParser.isOkMessage(response.body) === false
+    }).length
+  }
+
+  notResponded = responses => {
+    return responses - this.okResponses(responses) - this.notOkResponses(responses)
+  }
+
   render() {
     const {
       notifications,
@@ -42,19 +59,29 @@ class HomePage extends Component {
       handleChangeActiveTab,
       handleLoadMore,
       activeTab,
-      showButtonText,
-      sortOkOrNot
+      showButtonText
     } = this.props
 
     const notificationsList = notifications.map(notification => {
       return (
-        <Notification
-          {...notification}
-          key={notification._id}
-          responses={`${this.okResponses(notification.responses)}/${
-            notification.recipients.length
-          }`}
-        />
+        <Fragment>
+          <Notification
+            {...notification}
+            key={notification._id}
+            responses={`${notification.responses.length / notification.recipients.length * 100}% responded`}
+          />
+          <ReactTooltip id='notification' place="left" type="light" effect="solid">
+            <Icon className="text-success mr-2" name="check">
+              {` ${this.okResponses(notification.responses)}/${notification.recipients.length}`}
+            </Icon>
+            <Icon className="text-danger mr-2" name="times">
+              {` ${this.notOkResponses(notification.responses)}/${notification.recipients.length}`}
+            </Icon>
+            <Icon className="text-dark mr-2" name="question">
+              {` ${this.notResponded(notification.responses)}/${notification.recipients.length}`}
+            </Icon>
+          </ReactTooltip>
+        </Fragment>
       )
     })
     const announcementsList = announcements.map(announcement => {
@@ -66,8 +93,8 @@ class HomePage extends Component {
         <TabbedNav
           activeTab={activeTab}
           tabs={[
-            () => <p className="m-0"><Icon name="bell"/> Emergency Notifications</p>,
-            () => <p className="m-0"><Icon name="bullhorn"/> General Announcements</p>
+            () => <p className="m-0"><Icon name="bell" /> Emergency Notifications</p>,
+            () => <p className="m-0"><Icon name="bullhorn" /> General Announcements</p>
           ]}
           handleChangeActiveTab={handleChangeActiveTab}
         />
@@ -79,13 +106,13 @@ class HomePage extends Component {
             New Notification
           </Link>
         ) : (
-          <Link
-            to="/new_announcement"
-            className="btn btn-danger text-uppercase font-weight-bold my-2"
-          >
-            New Announcement
+            <Link
+              to="/new_announcement"
+              className="btn btn-danger text-uppercase font-weight-bold my-2"
+            >
+              New Announcement
           </Link>
-        )}
+          )}
         {!isEmpty(notifications) || !isEmpty(announcements) ? (
           <Fragment>
             {activeTab === 0 ? notificationsList : announcementsList}
@@ -99,8 +126,8 @@ class HomePage extends Component {
             </div>
           </Fragment>
         ) : (
-          <div>Loading notifications and announcements...</div>
-        )}
+            <div>Loading notifications and announcements...</div>
+          )}
       </Fragment>
     )
   }

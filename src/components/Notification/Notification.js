@@ -18,8 +18,8 @@ export default function Notification({
           <small className="m-0">
             {moment(createdAt).format('D MMM YYYY')}
           </small>
-          <small>
-            <Icon className="text-success mr-2" name="mail-reply" />
+          <small data-tip data-for='notification' >
+            <Icon className="text-success mr-2" name="user" />
             {responses}
           </small>
         </div>

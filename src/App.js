@@ -39,7 +39,8 @@ class App extends Component {
     notifications: [],
     announcements: [],
     recipients: [],
-    showButtonText: 'Show All'
+    showButtonText: 'Show All',
+    buttonState: false
   }
 
   onSignIn = ({ username, password }) => {
@@ -66,41 +67,41 @@ class App extends Component {
     const saveError = error => {
       this.setState({ error })
     }
-    const { notifications, announcements } = this.state
+    const { notifications, announcements, buttonState } = this.state
 
     if (activeTab === 0) {
-      if (notifications.length > 5)
+      if (buttonState) {
+        this.setState({ showButtonText: 'Show All', buttonState: false })
         listSomeNotifications()
           .then(notifications => {
-            this.setState({
-              notifications,
-              showButtonText: 'Show All'
-            })
+            this.setState({ notifications })
           })
           .catch(saveError)
-      else
+      }
+      else {
+        this.setState({ showButtonText: 'Hide', buttonState: true })
         listNotifications()
           .then(notifications => {
-            this.setState({
-              notifications,
-              showButtonText: 'Hide'
-            })
+            this.setState({ notifications })
           })
           .catch(saveError)
-    }
-    else if (activeTab === 1) {
-      if (announcements.length > 5)
+      }
+    } else if (activeTab === 1) {
+      if (this.buttonState === true) {
+        this.setState({ showButtonText: 'Show All', buttonState: false })
         listSomeAnnouncements()
           .then(announcements => {
             this.setState({ announcements })
           })
           .catch(saveError)
-      else
+      } else {
+        this.setState({ showButtonText: 'Hide', buttonState: true })
         listAnnouncements()
           .then(announcements => {
             this.setState({ announcements })
           })
           .catch(saveError)
+      }
     }
   }
 
@@ -162,6 +163,11 @@ class App extends Component {
         this.setState({ recipients })
       })
       .catch(saveError)
+
+    this.setState({
+      showButtonText: 'Show All',
+      buttonState: false
+    })
   }
 
   componentDidMount() {
