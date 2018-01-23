@@ -4,11 +4,11 @@
   border-right: 1px solid lightgray;
 }
 
-.Notification:nth-of-type(2n-1) {
+.Notification:nth-of-type(even) {
   background: rgb(225, 238, 248);
 }
 
-.Notification:nth-of-type(2n) {
+.Notification:nth-of-type(odd) {
   background: rgb(246, 246, 248);
 }
 

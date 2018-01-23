@@ -61,7 +61,11 @@ class HomePage extends Component {
   }
 
   notResponded = (recipients, responses) => {
-    return recipients.length - this.okResponses(responses) - this.notOkResponses(responses)
+    return (
+      recipients.length -
+      this.okResponses(responses) -
+      this.notOkResponses(responses)
+    )
   }
 
   handleSearch = e => {
@@ -165,33 +169,49 @@ class HomePage extends Component {
           <Fragment>
             {activeTab === 0
               ? filteredNotifications.map(notification => {
-                return (
-                  <Fragment>
-                    <Notification
-                      {...notification}
-                      key={notification._id}
-                      responses={notification.responses.length / notification.recipients.length * 100}
-                    />
-                    <ReactTooltip id={notification._id} place="left" type="light" effect="solid">
-                      <Icon className="text-success mr-2" name="check">
-                        {` ${this.okResponses(notification.responses)}/${notification.recipients.length}`}
-                      </Icon>
-                      <Icon className="text-danger mr-2" name="times">
-                        {` ${this.notOkResponses(notification.responses)}/${notification.recipients.length}`}
-                      </Icon>
-                      <Icon className="text-dark mr-2" name="question">
-                        {` ${this.notResponded(notification.recipients, notification.responses)}/${notification.recipients.length}`}
-                      </Icon>
-                    </ReactTooltip>
-                  </Fragment>
-                )
-              })
+                  return (
+                    <Fragment>
+                      <Notification
+                        {...notification}
+                        key={notification._id}
+                        responses={
+                          notification.responses.length /
+                          notification.recipients.length *
+                          100
+                        }
+                      />
+                      <ReactTooltip
+                        id={notification._id}
+                        place="left"
+                        type="light"
+                        effect="solid"
+                      >
+                        <Icon className="text-success mr-2" name="check">
+                          {` ${this.okResponses(notification.responses)}/${
+                            notification.recipients.length
+                          }`}
+                        </Icon>
+                        <Icon className="text-danger mr-2" name="times">
+                          {` ${this.notOkResponses(notification.responses)}/${
+                            notification.recipients.length
+                          }`}
+                        </Icon>
+                        <Icon className="text-dark mr-2" name="question">
+                          {` ${this.notResponded(
+                            notification.recipients,
+                            notification.responses
+                          )}/${notification.recipients.length}`}
+                        </Icon>
+                      </ReactTooltip>
+                    </Fragment>
+                  )
+                })
               : filteredAnnouncements.map(announcement => {
-                return (
-                  <Announcement {...announcement} key={announcement._id} />
-                )
-              })}
-            <div className="showAllButton">
+                  return (
+                    <Announcement {...announcement} key={announcement._id} />
+                  )
+                })}
+            <div className="showAllButton text-center">
               <Button
                 onClick={() => {
                   handleLoadMore(activeTab)
@@ -201,8 +221,8 @@ class HomePage extends Component {
             </div>
           </Fragment>
         ) : (
-            <div>Loading notifications and announcements...</div>
-          )}
+          <div>Loading notifications and announcements...</div>
+        )}
       </Fragment>
     )
   }
