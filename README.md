@@ -301,8 +301,6 @@ yarn jest
 - moment
 - ramda
 
-## How our API works
-
 ## Issues
 
 ### Tracking SMS responses

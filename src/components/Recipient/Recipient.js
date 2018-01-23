@@ -9,17 +9,18 @@ const Recipient = ({ recipient }) => {
         {recipient.firstName} {recipient.lastName}
       </div>
       <div className="d-md-flex justify-content-between">
-        <p className="m-0 p-0">
-          <Icon name="user" /> {recipient.idNo}
-        </p>
-        <p className="m-0 p-0">
-          <a href={`tel:${recipient.mobile}`}>
-            <Icon name="mobile" /> {recipient.mobile}
-          </a>
-        </p>
-        <p className="m-0 p-0">
-          <Icon name="envelope" /> {recipient.email}
-        </p>
+        <div className="d-flex align-items-center">
+          <Icon name="user" className="recipient-icon text-center" />{' '}
+          <p className="m-0 p-0">{recipient.idNo}</p>
+        </div>
+        <div className="d-flex align-items-center">
+          <Icon name="mobile" className="mr-1 recipient-icon text-center" />
+          <a href={`tel:${recipient.mobile}`}>{recipient.mobile}</a>
+        </div>
+        <div className="d-flex align-items-center">
+          <Icon name="envelope" className="mr-1 recipient-icon text-center" />
+          <a href={`mailto:${recipient.email}`}>{recipient.email}</a>
+        </div>
       </div>
     </div>
   )

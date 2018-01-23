@@ -4,12 +4,11 @@
   border-right: 1px solid lightgray;
 }
 
-
-.Notification:nth-child(even) {
+.Notification:nth-of-type(2n-1) {
   background: rgb(225, 238, 248);
 }
 
-.Notification:nth-child(odd) {
+.Notification:nth-of-type(2n) {
   background: rgb(246, 246, 248);
 }
 
@@ -29,9 +28,10 @@
 
 .Notification:hover {
   transition: 0.2s;
-  background: #0090D3;
+  background: #0090d3;
   color: white;
 }
+
 .Notification small {
   text-align: left;
   color: #777777;
@@ -44,7 +44,7 @@
 }
 
 .Notification:hover p {
-  color: #fff !important
+  color: #fff !important;
 }
 
 .Notification:hover small {
