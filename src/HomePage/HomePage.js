@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom'
 import Button from '../components/Button'
 import isEmpty from 'lodash/isEmpty'
 import Pusher from 'pusher-js'
-import { groupBy, reject } from 'ramda'
+import { reject } from 'ramda'
 import messageParser from '../MessageParser/message-parser'
 import { Icon } from 'react-fa'
 
@@ -87,8 +87,7 @@ class HomePage extends Component {
       handleChangeActiveTab,
       handleLoadMore,
       activeTab,
-      showButtonText,
-      sortOkOrNot
+      showButtonText
     } = this.props
     const {
       searchNotifications,
