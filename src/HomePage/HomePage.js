@@ -51,12 +51,11 @@ class HomePage extends Component {
         <Notification
           {...notification}
           key={notification._id}
-          responses={`${this.okResponses(notification.responses)}/${
-            notification.recipients.length
-          }`}
-        />
-      )
-    })
+          responses={`${notification.responses.length / notification.recipients.length * 100}% responded`} 
+          />
+        )
+      })
+      // ${notification.recipients.length}
     const announcementsList = announcements.map(announcement => {
       return <Announcement {...announcement} key={announcement._id} />
     })

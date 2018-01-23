@@ -8,6 +8,7 @@ import capitalize from 'lodash/capitalize'
 import messageParser from '../MessageParser/message-parser'
 import isEmpty from 'lodash/isEmpty'
 import NonResponder from '../components/NonResponder'
+import PieChart from '../components/PieChart/PieChart'
 
 class NotificationShowPage extends Component {
   state = {
@@ -81,6 +82,7 @@ class NotificationShowPage extends Component {
           <Message
             recipientId={response.sender._id}
             contactNumber={response.sender.mobile}
+            contactEmail={response.sender.email}
             recipientName={`${response.sender.firstName} ${
               response.sender.lastName
             }`}
@@ -124,6 +126,39 @@ class NotificationShowPage extends Component {
             {categories[category].map(group => group.selected).join(', ')}
           </p>
         ))
+
+        const chartData = {
+          datasets: [{
+            data: [
+              ok.length,
+              notOk.length,
+              nonResponders.length
+            ],
+            backgroundColor: [
+              '#0090D3', // Green
+              'red', // Red
+              '#E2E2E2' // yellow
+            ]
+          }],
+          labels: [
+            "OK",
+            "Not OK",
+            "Has not Responded",
+          ]
+        }
+    
+        const chartOptions = {
+          responsive: true
+          // legend: {
+          //   position: 'bottom'
+          // }
+        }
+
+        const analyticsChart = 
+        <PieChart 
+          data={chartData} 
+          options={chartOptions}
+        />
 
       return (
         <Fragment>
@@ -169,12 +204,19 @@ class NotificationShowPage extends Component {
                       currentNotification.recipients.length}
                   </p>
                 </div>
+              ),
+              () => (
+                <div className="text-center">
+                  <p className="m-0">Analytics</p>
+                  <br/>
+                </div>
               )
             ]}
           />
           {activeTab === 0 && okResponses}
           {activeTab === 1 && notOkResponses}
           {activeTab === 2 && nonRespondingRecipients}
+          {activeTab === 3 && analyticsChart}
           <Link to="/">Back</Link>
         </Fragment>
       )
