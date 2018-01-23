@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import Input from '../components/Input'
 import LoginButton from '../components/LoginButton'
-import Checkbox from '../components/Checkbox'
 import './LoginPage.css'
 import logo from './embassy_english.png'
 
@@ -9,7 +8,7 @@ class LoginPage extends Component {
   state = { error: '' }
 
   render() {
-    const { onSignIn, passwordLink } = this.props
+    const { onSignIn } = this.props
     const { error } = this.state
 
     return (

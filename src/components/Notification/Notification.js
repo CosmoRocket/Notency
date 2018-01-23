@@ -11,6 +11,14 @@ export default function Notification({
   createdAt,
   responses
 }) {
+
+  const truncateBody = body => {
+    if (body.length < 60)
+      return body
+    else
+      return body.substring(0, 10) + '...'
+  }
+
   return (
     <div className="Notification py-1">
       <Link to={`/notifications/${_id}`}>
@@ -18,11 +26,11 @@ export default function Notification({
           <small className="m-0">
             {moment(createdAt).format('D MMM YYYY')}
           </small>
-          <small>
+          <small className="responseMessage">
             {responses}% Responded
           </small>
         </div>
-        <p className="m-0 font-weight-bold"><Icon name="bell"/> {subject}</p>
+        <p className="m-0 font-weight-bold"><Icon name="bell"/> {subject} <small>{truncateBody(body)}</small></p>
       </Link>
     </div>
   )
