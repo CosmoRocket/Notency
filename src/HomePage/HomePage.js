@@ -50,7 +50,7 @@ class HomePage extends Component {
 
   okResponses = responses => {
     return responses.filter(response => {
-      return messageParser.isOkMessage(response.body) === true
+      return messageParser.isOkMessage(response.body)
     }).length
   }
 
@@ -60,8 +60,8 @@ class HomePage extends Component {
     }).length
   }
 
-  notResponded = responses => {
-    return responses.length - this.okResponses(responses) - this.notOkResponses(responses)
+  notResponded = (recipients, responses) => {
+    return recipients.length - this.okResponses(responses) - this.notOkResponses(responses)
   }
 
   handleSearch = e => {
@@ -172,7 +172,7 @@ class HomePage extends Component {
                       key={notification._id}
                       responses={notification.responses.length / notification.recipients.length * 100}
                     />
-                    <ReactTooltip id='notificationTooltip' place="left" type="light" effect="solid">
+                    <ReactTooltip id={notification._id} place="left" type="light" effect="solid">
                       <Icon className="text-success mr-2" name="check">
                         {` ${this.okResponses(notification.responses)}/${notification.recipients.length}`}
                       </Icon>
@@ -180,7 +180,7 @@ class HomePage extends Component {
                         {` ${this.notOkResponses(notification.responses)}/${notification.recipients.length}`}
                       </Icon>
                       <Icon className="text-dark mr-2" name="question">
-                        {` ${this.notResponded(notification.responses)}/${notification.recipients.length}`}
+                        {` ${this.notResponded(notification.recipients, notification.responses)}/${notification.recipients.length}`}
                       </Icon>
                     </ReactTooltip>
                     <div></div>
