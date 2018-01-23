@@ -24,7 +24,7 @@ export default function TextArea({
         onBlur={onBlur}
         value={value}
       />
-      {errorMessage && <p className="error-message">{errorMessage}</p>}
+      {errorMessage && <div className="error-message">{errorMessage}</div>}
     </div>
   )
 }

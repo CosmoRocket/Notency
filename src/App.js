@@ -43,13 +43,9 @@ class App extends Component {
   }
 
   onSignIn = ({ username, password }) => {
-    signIn({ username, password })
-      .then(userData => {
-        this.setState({ userData })
-      })
-      .catch(error => {
-        this.setState({ error })
-      })
+    return signIn({ username, password }).then(userData => {
+      this.setState({ userData })
+    })
   }
 
   onSignOut = () => {
@@ -87,8 +83,7 @@ class App extends Component {
             })
           })
           .catch(saveError)
-    }
-    else if (activeTab === 1) {
+    } else if (activeTab === 1) {
       if (announcements.length > 5)
         listSomeAnnouncements()
           .then(announcements => {
@@ -201,8 +196,8 @@ class App extends Component {
                   userData ? (
                     <Redirect to="/" />
                   ) : (
-                      <LoginPage onSignIn={this.onSignIn} />
-                    )
+                    <LoginPage onSignIn={this.onSignIn} />
+                  )
                 }
               />
               <Route path="/logout" render={() => <Redirect to="/login" />} />
@@ -270,7 +265,12 @@ class App extends Component {
                   path="/update_contacts"
                   exact
                   render={requireAuth(
-                    withRouter(props => <ContactsPage onUpload={this.onUpload} />)
+                    withRouter(props => (
+                      <ContactsPage
+                        onUpload={this.onUpload}
+                        recipients={recipients}
+                      />
+                    ))
                   )}
                 />
               </ContentContainer>

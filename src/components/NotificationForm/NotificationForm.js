@@ -60,7 +60,22 @@ function NotificationForm({ recipients, handleCreateNotification, history }) {
               })
             })
             .catch(error => {
-              console.log('There was an error')
+              const errorMessage = error.response.data.error.errmsg
+              if (
+                errorMessage.includes(
+                  'E11000 duplicate key error index: notency.notifications.$code_1 dup key'
+                )
+              ) {
+                setErrors({
+                  form:
+                    'Code has already been used. Please enter a unique 3-digit code.'
+                })
+              } else {
+                setErrors({
+                  form:
+                    'An unexpected error occurred. Please contact IT for assistance.'
+                })
+              }
             })
         }}
         validationSchema={Yup.object().shape({
@@ -85,8 +100,9 @@ function NotificationForm({ recipients, handleCreateNotification, history }) {
               } else {
                 return groups.some(
                   group =>
-                    recipient[category] && recipient[category].toLowerCase() ===
-                    group.value.item.toLowerCase()
+                    recipient[category] &&
+                    recipient[category].toLowerCase() ===
+                      group.value.item.toLowerCase()
                 )
               }
             })
@@ -186,6 +202,10 @@ function NotificationForm({ recipients, handleCreateNotification, history }) {
                     'body',
                     `Reply with '${e.target.value} OK' if you are safe.`
                   )
+                  setFieldValue(
+                    'bodyHtml',
+                    `<p>Reply with '${e.target.value} OK' if you are safe.</p>`
+                  )
                 }}
                 onBlur={handleBlur}
                 errorMessage={errors.code && touched.code && errors.code}
@@ -220,6 +240,7 @@ function NotificationForm({ recipients, handleCreateNotification, history }) {
                 onBlur={handleBlur}
                 errorMessage={errors.body && touched.body && errors.body}
               />
+              <div className="text-danger">{errors.form && errors.form}</div>
               <div className="formActions">
                 <Link className="formBack" to="/">
                   Back
