@@ -107,7 +107,7 @@ class HomePage extends Component {
           <Notification
             {...notification}
             key={notification._id}
-            responses={`${notification.responses.length / notification.recipients.length * 100}% responded`}
+            responses={notification.responses.length / notification.recipients.length * 100}
           />
           <ReactTooltip id='notification' place="left" type="light" effect="solid">
             <Icon className="text-success mr-2" name="check">

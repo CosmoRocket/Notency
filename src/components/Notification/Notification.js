@@ -19,11 +19,10 @@ export default function Notification({
             {moment(createdAt).format('D MMM YYYY')}
           </small>
           <small data-tip data-for='notification' >
-            <Icon className="text-success mr-2" name="user" />
-            {responses}
+            {responses}% Responded
           </small>
         </div>
-        <p className="m-0 font-weight-bold"><Icon name="bell"/> {subject}</p>
+        <p className="m-0 font-weight-bold"><Icon name="bell" /> {subject}</p>
       </Link>
     </div>
   )
