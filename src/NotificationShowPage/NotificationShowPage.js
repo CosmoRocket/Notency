@@ -141,8 +141,8 @@ class NotificationShowPage extends Component {
             ]
           }],
           labels: [
-            "OK",
-            "Not OK",
+            "Responded with OK",
+            "Responded with Not OK",
             "Has not Responded",
           ]
         }
@@ -217,7 +217,7 @@ class NotificationShowPage extends Component {
           {activeTab === 1 && notOkResponses}
           {activeTab === 2 && nonRespondingRecipients}
           {activeTab === 3 && analyticsChart}
-          <Link to="/">Back</Link>
+          <Link className="btn btn-primary mt-4" to="/">Back</Link>
         </Fragment>
       )
     } else {

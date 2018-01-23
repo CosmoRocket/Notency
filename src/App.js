@@ -185,11 +185,6 @@ class App extends Component {
       <Router>
         <Fragment>
           <div className="headerBar">
-            <h2>NOTENCY</h2>
-            <div>
-              <h6>Reset Account</h6>
-              <h6>Submit Issue</h6>
-            </div>
           </div>
           <Container>
             <Switch>
