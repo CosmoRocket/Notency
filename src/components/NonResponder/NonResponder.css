@@ -4,20 +4,15 @@
   border-right: solid 1px lightgray;
 }
 
-.NonResponder p {
-  display: inline-flex;
-  justify-content: space-between;
-  /* font-weight: bold; */
-}
-
-.NonResponder small {
-  display: block;
-}
-
 .NonResponder:nth-child(even) {
   background: rgb(225, 238, 248);
 }
 
 .NonResponder:nth-child(odd) {
   background: rgb(246, 246, 248);
+}
+
+.NonResponder a {
+  text-decoration: underline;
+  color: #777777;
 }

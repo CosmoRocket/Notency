@@ -1,5 +1,6 @@
 import React from 'react'
 import './NonResponder.css'
+import { Icon } from 'react-fa'
 
 export default function NonResponder({
   idNo,
@@ -8,15 +9,24 @@ export default function NonResponder({
   email
 }) {
   return (
-    <div className="NonResponder py-1">
-      <div>
-        <p className="m-0">{nonResponderName}</p>
-        <small>ID: {idNo}</small>
-      </div>
-      <div className="d-flex justify-content-around">
-        <small>{mobile}</small>
-        <small>{email}</small>
-      </div>
+<div className="NonResponder p-2">
+  <div className="font-weight-bold ">
+    {nonResponderName}
+  </div>
+  <div className="d-md-flex justify-content-between">
+    <div className="d-flex align-items-center">
+      <Icon name="user" className="recipient-icon text-center" />{' '}
+      <p className="m-0 p-0">{idNo}</p>
     </div>
+    <div className="d-flex align-items-center">
+      <Icon name="mobile" className="mr-1 recipient-icon text-center" />
+      <a href={`tel:${mobile}`}>{mobile}</a>
+    </div>
+    <div className="d-flex align-items-center">
+      <Icon name="envelope" className="mr-1 recipient-icon text-center" />
+      <a href={`mailto:${email}`}>{email}</a>
+    </div>
+  </div>
+</div>
   )
 }
