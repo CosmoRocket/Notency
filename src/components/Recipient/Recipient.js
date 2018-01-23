@@ -13,7 +13,9 @@ const Recipient = ({ recipient }) => {
           <Icon name="user" /> {recipient.idNo}
         </p>
         <p className="m-0 p-0">
-          <Icon name="mobile" /> {recipient.mobile}
+          <a href={`tel:${recipient.mobile}`}>
+            <Icon name="mobile" /> {recipient.mobile}
+          </a>
         </p>
         <p className="m-0 p-0">
           <Icon name="envelope" /> {recipient.email}
