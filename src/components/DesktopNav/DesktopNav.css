@@ -3,10 +3,24 @@
   flex: 0 0 auto;
 }
 
+.DesktopNav ul li a {
+  color: rgb(65, 65, 187);
+}
+
 .DesktopNav span {
   color: rgb(101, 190, 228);
 }
 
 .logo {
   width: 100%;
+}
+
+.selected {
+  font-weight: bold;
+  color: #5969E2;
+  /* text-decoration: underline; */
+}
+
+.selected span {
+  color: #5969E2;
 }

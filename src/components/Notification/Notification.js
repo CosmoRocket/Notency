@@ -23,7 +23,7 @@ export default function Notification({
             {responses}
           </small>
         </div>
-        <p className="m-0 font-weight-bold">{subject}</p>
+        <p className="m-0 font-weight-bold"><Icon name="bell"/> {subject}</p>
       </Link>
     </div>
   )

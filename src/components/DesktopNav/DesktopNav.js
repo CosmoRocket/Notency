@@ -1,7 +1,7 @@
 import React from 'react'
 import pic from './embassy_english.png'
 import './DesktopNav.css'
-import { Link } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 import { Icon } from 'react-fa'
 
 const DesktopNav = ({ onSignOut }) => {
@@ -14,14 +14,24 @@ const DesktopNav = ({ onSignOut }) => {
           </Link>
         </li>
         <li className="nav-item">
-          <Link className="nav-link" to="/">
+          <NavLink 
+            exact={true}
+            className="nav-link"
+            activeClassName="selected"
+            to="/"
+          >
             <Icon name="home" /> Home
-          </Link>
+          </NavLink>
         </li>
         <li className="nav-item">
-          <Link className="nav-link" to="/update_contacts">
+          <NavLink 
+            exact={true}
+            className="nav-link" 
+            activeClassName="selected"
+            to="/update_contacts"
+          >
             <Icon name="upload" /> Update Contacts
-          </Link>
+          </NavLink>
         </li>
         <li className="nav-item">
           <Link className="nav-link" to="/logout" onClick={onSignOut}>

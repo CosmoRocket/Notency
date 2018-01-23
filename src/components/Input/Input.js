@@ -3,7 +3,8 @@ import './Input.css'
 import { Icon } from 'react-fa'
 
 export default function Input({
-  type,
+  className,
+  type = 'text',
   name,
   placeholder,
   iconName,
@@ -13,7 +14,7 @@ export default function Input({
   value
 }) {
   return (
-    <div className="Input">
+    <div className={`Input ${className}`}>
       <input
         type={type}
         value={value}
@@ -24,7 +25,7 @@ export default function Input({
         onBlur={onBlur}
       />
       {iconName ? <Icon name={iconName} className="icon" /> : null}
-      {errorMessage && <p className="error-message">{errorMessage}</p>}
+      {errorMessage && <div className="error-message">{errorMessage}</div>}
     </div>
   )
 }

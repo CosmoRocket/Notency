@@ -5,41 +5,24 @@
 }
 
 .headerBar {
-  height: 40px;
-  background: rgb(0, 0, 80);
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 50px;
+  background: #0090D3;
   color: white;
-  font-family: 'VT323', monospace; 
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12);
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
-}
-
-.headerBar {
-  display: none;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
   justify-content: space-between;
+  z-index: -1;
 }
 
-.headerBar div, h2, h6 {
-  display: inline-flex;
+.headerBar h2 {
   margin-left: 20px;
-  margin-top: 2px;
-}
-
-.headerBar h6 {
-  margin-right: 16px;
-  margin-top: 14px;
-}
-
-.headerBar h6 a {
-  color: #fff;
-}
-
-.nav-link {
-  font-size: 1.1em;
-  color: rgb(0, 93, 133);
 }
 
 @media (min-width: 576px) {
   .headerBar {
-    display: flex;
+    display: none;
   }
 }

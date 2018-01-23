@@ -44,13 +44,9 @@ class App extends Component {
   }
 
   onSignIn = ({ username, password }) => {
-    signIn({ username, password })
-      .then(userData => {
-        this.setState({ userData })
-      })
-      .catch(error => {
-        this.setState({ error })
-      })
+    return signIn({ username, password }).then(userData => {
+      this.setState({ userData })
+    })
   }
 
   onSignOut = () => {
@@ -87,7 +83,7 @@ class App extends Component {
           .catch(saveError)
       }
     } else if (activeTab === 1) {
-      if (this.buttonState === true) {
+      if (buttonState) {
         this.setState({ showButtonText: 'Show All', buttonState: false })
         listSomeAnnouncements()
           .then(announcements => {
@@ -191,11 +187,6 @@ class App extends Component {
       <Router>
         <Fragment>
           <div className="headerBar">
-            <h2>NOTENCY</h2>
-            <div>
-              <h6>Reset Account</h6>
-              <h6>Submit Issue</h6>
-            </div>
           </div>
           <Container>
             <Switch>
@@ -276,7 +267,12 @@ class App extends Component {
                   path="/update_contacts"
                   exact
                   render={requireAuth(
-                    withRouter(props => <ContactsPage onUpload={this.onUpload} />)
+                    withRouter(props => (
+                      <ContactsPage
+                        onUpload={this.onUpload}
+                        recipients={recipients}
+                      />
+                    ))
                   )}
                 />
               </ContentContainer>

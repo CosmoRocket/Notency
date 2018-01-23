@@ -1,11 +1,13 @@
 .NonResponder {
-  text-align: center;
+  text-align: left;
   border-left: solid 1px lightgray;
   border-right: solid 1px lightgray;
 }
 
 .NonResponder p {
-  font-weight: bold;
+  display: inline-flex;
+  justify-content: space-between;
+  /* font-weight: bold; */
 }
 
 .NonResponder small {

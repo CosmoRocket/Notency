@@ -1,6 +1,6 @@
 .Input {
   position: relative;
-  max-width: 100%;
+  width: 100%;
   margin: 10px auto;
 }
 
@@ -19,7 +19,7 @@
 
 .Input .icon {
   position: absolute;
-  top: 9px;
+  top: 11px;
   left: 10px;
 }
 

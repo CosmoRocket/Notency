@@ -13,6 +13,11 @@
   border-color: rgb(74, 87, 189);
 }
 
+.btn-danger:active {
+  background: rgb(74, 87, 189) !important;
+  border-color: rgb(74, 87, 189) !important;
+}
+
 .false {
   background: rgb(226, 226, 226);
 }

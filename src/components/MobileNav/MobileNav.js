@@ -7,24 +7,24 @@ export default function MobileNav({ onSignOut }) {
   return (
     <nav>
       <ul className="mobile-nav-list d-sm-none d-flex justify-content-between">
-        <li className="mobile-nav-item m-0 p-0 text-center">
+        <li className="MobileNav mobile-nav-item m-0 p-0 text-center">
           <Link to="/">
             <Icon size="2x" name="home" />
-            <p className="mobile-nav-item-text text-uppercase">Home</p>
+            {/* <p className="mobile-nav-item-text text-uppercase">Home</p> */}
           </Link>
         </li>
         <li className="mobile-nav-item m-0 p-0 text-center">
           <Link to="/update_contacts">
-            <Icon size="2x" name="upload" />
-            <p className="mobile-nav-item-text text-uppercase">
+            <Icon size="2x" name="cloud-upload" />
+            {/* <p className="mobile-nav-item-text text-uppercase">
               Update Contacts
-            </p>
+            </p> */}
           </Link>
         </li>
         <li className="mobile-nav-item m-0 p-0 text-center">
           <Link to="/logout" onClick={onSignOut}>
             <Icon size="2x" name="sign-out" />
-            <p className="mobile-nav-item-text text-uppercase">Logout</p>
+            {/* <p className="mobile-nav-item-text text-uppercase">Logout</p> */}
           </Link>
         </li>
       </ul>

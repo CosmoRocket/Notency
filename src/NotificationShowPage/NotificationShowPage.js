@@ -8,6 +8,7 @@ import capitalize from 'lodash/capitalize'
 import messageParser from '../MessageParser/message-parser'
 import isEmpty from 'lodash/isEmpty'
 import NonResponder from '../components/NonResponder'
+import PieChart from '../components/PieChart/PieChart'
 
 class NotificationShowPage extends Component {
   state = {
@@ -81,6 +82,7 @@ class NotificationShowPage extends Component {
           <Message
             recipientId={response.sender._id}
             contactNumber={response.sender.mobile}
+            contactEmail={response.sender.email}
             recipientName={`${response.sender.firstName} ${
               response.sender.lastName
             }`}
@@ -121,19 +123,52 @@ class NotificationShowPage extends Component {
         Object.keys(categories).map(category => (
           <p>
             {capitalize(category)}:{' '}
-            {categories[category].map(group => group.selected).join(', ')}
+            {categories[category].map(group => group.item).join(', ')}
           </p>
         ))
+
+        const chartData = {
+          datasets: [{
+            data: [
+              ok.length,
+              notOk.length,
+              nonResponders.length
+            ],
+            backgroundColor: [
+              '#0090D3', // Green
+              'red', // Red
+              '#E2E2E2' // yellow
+            ]
+          }],
+          labels: [
+            "Responded with OK",
+            "Responded with Not OK",
+            "Has not Responded",
+          ]
+        }
+    
+        const chartOptions = {
+          responsive: true
+          // legend: {
+          //   position: 'bottom'
+          // }
+        }
+
+        const analyticsChart = 
+        <PieChart 
+          data={chartData} 
+          options={chartOptions}
+        />
 
       return (
         <Fragment>
           <p className="text-right">
             {moment(currentNotification.createdAt).format('D MMM YYYY')}
           </p>
-          {groupElements === '' ? (
-            <p>Groups Sent To: {groupElements}</p>
+          {isEmpty(groupElements) ? (
+            <div>Sent to All</div>
           ) : (
-            <p>Sent to All</p>
+            <div>Groups Sent To: {groupElements}</div>
           )}
 
           <h2 className="text-center">{currentNotification.subject}</h2>
@@ -169,13 +204,20 @@ class NotificationShowPage extends Component {
                       currentNotification.recipients.length}
                   </p>
                 </div>
+              ),
+              () => (
+                <div className="text-center">
+                  <p className="m-0">Analytics</p>
+                  <br/>
+                </div>
               )
             ]}
           />
           {activeTab === 0 && okResponses}
           {activeTab === 1 && notOkResponses}
           {activeTab === 2 && nonRespondingRecipients}
-          <Link to="/">Back</Link>
+          {activeTab === 3 && analyticsChart}
+          <Link className="btn btn-primary mt-4" to="/">Back</Link>
         </Fragment>
       )
     } else {

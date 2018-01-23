@@ -40,7 +40,7 @@ class AnnouncementShowPage extends Component {
           {isEmpty(groupElements) ? (
             <div>Sent to All</div>
           ) : (
-            <div>Groups Sent To: {groupElements}</div>
+            <div>Sent to: {groupElements}</div>
           )}
           <h2 className="text-center">{currentAnnouncement.subject}</h2>
           <div
