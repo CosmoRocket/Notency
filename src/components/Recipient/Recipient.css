@@ -1,0 +1,63 @@
+.Recipient {
+  border-left: 1px solid lightgray;
+  border-right: 1px solid lightgray;
+}
+
+.Recipient:nth-child(even) {
+  background: rgb(225, 238, 248);
+}
+
+.Recipient:nth-child(odd) {
+  background: rgb(246, 246, 248);
+}
+
+.Recipient a {
+  text-decoration: none;
+}
+
+.Recipient p {
+  text-align: left;
+  color: hsl(0, 0%, 27%);
+  padding-left: 5px;
+}
+
+.Recipient span {
+  color: #777777 !important;
+}
+
+.Recipient:hover {
+  transition: 0.2s;
+  background: #0090d3;
+  color: white;
+}
+
+.Recipient small {
+  text-align: left;
+  color: #777777;
+  margin-right: 6px;
+  padding-left: 5px;
+}
+
+.Recipient:hover div span {
+  color: #fff !important;
+}
+
+.Recipient:hover p {
+  color: #fff !important;
+}
+
+.Recipient:hover small {
+  color: #fff !important;
+}
+
+.Recipient:hover small span {
+  color: #fff !important;
+}
+
+.responsesBlock {
+  margin-right: 12px;
+}
+
+.responsesBlock p span {
+  color: green !important;
+}

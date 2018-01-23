@@ -3,16 +3,12 @@
   padding: 20px 0 0 0;
 }
 
-.ContentContainer {
-  text-align: center;
-}
-
 @media (min-width: 576px) {
   .ContentContainer {
     padding: 20px;
     margin-top: 120px;
     background-color: #fff;
-    border-top: 16px solid #0090D3;
+    border-top: 16px solid #0090d3;
     border-top-right-radius: 1.5%;
     border-top-left-radius: 1.5%;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12);

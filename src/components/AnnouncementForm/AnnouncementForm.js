@@ -89,8 +89,9 @@ function AnnouncementForm({ recipients, handleCreateAnnouncement, history }) {
               } else {
                 return groups.some(
                   group =>
-                    recipient[category] && recipient[category].toLowerCase() ===
-                    group.value.item.toLowerCase()
+                    recipient[category] &&
+                    recipient[category].toLowerCase() ===
+                      group.value.item.toLowerCase()
                 )
               }
             })
@@ -141,7 +142,9 @@ function AnnouncementForm({ recipients, handleCreateAnnouncement, history }) {
                   }}
                 />
               </div>
-              <div className='recipientTally'>Number of Recipients: {values.recipients.length}</div>
+              <div className="recipientTally">
+                Number of Recipients: {values.recipients.length}
+              </div>
               {values.group === 'nationality' && (
                 <ReactSelect
                   name="nationality"
@@ -217,24 +220,37 @@ function AnnouncementForm({ recipients, handleCreateAnnouncement, history }) {
                   errors.subject && touched.subject && errors.subject
                 }
               />
-              <Editor
-                name="body"
-                wrapperClassName="editorSection"
-                editorClassName="wrapperSection"
-                onContentStateChange={contentState => {
-                  const htmlContent = draftToHtml(contentState)
-                  setFieldValue('body', htmlContent.replace(/<[^>]+>/g, ''))
-                  setFieldValue('bodyHtml', htmlContent)
-                }}
-                toolbar={{
-                  options: ['inline', 'blockType', 'fontSize', 'fontFamily']
-                }}
-              />
+              <div>
+                <Editor
+                  name="body"
+                  wrapperClassName={`editorSection ${errors.body &&
+                    touched.body &&
+                    'error'}`}
+                  editorClassName="wrapperSection"
+                  onContentStateChange={contentState => {
+                    const htmlContent = draftToHtml(contentState)
+                    setFieldValue(
+                      'body',
+                      htmlContent.replace(/<[^>]+>/g, '').trim()
+                    )
+                    setFieldValue('bodyHtml', htmlContent)
+                  }}
+                  toolbar={{
+                    options: ['inline', 'blockType', 'fontSize', 'fontFamily']
+                  }}
+                />
+                {errors.body && touched.body ? (
+                  <p className="error-message">{errors.body}</p>
+                ) : null}
+              </div>
               <FileUpload
                 name="attachment"
                 onChange={e => {
                   const fileName = e.target.value
-                  setFieldValue('attachmentFileName', fileName.slice(fileName.lastIndexOf('\\') + 1))
+                  setFieldValue(
+                    'attachmentFileName',
+                    fileName.slice(fileName.lastIndexOf('\\') + 1)
+                  )
                   setFieldValue('attachment', e.target.files[0])
                 }}
               />
