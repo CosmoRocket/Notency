@@ -183,6 +183,7 @@ class HomePage extends Component {
                         {` ${this.notResponded(notification.responses)}/${notification.recipients.length}`}
                       </Icon>
                     </ReactTooltip>
+                    <div></div>
                   </Fragment>
                 )
               })
