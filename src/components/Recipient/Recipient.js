@@ -8,16 +8,16 @@ const Recipient = ({ recipient }) => {
       <div className="font-weight-bold ">
         {recipient.firstName} {recipient.lastName}
       </div>
-      <div className="d-md-flex justify-content-between">
-        <div className="d-flex align-items-center">
+      <div className="row">
+        <div className="col-md-3 d-flex align-items-center">
           <Icon name="user" className="recipient-icon text-center" />{' '}
           <p className="m-0 p-0">{recipient.idNo}</p>
         </div>
-        <div className="d-flex align-items-center">
+        <div className="col-md-3 d-flex align-items-center">
           <Icon name="mobile" className="mr-1 recipient-icon text-center" />
           <a href={`tel:${recipient.mobile}`}>{recipient.mobile}</a>
         </div>
-        <div className="d-flex align-items-center">
+        <div className="col-md-6 d-flex align-items-center">
           <Icon name="envelope" className="mr-1 recipient-icon text-center" />
           <a href={`mailto:${recipient.email}`}>{recipient.email}</a>
         </div>

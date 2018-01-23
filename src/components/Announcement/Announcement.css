@@ -2,6 +2,7 @@
   cursor: pointer;
   border-left: 1px solid lightgray;
   border-right: 1px solid lightgray;
+  padding-left: 10px;
 }
 
 .Announcement:nth-child(even) {

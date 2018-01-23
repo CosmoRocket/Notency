@@ -225,7 +225,7 @@ function AnnouncementForm({ recipients, handleCreateAnnouncement, history }) {
                   name="body"
                   wrapperClassName={`editorSection ${errors.body &&
                     touched.body &&
-                    'error'}`}
+                    'error'} mb-4`}
                   editorClassName="wrapperSection"
                   onContentStateChange={contentState => {
                     const htmlContent = draftToHtml(contentState)

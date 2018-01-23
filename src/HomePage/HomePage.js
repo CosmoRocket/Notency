@@ -61,7 +61,11 @@ class HomePage extends Component {
   }
 
   notResponded = (recipients, responses) => {
-    return recipients.length - this.okResponses(responses) - this.notOkResponses(responses)
+    return (
+      recipients.length -
+      this.okResponses(responses) -
+      this.notOkResponses(responses)
+    )
   }
 
   handleSearch = e => {
@@ -188,11 +192,11 @@ class HomePage extends Component {
                 )
               })
               : filteredAnnouncements.map(announcement => {
-                return (
-                  <Announcement {...announcement} key={announcement._id} />
-                )
-              })}
-            <div className="showAllButton">
+                  return (
+                    <Announcement {...announcement} key={announcement._id} />
+                  )
+                })}
+            <div className="showAllButton text-center">
               <Button
                 onClick={() => {
                   handleLoadMore(activeTab)
@@ -202,8 +206,8 @@ class HomePage extends Component {
             </div>
           </Fragment>
         ) : (
-            <div>Loading notifications and announcements...</div>
-          )}
+          <div>Loading notifications and announcements...</div>
+        )}
       </Fragment>
     )
   }
