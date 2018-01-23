@@ -178,6 +178,12 @@ class NotificationShowPage extends Component {
             handleChangeActiveTab={this.handleChangeActiveTab}
             tabs={[
               () => (
+                <div className="text-center">
+                  <p className="m-0">Analytics</p>
+                  <br/>
+                </div>
+              ),
+              () => (
                 <div className="text-center text-success">
                   <p className="m-0">Positive</p>
                   <p className="m-0">
@@ -204,19 +210,13 @@ class NotificationShowPage extends Component {
                       currentNotification.recipients.length}
                   </p>
                 </div>
-              ),
-              () => (
-                <div className="text-center">
-                  <p className="m-0">Analytics</p>
-                  <br/>
-                </div>
               )
             ]}
           />
-          {activeTab === 0 && okResponses}
-          {activeTab === 1 && notOkResponses}
-          {activeTab === 2 && nonRespondingRecipients}
-          {activeTab === 3 && analyticsChart}
+          {activeTab === 0 && analyticsChart}
+          {activeTab === 1 && okResponses}
+          {activeTab === 2 && notOkResponses}
+          {activeTab === 3 && nonRespondingRecipients}
           <Link className="btn btn-primary mt-4" to="/">Back</Link>
         </Fragment>
       )
