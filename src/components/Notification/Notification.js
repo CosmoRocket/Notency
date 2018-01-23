@@ -18,7 +18,7 @@ export default function Notification({
           <small className="m-0">
             {moment(createdAt).format('D MMM YYYY')}
           </small>
-          <small data-tip data-for='notification' >
+          <small data-tip data-for='notificationTooltip' >
             {responses}% Responded
           </small>
         </div>

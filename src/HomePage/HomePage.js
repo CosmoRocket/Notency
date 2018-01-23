@@ -61,7 +61,7 @@ class HomePage extends Component {
   }
 
   notResponded = responses => {
-    return responses - this.okResponses(responses) - this.notOkResponses(responses)
+    return responses.length - this.okResponses(responses) - this.notOkResponses(responses)
   }
 
   handleSearch = e => {
@@ -100,32 +100,6 @@ class HomePage extends Component {
       activeTab,
       showButtonText
     } = this.props
-
-    const notificationsList = notifications.map(notification => {
-      return (
-        <Fragment>
-          <Notification
-            {...notification}
-            key={notification._id}
-            responses={notification.responses.length / notification.recipients.length * 100}
-          />
-          <ReactTooltip id='notification' place="left" type="light" effect="solid">
-            <Icon className="text-success mr-2" name="check">
-              {` ${this.okResponses(notification.responses)}/${notification.recipients.length}`}
-            </Icon>
-            <Icon className="text-danger mr-2" name="times">
-              {` ${this.notOkResponses(notification.responses)}/${notification.recipients.length}`}
-            </Icon>
-            <Icon className="text-dark mr-2" name="question">
-              {` ${this.notResponded(notification.responses)}/${notification.recipients.length}`}
-            </Icon>
-          </ReactTooltip>
-        </Fragment>
-      )
-    })
-    const announcementsList = announcements.map(announcement => {
-      return <Announcement {...announcement} key={announcement._id} />
-    })
     const {
       searchNotifications,
       searchAnnouncements,
@@ -192,13 +166,24 @@ class HomePage extends Component {
             {activeTab === 0
               ? filteredNotifications.map(notification => {
                 return (
-                  <Notification
-                    {...notification}
-                    key={notification._id}
-                    responses={`${this.okResponses(notification.responses)}/${
-                      notification.recipients.length
-                      }`}
-                  />
+                  <Fragment>
+                    <Notification
+                      {...notification}
+                      key={notification._id}
+                      responses={notification.responses.length / notification.recipients.length * 100}
+                    />
+                    <ReactTooltip id='notificationTooltip' place="left" type="light" effect="solid">
+                      <Icon className="text-success mr-2" name="check">
+                        {` ${this.okResponses(notification.responses)}/${notification.recipients.length}`}
+                      </Icon>
+                      <Icon className="text-danger mr-2" name="times">
+                        {` ${this.notOkResponses(notification.responses)}/${notification.recipients.length}`}
+                      </Icon>
+                      <Icon className="text-dark mr-2" name="question">
+                        {` ${this.notResponded(notification.responses)}/${notification.recipients.length}`}
+                      </Icon>
+                    </ReactTooltip>
+                  </Fragment>
                 )
               })
               : filteredAnnouncements.map(announcement => {
