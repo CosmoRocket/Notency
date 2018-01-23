@@ -17,7 +17,7 @@ export default function TabbedNav({ handleChangeActiveTab, activeTab, tabs }) {
   })
   return (
     <nav>
-      <ul className="nav nav-tabs d-flex">{navTabs}</ul>
+      <ul className="nav nav-tabs d-flex nav-fill">{navTabs}</ul>
     </nav>
   )
 }

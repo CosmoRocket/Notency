@@ -63,7 +63,7 @@ class ContactsPage extends React.Component {
           }
         }}
       >
-        <div className="text-center mb-3">
+        <div className="mb-3">
           <div className="d-md-flex justify-content-between">
             <FileUpload
               name="csvFile"

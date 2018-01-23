@@ -12,7 +12,8 @@
 }
 
 .Recipient a {
-  text-decoration: none;
+  text-decoration: underline;
+  color: #777777;
 }
 
 .Recipient p {
@@ -46,6 +47,10 @@
   color: #fff !important;
 }
 
+.Recipient:hover a {
+  color: #fff !important;
+}
+
 .Recipient:hover small {
   color: #fff !important;
 }
@@ -60,4 +65,8 @@
 
 .responsesBlock p span {
   color: green !important;
+}
+
+.recipient-icon {
+  width: 25px;
 }

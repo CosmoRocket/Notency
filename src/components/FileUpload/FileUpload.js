@@ -3,9 +3,12 @@ import './FileUpload.css'
 
 const FileUpload = ({ name, onChange, fileName }) => {
   return (
-    <div className="mt-2 d-sm-flex">
+    <div className="mb-3 mb-md-0 d-sm-flex align-items-center">
       <div>
-        <label htmlFor={name} className="btn btn-dark btn-file btn-contacts">
+        <label
+          htmlFor={name}
+          className="btn btn-dark btn-file btn-contacts m-0"
+        >
           Attachment
         </label>
         <input
@@ -16,7 +19,7 @@ const FileUpload = ({ name, onChange, fileName }) => {
           onChange={onChange}
         />
       </div>
-      <div className="ml-3 file-name">{fileName}</div>
+      <div className="ml-3">{fileName}</div>
     </div>
   )
 }

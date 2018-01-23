@@ -20,7 +20,7 @@ export default function Input({
         value={value}
         name={name}
         placeholder={placeholder}
-        className={`${iconName && 'pl-4'} ${errorMessage && 'error'}`}
+        className={`${iconName} ${errorMessage && 'error'}`}
         onChange={onChange}
         onBlur={onBlur}
       />
