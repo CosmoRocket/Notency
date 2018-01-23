@@ -20,7 +20,7 @@ export default function Input({
         value={value}
         name={name}
         placeholder={placeholder}
-        className={`${iconName} ${errorMessage && 'error'}`}
+        className={`${iconName && 'extra-padding'} ${errorMessage && 'error'}`}
         onChange={onChange}
         onBlur={onBlur}
       />
