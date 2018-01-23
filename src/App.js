@@ -35,7 +35,6 @@ class App extends Component {
   state = {
     userData: getDecodedToken(),
     activeTab: 0,
-    totalRecipients: 700,
     notifications: [],
     announcements: [],
     recipients: [],

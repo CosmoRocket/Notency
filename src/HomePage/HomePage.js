@@ -166,7 +166,7 @@ class HomePage extends Component {
             {activeTab === 0
               ? filteredNotifications.map(notification => {
                 return (
-                  <Fragment>
+                  <Fragment key={notification._id}>
                     <Notification
                       {...notification}
                       key={notification._id}
