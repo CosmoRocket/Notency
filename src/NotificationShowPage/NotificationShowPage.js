@@ -80,7 +80,8 @@ class NotificationShowPage extends Component {
       const okResponses = ok.map(response => {
         return (
           <Message
-            recipientId={response.sender._id}
+            key={response.sender._id}
+            recipientId={response.sender.idNo}
             contactNumber={response.sender.mobile}
             contactEmail={response.sender.email}
             recipientName={`${response.sender.firstName} ${
@@ -93,8 +94,10 @@ class NotificationShowPage extends Component {
       const notOkResponses = notOk.map(response => {
         return (
           <Message
-            recipientId={response.sender._id}
+            key={response.sender._id}
+            recipientId={response.sender.idNo}
             contactNumber={response.sender.mobile}
+            contactEmail={response.sender.email}
             recipientName={`${response.sender.firstName} ${
               response.sender.lastName
             }`}
@@ -127,38 +130,34 @@ class NotificationShowPage extends Component {
           </p>
         ))
 
-        const chartData = {
-          datasets: [{
-            data: [
-              ok.length,
-              notOk.length,
-              nonResponders.length
-            ],
+      const chartData = {
+        datasets: [
+          {
+            data: [ok.length, notOk.length, nonResponders.length],
             backgroundColor: [
               '#0090D3', // Green
               'red', // Red
               '#E2E2E2' // yellow
             ]
-          }],
-          labels: [
-            "Responded with OK",
-            "Responded with Not OK",
-            "Has not Responded",
-          ]
-        }
-    
-        const chartOptions = {
-          responsive: true
-          // legend: {
-          //   position: 'bottom'
-          // }
-        }
+          }
+        ],
+        labels: [
+          'Responded with OK',
+          'Responded with Not OK',
+          'Has not Responded'
+        ]
+      }
 
-        const analyticsChart = 
-        <PieChart 
-          data={chartData} 
-          options={chartOptions}
-        />
+      const chartOptions = {
+        responsive: true
+        // legend: {
+        //   position: 'bottom'
+        // }
+      }
+
+      const analyticsChart = (
+        <PieChart data={chartData} options={chartOptions} />
+      )
 
       return (
         <Fragment>
@@ -180,7 +179,7 @@ class NotificationShowPage extends Component {
               () => (
                 <div className="text-center">
                   <p className="m-0">Analytics</p>
-                  <br/>
+                  <br />
                 </div>
               ),
               () => (
@@ -217,7 +216,9 @@ class NotificationShowPage extends Component {
           {activeTab === 1 && okResponses}
           {activeTab === 2 && notOkResponses}
           {activeTab === 3 && nonRespondingRecipients}
-          <Link className="btn btn-primary mt-4" to="/">Back</Link>
+          <Link className="btn btn-primary mt-4" to="/">
+            Back
+          </Link>
         </Fragment>
       )
     } else {
