@@ -158,9 +158,8 @@ class HomePage extends Component {
                     <Notification
                       {...notification}
                       key={notification._id}
-                      responses={`${this.okResponses(notification.responses)}/${
-                        notification.recipients.length
-                      }`}
+                      responses={notification.responses.length /
+                        notification.recipients.length * 100}
                     />
                   )
                 })

@@ -44,14 +44,6 @@ class LoginPage extends Component {
           />
           {error && <p className="error-message">{error}</p>}
           <LoginButton />
-          <div className="d-flex justify-content-between">
-            <Checkbox name="rememberMe" value="rememberMe" text="Remember me" />
-            <p>
-              <a href={passwordLink} className="password-link">
-                Forgot your password?
-              </a>
-            </p>
-          </div>
         </form>
         <p className="fine-print">
           An app for sending bulk SMS and email notifications

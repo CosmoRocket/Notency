@@ -4,7 +4,7 @@
 }
 
 .DesktopNav ul li a {
-  color: rgb(65, 65, 187);
+  color: #0090D3;
 }
 
 .DesktopNav span {
@@ -18,7 +18,10 @@
 .selected {
   font-weight: bold;
   color: #5969E2;
-  /* text-decoration: underline; */
+}
+
+.selected ul li a {
+  color: #5969E2;
 }
 
 .selected span {

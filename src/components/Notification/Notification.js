@@ -19,8 +19,7 @@ export default function Notification({
             {moment(createdAt).format('D MMM YYYY')}
           </small>
           <small>
-            <Icon className="text-success mr-2" name="mail-reply" />
-            {responses}
+            responded: {responses}%
           </small>
         </div>
         <p className="m-0 font-weight-bold"><Icon name="bell"/> {subject}</p>
