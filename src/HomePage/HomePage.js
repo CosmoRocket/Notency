@@ -115,7 +115,7 @@ class HomePage extends Component {
           handleChangeActiveTab={handleChangeActiveTab}
         />
         {activeTab === 0 && (
-          <div className="d-flex align-items-center">
+          <div className="mb-3 d-md-flex align-items-center">
             <Input
               className="mr-2"
               name="searchNotifications"
@@ -126,14 +126,14 @@ class HomePage extends Component {
             />
             <Link
               to="/new_notification"
-              className="btn btn-danger text-uppercase font-weight-bold my-2"
+              className="btn btn-danger text-uppercase font-weight-bold my-2 btn-block"
             >
               New Notification
             </Link>
           </div>
         )}
         {activeTab === 1 && (
-          <div className="d-flex align-items-center">
+          <div className="mb-3 d-md-flex align-items-center">
             <Input
               className="mr-2"
               name="searchAnnouncements"
@@ -144,7 +144,7 @@ class HomePage extends Component {
             />
             <Link
               to="/new_announcement"
-              className="btn btn-danger text-uppercase font-weight-bold my-2"
+              className="btn btn-danger text-uppercase font-weight-bold my-2 btn-block"
             >
               New Announcement
             </Link>

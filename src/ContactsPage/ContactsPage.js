@@ -64,12 +64,14 @@ class ContactsPage extends React.Component {
         }}
       >
         <div className="text-center mb-3">
-          <FileUpload
-            name="csvFile"
-            onChange={this.onChange}
-            fileName={fileName}
-          />
-          <Button btnStyle="danger btn-contacts" text="Upload" />
+          <div className="d-md-flex justify-content-between">
+            <FileUpload
+              name="csvFile"
+              onChange={this.onChange}
+              fileName={fileName}
+            />
+            <Button btnStyle="danger btn-contacts" text="Upload" />
+          </div>
           {successUpload && <div>{successUpload}</div>}
           {error && <div className="error-message">{error}</div>}
         </div>
