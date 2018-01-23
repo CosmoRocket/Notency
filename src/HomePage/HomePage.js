@@ -11,6 +11,7 @@ import Pusher from 'pusher-js'
 import { reject } from 'ramda'
 import messageParser from '../MessageParser/message-parser'
 import { Icon } from 'react-fa'
+import ReactTooltip from 'react-tooltip'
 
 class HomePage extends Component {
   constructor(props) {
@@ -51,6 +52,16 @@ class HomePage extends Component {
     return responses.filter(response => {
       return messageParser.isOkMessage(response.body) === true
     }).length
+  }
+
+  notOkResponses = responses => {
+    return responses.filter(response => {
+      return messageParser.isOkMessage(response.body) === false
+    }).length
+  }
+
+  notResponded = responses => {
+    return responses.length - this.okResponses(responses) - this.notOkResponses(responses)
   }
 
   handleSearch = e => {
@@ -154,20 +165,32 @@ class HomePage extends Component {
           <Fragment>
             {activeTab === 0
               ? filteredNotifications.map(notification => {
-                  return (
+                return (
+                  <Fragment>
                     <Notification
                       {...notification}
                       key={notification._id}
-                      responses={notification.responses.length /
-                        notification.recipients.length * 100}
+                      responses={notification.responses.length / notification.recipients.length * 100}
                     />
-                  )
-                })
+                    <ReactTooltip id='notificationTooltip' place="left" type="light" effect="solid">
+                      <Icon className="text-success mr-2" name="check">
+                        {` ${this.okResponses(notification.responses)}/${notification.recipients.length}`}
+                      </Icon>
+                      <Icon className="text-danger mr-2" name="times">
+                        {` ${this.notOkResponses(notification.responses)}/${notification.recipients.length}`}
+                      </Icon>
+                      <Icon className="text-dark mr-2" name="question">
+                        {` ${this.notResponded(notification.responses)}/${notification.recipients.length}`}
+                      </Icon>
+                    </ReactTooltip>
+                  </Fragment>
+                )
+              })
               : filteredAnnouncements.map(announcement => {
-                  return (
-                    <Announcement {...announcement} key={announcement._id} />
-                  )
-                })}
+                return (
+                  <Announcement {...announcement} key={announcement._id} />
+                )
+              })}
             <div className="showAllButton">
               <Button
                 onClick={() => {
@@ -178,8 +201,8 @@ class HomePage extends Component {
             </div>
           </Fragment>
         ) : (
-          <div>Loading notifications and announcements...</div>
-        )}
+            <div>Loading notifications and announcements...</div>
+          )}
       </Fragment>
     )
   }

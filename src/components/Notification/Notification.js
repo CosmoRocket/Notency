@@ -26,11 +26,12 @@ export default function Notification({
           <small className="m-0">
             {moment(createdAt).format('D MMM YYYY')}
           </small>
-          <small className="responseMessage">
+          <small data-tip data-for='notificationTooltip' >
             {responses}% Responded
           </small>
         </div>
-        <p className="m-0 font-weight-bold"><Icon name="bell"/> {subject} <small>{truncateBody(body)}</small></p>
+        <p className="m-0 font-weight-bold"><Icon name="bell" /> {subject}
+        <small>{truncateBody(body)}</small></p>
       </Link>
     </div>
   )
