@@ -45,28 +45,38 @@ Whilst we prepared the wireframes, Glenn worked on the basic functionality for t
 ## User Stories
 
 ```
-I want to notify the students of an emergency so that important information and intructions can be conveyed on a timely basis
+I want to notify the students of an emergency so that important information and
+intructions can be conveyed on a timely basis
 ```
 ```
-I want to track the replies of teachers and students so I can know if they are safe during an emergency
+I want to track the replies of teachers and students so I can know if they are
+safe during an emergency
 ```
 ```
-I want to let teachers/students of a certain nationality know if their country has suffered a calamity/accident/terrorist attack so that only relevant parties are communicated with
+I want to let teachers/students of a certain nationality know if their country
+has suffered a calamity/accident/terrorist attack so that only relevant parties
+are communicated with
 ```
 ```
-I want to send newsletters and announcements to students so I can conveniently keep students informed of non-critical events happening in the school
+I want to send newsletters and announcements to students so I can conveniently
+keep students informed of non-critical events happening in the school
 ```
 ```
-I want to upload student and teacher data from a file so that I can easily keep the database updated without manual data entry
+I want to upload student and teacher data from a file so that I can easily keep
+the database updated without manual data entry
 ```
 ```
-I want to send the notifications in form of a SMS message or an Email so that students have multiple means of receiving notifications and so that an internet connection is not required to receive that information
+I want to send the notifications in form of a SMS message or an Email so that
+students have multiple means of receiving notifications and so that an internet
+connection is not required to receive that information
 ```
 ```
-I want to easily search, group, categorize and manage the recipients so I can easily look up whether students have been added to the mailing list
+I want to easily search, group, categorize and manage the recipients so I can
+easily look up whether students have been added to the mailing list
 ```
 ```
-I want to identify the status of the notifications delivered so that I can resend notifications to those that have not received them.
+I want to identify the status of the notifications delivered so that I can
+resend notifications to those that have not received them.
 ```
 
 
@@ -79,7 +89,7 @@ One-way communication is used for sending out Announcements. These announcements
 
 ### Two-way Messaging
 Two-way communication is used for sending out Notifications. These notifications pertain to situations where the recipients need to respond to the message. 
-      
+
 ![Two-Way Messaging](docs/two-way-messaging.png)    
 
 ## Entity Relationship Diagram
