@@ -14,6 +14,7 @@ Live at: http://notency.netlify.com/
 - **[Process Map](#ProcessMap)**
 - **[Entity Relationship Diagram](#ERD)**
 - **[Wireframing](#Wireframing)**
+- **[Repositories](#Repositories)**
 - **[Notency API](#NotencyAPI)**
 - **[Our Test Driven Pipeline](#OurTestDrivenPipeline)**
 - **[NPM / Yarn Packages](#NPMYarnPackages)**
@@ -34,11 +35,14 @@ We set out to build a MERN stack application that would achieve these objectives
 
 [Back to Top](#top)
 
+
 ## <a id="TeamMembers"></a>Team Members
+![Team Members](docs/teammembers.png)
 - [Alessio Palumbo](github.com/alessio-palumbo)
 - [Alex Farries](@github/cursande)
 - [Glenn Dimaliwat](@github/Gurenax)
 - [John Voon](@github/johnvoon)
+    
 
 [Back to Top](#top)
 
@@ -143,6 +147,16 @@ We made three iterant mock designs, building on the things we liked and the feat
 ![Desktop Wireframes](docs/desktop-wireframes.png)
 
 ![Mobile Wireframes](docs/mobile-wireframes.png)
+
+[Back to Top](#top)
+
+## <a id="Repositories"></a>Repositories
+We decided to separate the back-end repository from the front-end repository as it was an easier way to manage our branches. It also gave us a clearer perspective in finding our errors and keeping the changes under control.   
+
+- [Link to Front-end repository](https://github.com/CosmoRocket/Notency)
+- [Link to Back-end repository](https://github.com/CosmoRocket/Notency-api)
+
+![Repositories](docs/repositories.png)
 
 [Back to Top](#top)
 
