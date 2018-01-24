@@ -12,6 +12,12 @@ Our client is looking for a web-based dashboard which would allow them to send n
 
 We set out to build a MERN stack application that would achieve these objectives.
 
+## Team Members
+- Alessio Palumbo @github/alessio-palumbo
+- Alex Farries @github/cursande
+- Glenn Dimaliwat @github/Gurenax
+- John Voon @github/johnvoon
+
 ## Information Gathering
 
 Before our first meeting and based on the preliminary information provided by the client about the kind of app they wanted, we prepared a list of potential issues/questions to ask of the client.
