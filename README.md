@@ -16,7 +16,7 @@ Live at: http://notency.netlify.com/
 - **[Wireframing](#Wireframing)**
 - **[Repositories](#Repositories)**
 - **[Notency API](#NotencyAPI)**
-- **[Our Test Driven Pipeline](#OurTestDrivenPipeline)**
+- **[Our Test Driven Development Pipeline](#OurTestDrivenDevelopmentPipeline)**
 - **[NPM / Yarn Packages](#NPMYarnPackages)**
 - **[Client Questionaire](#ClientQuestionaire)**
 - **[Post Project Review](#PostProjectReview)**
@@ -42,7 +42,7 @@ We set out to build a MERN stack application that would achieve these objectives
 - [Alex Farries](@github/cursande)
 - [Glenn Dimaliwat](@github/Gurenax)
 - [John Voon](@github/johnvoon)
-    
+
 
 [Back to Top](#top)
 
@@ -196,7 +196,7 @@ MONGO_TEST_URI =
 
 [Back to Top](#top)
 
-## <a id="OurTestDrivenPipeline"></a>Our Test Driven Pipeline
+## <a id="OurTestDrivenDevelopmentPipeline"></a>Our Test Driven Development Pipeline
 
 Notency API is built with 100% Test Driven Development coverage while the Notency Front-end is thoroughly tested across multiple mobile devices, desktop, and multiple browsers.
 
