@@ -1,42 +1,70 @@
-# NOTENCY
+# <a id="top"></a>NOTENCY
 
 Live at: http://notency.netlify.com/
 
-## Our Client
+## Contents
+- **[Our Client](#OurClient)**
+- **[Our Task](#OurTask)**
+- **[Team Members](#TeamMembers)**
+- **[Information Gathering](#InformationGathering)**
+- **[Project Charter](#ProjectCharter)**
+- **[Interactions With Client](#InteractionsWithClient)**
+- **[Planning and Work Breakdown and Allocation](#PlanningandWorkBreakdownandAllocation)**
+- **[User Stories](#UserStories)**
+- **[Process Map](#ProcessMap)**
+- **[Entity Relationship Diagram](#ERD)**
+- **[Wireframing](#Wireframing)**
+- **[Notency API](#NotencyAPI)**
+- **[Our Test Driven Pipeline](#OurTestDrivenPipeline)**
+- **[NPM / Yarn Packages](#NPMYarnPackages)**
+- **[Client Questionaire](#ClientQuestionaire)**
+- **[Post Project Review](#PostProjectReview)**
+
+## <a id="OurClient"></a>Our Client
 
 [Embassy English](https://www.embassyenglish.com/) is an organisation that seeks to provide teaching and resources for students learning English. They currently have schools in Australia, New Zealand, Canada, the UK and the USA.
 
-## Our Task
+[Back to Top](#top)
+
+## <a id="OurTask"></a>Our Task
 
 Our client is looking for a web-based dashboard which would allow them to send notifications (via a service like SMS) and email announcements. The notifications are particularly critical, as they would allow the school to confirm the safety of their students in case of an emergency such as a flood. Since entering in each individual student into the system would be impractical, they would like to be able to upload student data via existing files, e.g. an excel spreadsheet containing the students' ids, names, phone numbers etc.
 
 We set out to build a MERN stack application that would achieve these objectives.
 
-## Team Members
-- Alessio Palumbo @github/alessio-palumbo
-- Alex Farries @github/cursande
-- Glenn Dimaliwat @github/Gurenax
-- John Voon @github/johnvoon
+[Back to Top](#top)
 
-## Information Gathering
+## <a id="TeamMembers"></a>Team Members
+- [Alessio Palumbo](github.com/alessio-palumbo)
+- [Alex Farries](@github/cursande)
+- [Glenn Dimaliwat](@github/Gurenax)
+- [John Voon](@github/johnvoon)
+
+[Back to Top](#top)
+
+## <a id="InformationGathering"></a>Information Gathering
 
 Before our first meeting and based on the preliminary information provided by the client about the kind of app they wanted, we prepared a list of potential issues/questions to ask of the client.
 
 [Link to Issues/Questions to Ask the Client](https://drive.google.com/open?id=18tdyhtKnKc1liPz6Ea4KNleAcVBdb5Ua)
 
-## Project Charter
+[Back to Top](#top)
+
+## <a id="ProjectCharter"></a>Project Charter
 
 Early on in the project, we prepared the Project Charter containing the problem statement, our proposed solution, the goal of the project, scope of the project, schedule/timeline and terms of the project. This client acknowledged and agreed with what we proposed and the signed document can be found here.
 
 [Link to Project Charter](https://drive.google.com/open?id=1o0TFGbgxc2bO3Cv6jlxSUZteY7G3bll6)
 
-## Interactions with Client
+## <a id="InteractionsWithClient"></a>Interactions with Client
 
 We corresponded with the client mainly via face to face meetings and email. We kept track of these interactions including emails and meeting minutes.
 
 [Link to all correspondence with Embassy English]()
 
-## Planning and Work Breakdown and Allocation
+[Back to Top](#top)
+
+## <a id="PlanningandWorkBreakdownandAllocation"></a>Planning and Work Breakdown and Allocation
 
 We took an agile approach to organising our workflow, using Trello heavily to collect ideas and manage tasks. We used Trello to breakdown and allocate the workload based on our app's features and components.
 
@@ -47,8 +75,9 @@ Whilst we prepared the wireframes, Glenn worked on the basic functionality for t
 
 ![Trello](docs/trello.png)
 
+[Back to Top](#top)
 
-## User Stories
+## <a id="UserStories"></a>User Stories
 
 ```
 I want to notify the students of an emergency so that important information and
@@ -85,8 +114,9 @@ I want to identify the status of the notifications delivered so that I can
 resend notifications to those that have not received them.
 ```
 
+[Back to Top](#top)
 
-## Process Map
+## <a id="ProcessMap"></a>Process Map
 
 ### One-way Messaging
 One-way communication is used for sending out Announcements. These announcements do not require the recipients to respond to the message.   
@@ -98,12 +128,15 @@ Two-way communication is used for sending out Notifications. These notifications
 
 ![Two-Way Messaging](docs/two-way-messaging.png)    
 
-## Entity Relationship Diagram
+[Back to Top](#top)
 
-![Basic ERD](docs/basic-erd.png)
+## <a id="ERD"></a>Entity Relationship Diagram
 
+![ERD](docs/basic-erd.png)
 
-## Wireframing
+[Back to Top](#top)
+
+## <a id="Wireframing"></a>Wireframing
 
 We made three iterant mock designs, building on the things we liked and the features that we thought worked best for this application. Links to each design can be found on our trello board.
 
@@ -111,13 +144,15 @@ We made three iterant mock designs, building on the things we liked and the feat
 
 ![Mobile Wireframes](docs/mobile-wireframes.png)
 
-## Notency API
+[Back to Top](#top)
+
+## <a id="NotencyAPI"></a>Notency API
 
 The [Notency API](https://github.com/CosmoRocket/Notency-api/) is the Node.JS back-end for Notency Front-end. Our back-end uses Express, Mongoose and other several open-source libraries. It was created with test driven development in mind while using tools such as Flow and Jest. It also uses the async/await syntax for all its routes and API calls.
 
 Notency API makes use of Twilio for sending text messages and Mailgun for sending e-mail messages. These APIs are the foundation of our Notification and Announcement features and it completes the main essential of our app which is to have two-way communication with its customers.
 
-## Setting up Notency API
+### Setting up Notency API
 
 1. Git clone https://github.com/CosmoRocket/Notency-api.git
 2. Create a .env file containing the following keys in the root folder
@@ -145,7 +180,9 @@ MONGO_URI =
 MONGO_TEST_URI =
 ```
 
-## Our Test Pipeline
+[Back to Top](#top)
+
+## <a id="OurTestDrivenPipeline"></a>Our Test Driven Pipeline
 
 Notency API is built with 100% Test Driven Development coverage while the Notency Front-end is thoroughly tested across multiple mobile devices, desktop, and multiple browsers.
 
@@ -173,6 +210,7 @@ yarn jest
 4. Ensure that there are no errors in Jest    
 ![JEST Results](docs/jest-results.png)    
 
+[Back to Top](#top)
 
 ## Routes for Notency API
 
@@ -413,7 +451,9 @@ yarn jest
 * Upload a CSV file and store data as Recipients
 * Request Parameters: `file`
 
-## NPM / Yarn Packages
+[Back to Top](#top)
+
+## <a id="NPMYarnPackages"></a>NPM / Yarn Packages
 
 * mongoose
 * express - Back end framework
@@ -437,11 +477,15 @@ yarn jest
 * moment - Formatting dates
 * ramda - Library of higher order functions with emphasis on functional programming concepts
 
-## Client Questionnaire
+[Back to Top](#top)
+
+## <a id="ClientQuestionaire"></a>Client Questionnaire
 
 We prepared a questionnaire for the client to ascertain the satisfaction with our product and service.
 
-## Post Project Review
+[Back to Top](#top)
+
+## <a id="PostProjectReview"></a>Post Project Review
 
 ### Summary
 
@@ -500,4 +544,4 @@ Clarity came midway through the project when we realized the implications of del
 
 However, if we were to let the list of recipients grow, students who had graduated or dropped out would still receive messages. The solution we decided to implement that made the most sense was to have a boolean attribute `active`, which would be `true` if the student was still on the list and `false` if not. On the back-end, we would need to have a route such as `/recipients/active` which would run a query to retrieve only "active" recipients.
 
-This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
+[Back to Top](#top)
