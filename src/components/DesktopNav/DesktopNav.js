@@ -30,7 +30,7 @@ const DesktopNav = ({ onSignOut }) => {
             activeClassName="selected"
             to="/update_contacts"
           >
-            <Icon name="upload" /> Update Contacts
+            <Icon name="cloud-upload" /> Update Contacts
           </NavLink>
         </li>
         <li className="nav-item">

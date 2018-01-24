@@ -4,7 +4,13 @@ textarea {
 
 .char-length {
   margin-top: 1.05em;
-  background: #fff;
+  background: #F0F3F8;
+}
+
+@media (min-width: 576px) {
+  .char-length {
+    background: #fff;
+  }
 }
 
 .char-limit-reached {

@@ -16,7 +16,7 @@ export default function Notification({
     if (body.length < 60)
       return body
     else
-      return body.substring(0, 10) + '...'
+      return body.substring(0, 60) + '...'
   }
 
   return (

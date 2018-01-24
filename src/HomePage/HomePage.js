@@ -61,7 +61,11 @@ class HomePage extends Component {
   }
 
   notResponded = (recipients, responses) => {
-    return recipients.length - this.okResponses(responses) - this.notOkResponses(responses)
+    return (
+      recipients.length -
+      this.okResponses(responses) -
+      this.notOkResponses(responses)
+    )
   }
 
   handleSearch = e => {
@@ -166,7 +170,7 @@ class HomePage extends Component {
             {activeTab === 0
               ? filteredNotifications.map(notification => {
                 return (
-                  <Fragment>
+                  <Fragment key={notification._id}>
                     <Notification
                       {...notification}
                       key={notification._id}
@@ -183,15 +187,16 @@ class HomePage extends Component {
                         {` ${this.notResponded(notification.recipients, notification.responses)}/${notification.recipients.length}`}
                       </Icon>
                     </ReactTooltip>
+                    <div></div>
                   </Fragment>
                 )
               })
               : filteredAnnouncements.map(announcement => {
-                return (
-                  <Announcement {...announcement} key={announcement._id} />
-                )
-              })}
-            <div className="showAllButton">
+                  return (
+                    <Announcement {...announcement} key={announcement._id} />
+                  )
+                })}
+            <div className="showAllButton text-center">
               <Button
                 onClick={() => {
                   handleLoadMore(activeTab)
@@ -201,8 +206,8 @@ class HomePage extends Component {
             </div>
           </Fragment>
         ) : (
-            <div>Loading notifications and announcements...</div>
-          )}
+          <div>Loading notifications and announcements...</div>
+        )}
       </Fragment>
     )
   }
