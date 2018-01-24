@@ -1,6 +1,7 @@
 import React from 'react'
 import './Message.css'
 import { Icon } from 'react-fa'
+import ReactTooltip from 'react-tooltip'
 
 export default function Message({
   recipientId,
@@ -10,21 +11,26 @@ export default function Message({
   messageBody
 }) {
   return (
-    <div className="Message py-1 d-md-flex justify-content-between">
-      <p className="m-0">
-        <span className="font-weight-bold">{recipientName}</span> wrote:{' '}
-        <span className="font-italic">{messageBody}</span>
+
+    <div className="Message">
+      <p className="px-2 m-0 font-weight-bold">
+        {recipientName}
+        <a href={`tel:${contactNumber}`} className='mx-2'>
+          <Icon className="recipient-icon text-center" name="phone" data-tip data-for='tooltip1' />
+          <ReactTooltip id='tooltip1' place="right" type="light" effect="solid" delayHide={200}>
+            {contactNumber}
+          </ReactTooltip>
+        </a>
+        <a href={`mailto:${contactEmail}`}>
+          <Icon className="recipient-icon text-center" name="envelope" data-tip data-for='tooltip2' className='align-text-top' />
+          <ReactTooltip id='tooltip2' place="right" type="light" effect="solid">
+            {contactEmail}
+          </ReactTooltip>
+        </a>
       </p>
-      <div>
-        <div>
-          <Icon className="recipient-icon text-center" name="mobile" />
-          <a href={`tel:${contactNumber}`}>{contactNumber}</a>
-        </div>
-        <div>
-          <Icon className="recipient-icon text-center" name="envelope" />
-          <a href={`mailto:${contactEmail}`}>{contactEmail}</a>
-        </div>
-      </div>
+      <p className='font-italic'>
+        {messageBody}
+      </p>
     </div>
   )
 }
