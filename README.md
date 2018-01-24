@@ -253,6 +253,7 @@ yarn jest
 * Request Parameters: `nationality`, `role`, `graduationDate`
 
 ```javascript
+e.g.
 {
   "nationality": "Australia",
   "role": "Student",
@@ -295,6 +296,7 @@ yarn jest
 * Request Parameter: `limit`
 
 ```javascript
+e.g.
 /notifications/latest/5
 ```
 
@@ -328,6 +330,7 @@ yarn jest
 * Request Parameter: `limit`
 
 ```javascript
+e.g.
 /announcements/latest/5
 ```
 
@@ -385,6 +388,7 @@ yarn jest
 * Request Parameters: `From`, `Body`
 
 ```javascript
+e.g.
 {
   From: '+61444888000',
   Body: 'EQ1 OK'
@@ -397,6 +401,7 @@ yarn jest
 * Request Parameters: `recipient`, `message`
 
 ```javascript
+e.g.
 {
   recipient: '+61444555555',
   message: 'This is a test notification!'
@@ -409,6 +414,7 @@ yarn jest
 * Request Parameters: `recipients`, `message`
 
 ```javascript
+e.g.
 {
   recipients: ['+61444555555', '+61444555552', '+61444555553'],
   message: 'This is a test notification!'
@@ -423,6 +429,7 @@ yarn jest
 * Request Parameters: `sender`, `subject`, `stripped-text`
 
 ```javascript
+e.g.
 {
   sender: 'somone@example.com',
   subject: 'Re: Hello',
@@ -436,6 +443,7 @@ yarn jest
 * Request Parameters: `recipients`, `subject`, `text`, `html`
 
 ```javascript
+e.g.
 {
   recipients: ["someone@example.com"],
   subject: "Hello",
@@ -491,11 +499,12 @@ We prepared a questionnaire for the client to ascertain the satisfaction with ou
 
 This project presented us with interesting features to implement such as sending SMS and tracking responses and therefore was a very valuable learning opportunity. Doing the project for a real client helped us train soft skills such as communication, planning, scoping to a minimum viable product, time management, getting feedback, etc.
 
-The scope of the project was perfect for the time allowed whilst challenging at the same time.
+The scope of the project was perfect for the time allowed whilst challenging at the same time.        
 
 ### Communication with the client
 
-We managed to communicate regularly with the client by email and meetings to get instructions and confirmation as we went along. We were very fortunate in that our client was very responsive to our questions and emails, which made the whole process a lot smoother for us.
+We managed to communicate regularly with the client by email and meetings to get instructions and confirmation as we went along. We were very fortunate in that our client was very responsive to our questions and emails, which made the whole process a lot smoother for us. 
+
 
 ### Collaboration as a team
 
@@ -505,6 +514,7 @@ We pair-programmed when appropriate which helped each other detect bugs in the p
 
 We used git and github mostly without much trouble, merging work as features were completed. There was just one time where we had trouble syncing our work due to a delayed pull but that was eventually resolved.
 
+
 ### Introducing new libraries
 
 At one stage, one of the group members introduced a new library called Formik to manage form state in React which resulted in unfamiliar code being added to important parts of the codebase.
@@ -513,9 +523,11 @@ Introducing libraries made life easier on the one hand but was a challenge on th
 
 In these circumstances, it was important to have the person who introduced the new library to be involved in writing the new code by pair programming for example and to explain how the new library works.
 
+
 ### Use of the Chrome developer tools
 
 One of the more time consuming and frustrating features to implement was dealing with all the edge cases of filtering recipients by group such as role, nationality, graduation date on the front end. Using the Chrome developer tools was extremely helpful in tracking the props and state changes in the app whilst developing this feature. So often, this was better than littering `console.log` statements throughout the app.
+
 
 ### Tracking SMS responses
 
@@ -529,11 +541,13 @@ We considered two possible solutions:
 
 We chose the first option as we could only test with one number with the trial TWilio account, though left open the possibility of adding more numbers through Twilio.
 
+
 ### Email Attachments
 
 Getting email attachments to work was time consuming especially as we did not have a clear idea of what was involved in implementing the functionality. In the absence of clear guidance, documentation and tutorials, we had to take a step back and think through the whole process ourselves before implementing the feature.
 
 There are 3 main steps in sending an email with attachments: Submitting the file, saving the file to the app and attaching it in the email. After extensive research, we submitted the attachment using a FormData object and processed that on the back end using Multer. Multer would save that file to a temporary folder in the app, which could then be attached to the email.
+
 
 ### Deleting Recipients vs Activating/Deactivating Recipients
 
