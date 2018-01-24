@@ -36,21 +36,56 @@ We took an agile approach to organising our workflow, using Trello heavily to co
 
 Whilst we prepared the wireframes, Glenn worked on the basic functionality for the backend such as sending SMS and emails. Once the wireframes were finalized, the rest of us developed the individual components needed by the application which could be reused. Once the components were in place, we assembled the various pages of the application. Finally, we connected the front end to the back end API and polished the UI and functionality.
 
+
 [Link to our board](https://trello.com/b/Xl2taIie/embassy-english)
+
+![Trello](docs/trello.png)
+
 
 ## User Stories
 
-Our user stories can be found on our Trello board.
+```
+I want to notify the students of an emergency so that important information and intructions can be conveyed on a timely basis
+```
+```
+I want to track the replies of teachers and students so I can know if they are safe during an emergency
+```
+```
+I want to let teachers/students of a certain nationality know if their country has suffered a calamity/accident/terrorist attack so that only relevant parties are communicated with
+```
+```
+I want to send newsletters and announcements to students so I can conveniently keep students informed of non-critical events happening in the school
+```
+```
+I want to upload student and teacher data from a file so that I can easily keep the database updated without manual data entry
+```
+```
+I want to send the notifications in form of a SMS message or an Email so that students have multiple means of receiving notifications and so that an internet connection is not required to receive that information
+```
+```
+I want to easily search, group, categorize and manage the recipients so I can easily look up whether students have been added to the mailing list
+```
+```
+I want to identify the status of the notifications delivered so that I can resend notifications to those that have not received them.
+```
 
-[Link to our board](https://trello.com/b/Xl2taIie/embassy-english)
 
-## Program flow and Basic ERD
+## Process Map
 
-![One-Way Messaging](docs/one-way-messaging.png)
+### One-way Messaging
+One-way communication is used for sending out Announcements. These announcements do not require the recipients to respond to the message.   
 
-![Two-Way Messaging](docs/two-way-messaging.png)
+![One-Way Messaging](docs/one-way-messaging.png)    
+
+### Two-way Messaging
+Two-way communication is used for sending out Notifications. These notifications pertain to situations where the recipients need to respond to the message. 
+      
+![Two-Way Messaging](docs/two-way-messaging.png)    
+
+## Entity Relationship Diagram
 
 ![Basic ERD](docs/basic-erd.png)
+
 
 ## Wireframing
 
@@ -62,9 +97,9 @@ We made three iterant mock designs, building on the things we liked and the feat
 
 ## Notency API
 
-The [Notency API](https://github.com/CosmoRocket/Notency-api/) is the Node.JS back-end for Notency which uses Express and Mongoose. It was created with test driven development in mind having 100% test coverage and using tools such as Flow and Jest. It also uses the async/await syntax for all its routes and API calls.
+The [Notency API](https://github.com/CosmoRocket/Notency-api/) is the Node.JS back-end for Notency Front-end. Our back-end uses Express, Mongoose and other several open-source libraries. It was created with test driven development in mind while using tools such as Flow and Jest. It also uses the async/await syntax for all its routes and API calls.
 
-Notency API makes use of Twilio for sending text messages and Mailgun for sending e-mail messages. These APIs are the foundation of our Notification and Announcement features as two-way communication is the main goal of the App.
+Notency API makes use of Twilio for sending text messages and Mailgun for sending e-mail messages. These APIs are the foundation of our Notification and Announcement features and it completes the main essential of our app which is to have two-way communication with its customers.
 
 ## Setting up Notency API
 
@@ -85,19 +120,27 @@ MAILGUN_DOMAIN =
 MAILGUN_API_KEY =
 MAILGUN_PUB_KEY =
 
+PUSHER_APP_ID =
+PUSHER_KEY =
+PUSHER_SECRET =
+PUSHER_CLUSTER =
+
 MONGO_URI =
 MONGO_TEST_URI =
 ```
 
 ## Our Test Pipeline
 
-Notency API is built with 100% Test Driven Development coverage
+Notency API is built with 100% Test Driven Development coverage while the Notency Front-end is thoroughly tested across multiple mobile devices, desktop, and multiple browsers.
 
 1. Run syntax checker
 
 ```
 yarn flow
 ```
+
+2. Ensure that there are no errors in Flow    
+![FLOW Results](docs/flow-results.png)
 
 2. Run test server
 
@@ -111,7 +154,11 @@ yarn test
 yarn jest
 ```
 
-## The routes for Notency API
+4. Ensure that there are no errors in Jest    
+![JEST Results](docs/jest-results.png)    
+
+
+## Routes for Notency API
 
 ### User
 
@@ -360,7 +407,7 @@ yarn jest
 * dotenv - For storing application environment variables
 * axios - For making API requests from the front end
 * twilio - Service we used for sending SMS and tracking responses
-* mailgun - Service we used for sending emails and tracking responses
+* mailgun / nodemailer - Service we used for sending emails and tracking responses
 * exceljs
 * nodemailer-mailgun-transport - Integrates nodemailer and mailgun for making sending emails with attachments easier
 * react-draft-wysiwyg - Editor for composing emails.
