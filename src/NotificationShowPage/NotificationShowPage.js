@@ -216,7 +216,7 @@ class NotificationShowPage extends Component {
           {activeTab === 1 && okResponses}
           {activeTab === 2 && notOkResponses}
           {activeTab === 3 && nonRespondingRecipients}
-          <Link className="btn btn-primary mt-4" to="/">
+          <Link className="mt-5" to="/">
             Back
           </Link>
         </Fragment>

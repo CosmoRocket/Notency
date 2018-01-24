@@ -16,3 +16,7 @@
   text-decoration: underline;
   color: #777777;
 }
+
+.NonResponder p {
+  color: hsl(0, 0%, 27%);
+}
