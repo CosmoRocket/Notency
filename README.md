@@ -3,23 +3,24 @@
 Live at: http://notency.netlify.com/
 
 ## Contents
-- **[Our Client](#OurClient)**
-- **[Our Task](#OurTask)**
-- **[Team Members](#TeamMembers)**
-- **[Information Gathering](#InformationGathering)**
-- **[Project Charter](#ProjectCharter)**
-- **[Interactions With Client](#InteractionsWithClient)**
-- **[Planning and Work Breakdown and Allocation](#PlanningandWorkBreakdownandAllocation)**
-- **[User Stories](#UserStories)**
-- **[Process Map](#ProcessMap)**
-- **[Entity Relationship Diagram](#ERD)**
-- **[Wireframing](#Wireframing)**
-- **[Repositories](#Repositories)**
-- **[Notency API](#NotencyAPI)**
-- **[Our Test Driven Development Pipeline](#OurTestDrivenDevelopmentPipeline)**
-- **[NPM / Yarn Packages](#NPMYarnPackages)**
-- **[Client Questionaire](#ClientQuestionaire)**
-- **[Post Project Review](#PostProjectReview)**
+
+* **[Our Client](#OurClient)**
+* **[Our Task](#OurTask)**
+* **[Team Members](#TeamMembers)**
+* **[Information Gathering](#InformationGathering)**
+* **[Project Charter](#ProjectCharter)**
+* **[Interactions With Client](#InteractionsWithClient)**
+* **[Planning and Work Breakdown and Allocation](#PlanningandWorkBreakdownandAllocation)**
+* **[User Stories](#UserStories)**
+* **[Process Map](#ProcessMap)**
+* **[Entity Relationship Diagram](#ERD)**
+* **[Wireframing](#Wireframing)**
+* **[Repositories](#Repositories)**
+* **[Notency API](#NotencyAPI)**
+* **[Our Test Driven Development Pipeline](#OurTestDrivenDevelopmentPipeline)**
+* **[NPM / Yarn Packages](#NPMYarnPackages)**
+* **[Client Questionaire](#ClientQuestionaire)**
+* **[Post Project Review](#PostProjectReview)**
 
 ## <a id="OurClient"></a>Our Client
 
@@ -35,14 +36,14 @@ We set out to build a MERN stack application that would achieve these objectives
 
 [Back to Top](#top)
 
-
 ## <a id="TeamMembers"></a>Team Members
-![Team Members](docs/teammembers.png)
-- [Alessio Palumbo](github.com/alessio-palumbo)
-- [Alex Farries](@github/cursande)
-- [Glenn Dimaliwat](@github/Gurenax)
-- [John Voon](@github/johnvoon)
 
+![Team Members](docs/teammembers.png)
+
+* [Alessio Palumbo](github.com/alessio-palumbo)
+* [Alex Farries](@github/cursande)
+* [Glenn Dimaliwat](@github/Gurenax)
+* [John Voon](@github/johnvoon)
 
 [Back to Top](#top)
 
@@ -60,20 +61,31 @@ Early on in the project, we prepared the Project Charter containing the problem 
 
 [Link to Project Charter](https://drive.google.com/open?id=1o0TFGbgxc2bO3Cv6jlxSUZteY7G3bll6)
 
+[Back to Top](#top)
+
 ## <a id="InteractionsWithClient"></a>Interactions with Client
 
 We corresponded with the client mainly via face to face meetings and email. We kept track of these interactions including emails and meeting minutes.
 
-[Link to all correspondence with Embassy English]()
+[Link to all correspondence with Embassy English](https://drive.google.com/open?id=1pnk1Urbonb1zRz-UOba7NFKvXwGgSM86)
 
 [Back to Top](#top)
 
 ## <a id="PlanningandWorkBreakdownandAllocation"></a>Planning and Work Breakdown and Allocation
 
-We took an agile approach to organising our workflow, using Trello heavily to collect ideas and manage tasks. We used Trello to breakdown and allocate the workload based on our app's features and components.
+We took an agile approach to organising our workflow, using Trello heavily to collect ideas and manage tasks.
 
-Whilst we prepared the wireframes, Glenn worked on the basic functionality for the backend such as sending SMS and emails. Once the wireframes were finalized, the rest of us developed the individual components needed by the application which could be reused. Once the components were in place, we assembled the various pages of the application. Finally, we connected the front end to the back end API and polished the UI and functionality.
+We also used Trello to breakdown and allocate the workload based on our app's features and components.
 
+Our approach to the project on a macro level was as follows:
+
+* Whilst we prepared the wireframes, Glenn worked on the basic functionality for the backend such as sending SMS and emails.
+
+* Once the wireframes were finalized, the rest of us figured out what components the application would need to have and developed the individual React components needed by the application which could be reused throughout the application.
+
+* Once the components were in place, we assembled the various pages of the application using the individual components prepared in the previous step. Because we did this step, assembling was relatively easy and sort of like putting lego together. In taking this approach, we leveraged the strengths of React components to our benefit.
+
+* Finally, we connected the front end to the back end API and polished the UI and functionality.
 
 [Link to our board](https://trello.com/b/Xl2taIie/embassy-english)
 
@@ -84,35 +96,35 @@ Whilst we prepared the wireframes, Glenn worked on the basic functionality for t
 ## <a id="UserStories"></a>User Stories
 
 ```
-I want to notify the students of an emergency so that important information and
-intructions can be conveyed on a timely basis
+As a member of staff in charge of checking students' safety in a critical event, I want to notify the students of an emergency so that important information and intructions can be conveyed on a timely basis
 ```
+
 ```
-I want to track the replies of teachers and students so I can know if they are
-safe during an emergency
+As a member of staff in charge of checking students' safety in a critical event, I want to track the replies of teachers and students (in particular, OK responses, non-OK responses and people who have no responded) so I can know if they are safe during an emergency
 ```
+
 ```
-I want to let teachers/students of a certain nationality know if their country
-has suffered a calamity/accident/terrorist attack so that only relevant parties
-are communicated with
+As a member of staff staff in charge of checking students' safety in a critical event, I want to let teachers/students of a certain nationality know if their country has suffered a calamity/accident/terrorist attack so that only relevant parties are communicated with
 ```
+
 ```
-I want to send newsletters and announcements to students so I can conveniently
-keep students informed of non-critical events happening in the school
+As a member of staff in charge of sending regular announcements to students, I want to send newsletters and announcements to students so I can conveniently
+and efficiently keep students informed of non-critical events happening in the school
 ```
+
 ```
-I want to upload student and teacher data from a file so that I can easily keep
-the database updated without manual data entry
+As a user of this app, I want to upload student and teacher data from a file so that I can easily keep the database mailing list updated without manual data entry and with minimum fuss.
 ```
+
 ```
-I want to send the notifications in form of a SMS message or an Email so that
-students have multiple means of receiving notifications and so that an internet
-connection is not required to receive that information
+As a member of staff staff in charge of checking students' safety in a critical event, I want to send the notifications in the form of a SMS message or an Email so that students have multiple means of receiving notifications and so that an internet connection is not required to receive that information
 ```
+
 ```
 I want to easily search, group, categorize and manage the recipients so I can
 easily look up whether students have been added to the mailing list
 ```
+
 ```
 I want to identify the status of the notifications delivered so that I can
 resend notifications to those that have not received them.
@@ -123,14 +135,16 @@ resend notifications to those that have not received them.
 ## <a id="ProcessMap"></a>Process Map
 
 ### One-way Messaging
-One-way communication is used for sending out Announcements. These announcements do not require the recipients to respond to the message.   
 
-![One-Way Messaging](docs/one-way-messaging.png)    
+One-way communication is used for sending out Announcements. These announcements do not require the recipients to respond to the message.
+
+![One-Way Messaging](docs/one-way-messaging.png)
 
 ### Two-way Messaging
-Two-way communication is used for sending out Notifications. These notifications pertain to situations where the recipients need to respond to the message. 
 
-![Two-Way Messaging](docs/two-way-messaging.png)    
+Two-way communication is used for sending out Notifications. These notifications pertain to situations where the recipients need to respond to the message.
+
+![Two-Way Messaging](docs/two-way-messaging.png)
 
 [Back to Top](#top)
 
@@ -151,10 +165,11 @@ We made three iterant mock designs, building on the things we liked and the feat
 [Back to Top](#top)
 
 ## <a id="Repositories"></a>Repositories
-We decided to separate the back-end repository from the front-end repository as it was an easier way to manage our branches. It also gave us a clearer perspective in finding our errors and keeping the changes under control.   
 
-- [Link to Front-end repository](https://github.com/CosmoRocket/Notency)
-- [Link to Back-end repository](https://github.com/CosmoRocket/Notency-api)
+We decided to separate the back-end repository from the front-end repository as it was an easier way to manage our branches. It also gave us a clearer perspective in finding our errors and keeping the changes under control.
+
+* [Link to Front-end repository](https://github.com/CosmoRocket/Notency)
+* [Link to Back-end repository](https://github.com/CosmoRocket/Notency-api)
 
 ![Repositories](docs/repositories.png)
 
@@ -206,10 +221,10 @@ Notency API is built with 100% Test Driven Development coverage while the Notenc
 yarn flow
 ```
 
-2. Ensure that there are no errors in Flow    
-![FLOW Results](docs/flow-results.png)
+2. Ensure that there are no errors in Flow  
+   ![FLOW Results](docs/flow-results.png)
 
-2. Run test server
+3. Run test server
 
 ```
 yarn test
@@ -221,8 +236,8 @@ yarn test
 yarn jest
 ```
 
-4. Ensure that there are no errors in Jest    
-![JEST Results](docs/jest-results.png)    
+4. Ensure that there are no errors in Jest  
+   ![JEST Results](docs/jest-results.png)
 
 [Back to Top](#top)
 
@@ -513,12 +528,13 @@ We prepared a questionnaire for the client to ascertain the satisfaction with ou
 
 This project presented us with interesting features to implement such as sending SMS and tracking responses and therefore was a very valuable learning opportunity. Doing the project for a real client helped us train soft skills such as communication, planning, scoping to a minimum viable product, time management, getting feedback, etc.
 
-The scope of the project was perfect for the time allowed whilst challenging at the same time.        
+The scope of the project was perfect for the time allowed whilst challenging at the same time.
+
+We encountered quite a few technical challenges along the way. Below, we have documented our thought processes and how we resolved these issues.
 
 ### Communication with the client
 
-We managed to communicate regularly with the client by email and meetings to get instructions and confirmation as we went along. We were very fortunate in that our client was very responsive to our questions and emails, which made the whole process a lot smoother for us. 
-
+We managed to communicate regularly with the client by email and meetings to get instructions and confirmation as we went along. We were very fortunate in that our client was very responsive to our questions and emails, which made the whole process a lot smoother for us.
 
 ### Collaboration as a team
 
@@ -528,7 +544,6 @@ We pair-programmed when appropriate which helped each other detect bugs in the p
 
 We used git and github mostly without much trouble, merging work as features were completed. There was just one time where we had trouble syncing our work due to a delayed pull but that was eventually resolved.
 
-
 ### Introducing new libraries
 
 At one stage, one of the group members introduced a new library called Formik to manage form state in React which resulted in unfamiliar code being added to important parts of the codebase.
@@ -537,15 +552,13 @@ Introducing libraries made life easier on the one hand but was a challenge on th
 
 In these circumstances, it was important to have the person who introduced the new library to be involved in writing the new code by pair programming for example and to explain how the new library works.
 
-
 ### Use of the Chrome developer tools
 
 One of the more time consuming and frustrating features to implement was dealing with all the edge cases of filtering recipients by group such as role, nationality, graduation date on the front end. Using the Chrome developer tools was extremely helpful in tracking the props and state changes in the app whilst developing this feature. So often, this was better than littering `console.log` statements throughout the app.
 
-
 ### Tracking SMS responses
 
-A key feature of our app was being able to track SMS responses. One of the challenges that came up during group discussions was how to associate SMS responses coming back with a particular notification given that SMS responses do not store any application state.
+A key feature of our app was being able to track SMS responses coming back from recipients. One of the challenges that came up during group discussions was how to associate SMS responses coming back with a particular notification given that SMS responses do not store any application state.
 
 We considered two possible solutions:
 
@@ -555,21 +568,19 @@ We considered two possible solutions:
 
 We chose the first option as we could only test with one number with the trial TWilio account, though left open the possibility of adding more numbers through Twilio.
 
-
 ### Email Attachments
 
-Getting email attachments to work was time consuming especially as we did not have a clear idea of what was involved in implementing the functionality. In the absence of clear guidance, documentation and tutorials, we had to take a step back and think through the whole process ourselves before implementing the feature.
+Getting email attachments to work was time consuming especially as we did not have a clear idea of what was involved in implementing the functionality. In the absence of clear guidance, documentation and tutorials, we had to take a step back and think through the whole process ourselves before implementing the feature. It was only by doing this that we could push through the knowledge gap and technical issues along the way.
 
-There are 3 main steps in sending an email with attachments: Submitting the file, saving the file to the app and attaching it in the email. After extensive research, we submitted the attachment using a FormData object and processed that on the back end using Multer. Multer would save that file to a temporary folder in the app, which could then be attached to the email.
-
+After extensive research and multiple failed attempts, we learned that there are 3 main steps involved in sending an email with attachments: Submitting the file, saving the file to the app and attaching it in the email. We submitted the attachment using a FormData object and processed that on the back end using Multer. Multer would give us access to the file in `req.file` and save that file to a temporary folder in the app, which could then be attached to the email.
 
 ### Deleting Recipients vs Activating/Deactivating Recipients
 
 The list of students/teachers at Embassy English gets updated quite frequently as new students enroll and existing students graduate on a weekly basis.
 One challenging decision we faced related to this was whether to totally replace all recipients in the database from the excel file or keep all users on the database and just activate/deactivate users.
 
-Clarity came midway through the project when we realized the implications of deleting recipients from the database. This would mean some notifications would not have IDs without corresponding recipients, as they would have been deleted. So this ruled out the option of deleting recipients.
+Clarity came midway through the project when we realized the implications of deleting recipients from the database. This would mean some notifications would have IDs without corresponding recipients, as they would have been deleted. So this ruled out the option of deleting recipients.
 
-However, if we were to let the list of recipients grow, students who had graduated or dropped out would still receive messages. The solution we decided to implement that made the most sense was to have a boolean attribute `active`, which would be `true` if the student was still on the list and `false` if not. On the back-end, we would need to have a route such as `/recipients/active` which would run a query to retrieve only "active" recipients.
+On the other hand, if we were to let the list of recipients grow, students who had graduated or dropped out would still receive messages. The solution we decided to implement that made the most sense was to have a boolean attribute `active`, which would be `true` if the student was still on the list and `false` if not. On the back-end, we would need to have a route such as `/recipients/active` which would run a query to retrieve only "active" recipients.
 
 [Back to Top](#top)
