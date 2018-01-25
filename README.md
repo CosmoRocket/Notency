@@ -518,7 +518,9 @@ e.g.
 
 ## <a id="ClientQuestionaire"></a>Client Questionnaire
 
-We prepared a questionnaire for the client to ascertain the satisfaction with our product and service.
+We prepared a questionnaire for Embassy English to ascertain the satisfaction with our product and service and we were grateful to have received very positive feedback for our product from our client.
+
+[Link to Completed Client Feedback Questionnaire](https://drive.google.com/file/d/1Yb0z2jLrF994e7PusT4FYr8Mq-K1pegR/view?usp=sharing)
 
 [Back to Top](#top)
 
