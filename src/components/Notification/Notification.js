@@ -30,7 +30,7 @@ export default function Notification({
             {responses}% Responded
           </small>
         </div>
-        <p className="m-0 font-weight-bold"><Icon name="bell" /> {subject}
+        <p className="m-0 font-weight-bold"><Icon name="bell" /> {subject}<br />
         <small>{truncateBody(body)}</small></p>
       </Link>
     </div>
