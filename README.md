@@ -81,7 +81,9 @@ Our approach to the project on a macro level was as follows:
 
 * Whilst we prepared the wireframes, Glenn worked on the basic functionality for the backend such as sending SMS and emails.
 
-* Once the wireframes were finalized, the rest of us figured out what components the application would need to have and developed the individual React components needed by the application which could be reused throughout the application.
+* Once the wireframes were finalized, the rest of us figured out the components the application would have and developed each React component with styles and images needed by each component. These components could then be reused throughout the application. We ended up with a folder structure like this.
+
+![Folder structure](docs/folder-structure.png)
 
 * Once the components were in place, we assembled the various pages of the application using the individual components prepared in the previous step. Because we did this step, assembling was relatively easy and sort of like putting lego together. In taking this approach, we leveraged the strengths of React components to our benefit.
 
