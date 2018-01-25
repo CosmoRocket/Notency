@@ -73,11 +73,17 @@ class HomePage extends Component {
       return results.filter(notification => {
         const searchTerms = reject(
           word => word === '',
-          e.target.value.trim().split(' ')
+          e.target.value
+            .trim()
+            .toLowerCase()
+            .split(' ')
         )
 
         return searchTerms.every(searchTerm =>
-          notification.subject.split(' ').find(word => word === searchTerm)
+          notification.subject
+            .toLowerCase()
+            .split(' ')
+            .find(word => word === searchTerm)
         )
       })
     }
@@ -169,28 +175,44 @@ class HomePage extends Component {
           <Fragment>
             {activeTab === 0
               ? filteredNotifications.map(notification => {
-                return (
-                  <Fragment key={notification._id}>
-                    <Notification
-                      {...notification}
-                      key={notification._id}
-                      responses={notification.responses.length / notification.recipients.length * 100}
-                    />
-                    <ReactTooltip id={notification._id} place="left" type="light" effect="solid">
-                      <Icon className="text-success mr-2" name="check">
-                        {` ${this.okResponses(notification.responses)}/${notification.recipients.length}`}
-                      </Icon>
-                      <Icon className="text-danger mr-2" name="times">
-                        {` ${this.notOkResponses(notification.responses)}/${notification.recipients.length}`}
-                      </Icon>
-                      <Icon className="text-dark mr-2" name="question">
-                        {` ${this.notResponded(notification.recipients, notification.responses)}/${notification.recipients.length}`}
-                      </Icon>
-                    </ReactTooltip>
-                    <div></div>
-                  </Fragment>
-                )
-              })
+                  return (
+                    <Fragment key={notification._id}>
+                      <Notification
+                        {...notification}
+                        key={notification._id}
+                        responses={
+                          notification.responses.length /
+                          notification.recipients.length *
+                          100
+                        }
+                      />
+                      <ReactTooltip
+                        id={notification._id}
+                        place="left"
+                        type="light"
+                        effect="solid"
+                      >
+                        <Icon className="text-success mr-2" name="check">
+                          {` ${this.okResponses(notification.responses)}/${
+                            notification.recipients.length
+                          }`}
+                        </Icon>
+                        <Icon className="text-danger mr-2" name="times">
+                          {` ${this.notOkResponses(notification.responses)}/${
+                            notification.recipients.length
+                          }`}
+                        </Icon>
+                        <Icon className="text-dark mr-2" name="question">
+                          {` ${this.notResponded(
+                            notification.recipients,
+                            notification.responses
+                          )}/${notification.recipients.length}`}
+                        </Icon>
+                      </ReactTooltip>
+                      <div />
+                    </Fragment>
+                  )
+                })
               : filteredAnnouncements.map(announcement => {
                   return (
                     <Announcement {...announcement} key={announcement._id} />
