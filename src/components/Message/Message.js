@@ -29,7 +29,7 @@ export default function Message({
         </a>
       </p>
       <p className='font-italic'>
-        {messageBody}
+        {messageBody.trim().substr(3)}
       </p>
     </div>
   )
